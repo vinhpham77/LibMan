@@ -77,7 +77,7 @@
                 Height="40"
                 Margin="30,0,5,0"
                 Cursor="Hand"
-                FontSize="20">
+                FontSize="20" Click="btnRegister_Click">
                 Đăng ký
             </Button>
             <Button
@@ -88,7 +88,7 @@
                 Background="#0067b8"
                 Cursor="Hand"
                 FontSize="20"
-                Foreground="White">
+                Foreground="White" Click="btnLogin_Click">
                 Đăng nhập
             </Button>
         </StackPanel>

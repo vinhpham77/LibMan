@@ -60,19 +60,34 @@ namespace DAL
             }
         }
 
-        public static Account GetAccount(string usernameOrUserID, bool isUserIDField = false)
+        public static Account GetAccount(string usernameOrUserID, bool isUserID = false)
         {
             using(LibManDataContext context = new LibManDataContext())
             {
                 string field = usernameOrUserID;
                 var query = from acc in context.Accounts where acc.Username == field select acc;
                 
-                if (isUserIDField)
+                if (isUserID)
                 {
                     query = from acc in context.Accounts where acc.UserID == field select acc;
                 }
 
                 return query.FirstOrDefault();
+            }
+        }
+
+        public static bool CheckAccount(string username, string password = null)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var query = from account in context.Accounts where account.Username == username select account;
+
+                if (password is null)
+                {
+                    query = from account in context.Accounts where account.Username == username && account.Password == password select account;
+                }
+
+                return query.FirstOrDefault() != null;
             }
         }
     }

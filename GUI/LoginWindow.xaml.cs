@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI
 {
@@ -23,6 +11,21 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            bool isCorrect = AccountBLL.CheckAccount(txtUsername.Text, txtPassword.Password);
+            if (!isCorrect)
+            {
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Đăng nhập");
+            }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow register = new RegisterWindow();
+            register.Show();
         }
     }
 }

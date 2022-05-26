@@ -7,3 +7,13 @@ C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DAL\obj\Debug\DAL.csproj.CoreCompileInputs
 C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DAL\obj\Debug\DAL.dll
 C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DAL\obj\Debug\DAL.pdb
+C:\Users\LENOVO LEGION\QLTV\DAL\bin\Debug\DAL.dll
+C:\Users\LENOVO LEGION\QLTV\DAL\bin\Debug\DAL.pdb
+C:\Users\LENOVO LEGION\QLTV\DAL\bin\Debug\DTO.dll
+C:\Users\LENOVO LEGION\QLTV\DAL\bin\Debug\DTO.pdb
+C:\Users\LENOVO LEGION\QLTV\DAL\bin\Debug\DTO.dll.config
+C:\Users\LENOVO LEGION\QLTV\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Users\LENOVO LEGION\QLTV\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO LEGION\QLTV\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\LENOVO LEGION\QLTV\DAL\obj\Debug\DAL.dll
+C:\Users\LENOVO LEGION\QLTV\DAL\obj\Debug\DAL.pdb

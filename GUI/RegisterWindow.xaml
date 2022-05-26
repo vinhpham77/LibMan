@@ -5,8 +5,153 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="450" Width="800">
+        Title="RegisterWindow" Height="600" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Label
+            x:Name="lblTitle"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            FontSize="26"
+            FontWeight="Bold" Grid.Column="1" Margin="162,0,0,0">
+            ĐĂNG KÝ
+        </Label>
+        <Label
+            x:Name="lblUsername"
+            Grid.Row="1"
+            Margin="30,36,30,36"
+            VerticalContentAlignment="Bottom"
+            FontSize="22"
+            FontWeight="SemiBold" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            Tài khoản
+        </Label>
+        <TextBox
+            x:Name="txtUsername"
+            Grid.Row="3"
+            Margin="34,0,34,0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            BorderThickness="0,0,0,1"
+            FontSize="20" Grid.ColumnSpan="2" />
+        <Label
+            x:Name="lblPassword"
+            Grid.Row="4"
+            Margin="30,0,30,36"
+            VerticalContentAlignment="Bottom"
+            FontSize="22"
+            FontWeight="SemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            Mật khẩu
+        </Label>
+        <PasswordBox
+            x:Name="password"
+            Grid.Row="5"
+            Margin="34,0,34,0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            BorderThickness="0,0,0,1"
+            FontSize="20"
+            PasswordChar="●" Grid.ColumnSpan="2" />
+        <Label
+            x:Name="lblRePassword"
+            Grid.Row="5"
+            Margin="30,36,30,0"
+            VerticalContentAlignment="Bottom"
+            FontSize="22"
+            FontWeight="SemiBold" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            Nhập lại mật khẩu
+        </Label>
+        <PasswordBox
+            x:Name="txtRePassword"
+            Grid.Row="7"
+            Margin="34,0,34,0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            BorderThickness="0,0,0,1"
+            FontSize="20"
+            PasswordChar="●" Grid.ColumnSpan="2" />
+        <Label
+            x:Name="lblFullname"
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="30,36,30,36"
+            VerticalContentAlignment="Bottom"
+            FontSize="22"
+            FontWeight="SemiBold" Grid.RowSpan="3">
+            Họ tên
+        </Label>
+        <TextBox
+            x:Name="txtFullname"
+            Grid.Column="2"
+            Grid.Row="3"
+            Margin="34,0,34,0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Bottom"
+            BorderThickness="0,0,0,1"
+            FontSize="20" />
+        <Label
+            x:Name="lblBirthday"
+            Grid.Column="2"
+            Grid.Row="4"
+            Margin="30,0,30,36"
+            VerticalContentAlignment="Bottom"
+            FontSize="22"
+            FontWeight="SemiBold" Grid.RowSpan="2">
+            Ngày sinh
+        </Label>
+        <DatePicker
+            x:Name="dtpKBirthday"
+            Grid.Column="2"
+            Grid.Row="5"
+            BorderThickness="0,0,0,1"
+            Margin="34,5,34,0"
+            
+            FontSize="20"
+            />
+        <!--<StackPanel
+            Grid.Row="15"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnRegister"
+                Width="100"
+                Height="40"
+                Margin="30,0,5,0"
+                Cursor="Hand"
+                FontSize="20">
+                Đăng ký
+            </Button>
+            <Button
+                x:Name="btnLogin"
+                Width="120"
+                Height="40"
+                Margin="5,0,30,0"
+                Background="#0067b8"
+                Cursor="Hand"
+                FontSize="20"
+                Foreground="White" Click="btnLogin_Click">
+                Đăng nhập
+            </Button>
+        </StackPanel>-->
     </Grid>
 </Window>

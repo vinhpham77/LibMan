@@ -12,18 +12,23 @@ namespace BLL
     {
         public static List<AccountDTO> GetAccountList()
         {
-            return DAL.AccountDAL.GetAccountList();
+            return AccountDAL.GetAccountList();
         }
 
         public static void CreateAccount(string username, string password, int accountTypeID, string fullname
                                             , DateTime birthday, bool gender, string userID, string address)
         {
-            DAL.AccountDAL.CreateAccount(username, password, accountTypeID, fullname, birthday, gender, userID, address);
+            AccountDAL.CreateAccount(username, password, accountTypeID, fullname, birthday, gender, userID, address);
         }
 
         public static Account GetAccount(string usernameOrUserID, bool isUserID = false)
         {
-            return DAL.AccountDAL.GetAccount(usernameOrUserID, isUserID);
+            return AccountDAL.GetAccount(usernameOrUserID, isUserID);
+        }
+
+        public static bool CheckAccount(string username, string password = null)
+        {
+            return AccountDAL.CheckAccount(username, password);
         }
     }
 }
