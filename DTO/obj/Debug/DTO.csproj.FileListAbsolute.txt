@@ -1,0 +1,6 @@
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\bin\Debug\DTO.dll
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\bin\Debug\DTO.pdb
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\obj\Debug\DTO.csproj.AssemblyReference.cache
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\obj\Debug\DTO.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\obj\Debug\DTO.dll
+C:\Users\LENOVO LEGION\QLTV\.git\QLTV\DTO\obj\Debug\DTO.pdb
