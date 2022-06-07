@@ -1,0 +1,20 @@
+﻿GUI
+
+
+winexe
+C#
+.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\
+GUI
+none
+false
+DEBUG;TRACE
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\App.xaml
+10264182679
+1-174167838
+14611082807
+17997305126
+AdminWindow.xaml;Child\AddWindow\BookManWindow.xaml;Child\BookLibrarianPage.xaml;Child\BookPage.xaml;Child\LoanPage.xaml;LibrarianWindow.xaml;LoginWindow.xaml;ReaderWindow.xaml;RegisterWindow.xaml;UC\ControlBarUC.xaml;
+
+False
+
