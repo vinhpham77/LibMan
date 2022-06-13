@@ -16,16 +16,7 @@ namespace DAL
                 var query = context.Books.Where(b => b.Title.ToLower().Contains(title.ToLower()));
                 foreach (var row in query)
                 {
-                    BookDTO book = new BookDTO()
-                    {
-                        ID = row.ID,
-                        Title = row.Title,
-                        Catalog = row.Catalog,
-                        Author = row.Author,
-                        Publisher = row.Publisher,
-                    };
-
-                    books.Add(book);
+                    books.Add(new BookDTO(row));
                 }
             }
 
@@ -77,6 +68,25 @@ namespace DAL
             using (LibManDataContext context = new LibManDataContext())
             {
                 return context.Books.Where(b => b.ID == id).FirstOrDefault();
+            }
+        }
+
+        public static bool DeleteBook(int id)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var book = context.Books.Where(b => b.ID == id).FirstOrDefault();
+
+                if (book is null)
+                {
+                    return false;
+                }
+                else
+                {
+                    context.Books.DeleteOnSubmit(book);
+                    context.SubmitChanges();
+                    return true;
+                }
             }
         }
     }

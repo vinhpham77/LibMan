@@ -41,23 +41,72 @@ namespace GUI.Child
 
         private void btnAddBook_Click(object sender, RoutedEventArgs e)
         {
-            BookManWindow addBook = new BookManWindow();
+            BookManWindow addBook = new BookManWindow(btnAddBook.Content.ToString());
             addBook.ShowDialog();
         }
 
         private void btnEditBook_Click(object sender, RoutedEventArgs e)
         {
-            BookDTO book = dtgBook.SelectedItem as BookDTO;
-            
-            if (book is null)
+            string title = btnEditBook.Content.ToString();
+            if (!(dtgBook.SelectedItem is BookDTO book))
             {
-                MessageBox.Show("Vui lòng chọn sách cần sửa!", "Sửa sách", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Vui lòng chọn sách cần sửa!", title, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                BookManWindow bookMan = new BookManWindow(book);
+                BookManWindow bookMan = new BookManWindow(title, book);
                 bookMan.ShowDialog();
             }
+        }
+
+        private void btnDeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+            string title = btnDeleteBook.Content.ToString();
+            if (!(dtgBook.SelectedItem is BookDTO book))
+            {
+                MessageBox.Show("Vui lòng chọn sách cần xoá!", title, MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá sách '{book.Title}' không?", title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    bool successful = BookBLL.DeleteBook(book.ID);
+                    if (successful)
+                    {
+                        MessageBox.Show("Thành công!", title, MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Thất bại, sách '{book.Title}' không tồn tại!", title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            dtgBook_Load();
+            txtBookSearch.Clear();
+        }
+
+        private void btnBorrowBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(dtgBook.SelectedItem is BookDTO book))
+            {
+                MessageBox.Show("Vui lòng chọn sách cần cho mượn!", btnBorrowBook.Content.ToString(), MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                LoanBookWindow loan = new LoanBookWindow(btnBorrowBook.Content.ToString(), book.ID);
+                loan.ShowDialog();
+            }
+        }
+
+        private void btnReturnBook_Click(object sender, RoutedEventArgs e)
+        {
+            ReturnBookWindow returnBook = new ReturnBookWindow(btnReturnBook.Content.ToString());
+            returnBook.ShowDialog();
         }
     }
 }

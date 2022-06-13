@@ -1,0 +1,20 @@
+﻿GUI
+
+
+winexe
+C#
+.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Release\
+GUI
+none
+false
+TRACE
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\App.xaml
+13-2126614388
+1-174167838
+171571141930
+17770407474
+AdminWindow.xaml;Child\AddWindow\BookManWindow.xaml;Child\AddWindow\LoanBookWindow.xaml;Child\AddWindow\ReturnBookWindow.xaml;Child\BookLibrarianPage.xaml;Child\BookPage.xaml;Child\LoanManPage.xaml;Child\LoanPage.xaml;LibrarianWindow.xaml;LoginWindow.xaml;ReaderWindow.xaml;RegisterWindow.xaml;UC\ControlBarUC.xaml;
+
+True
+

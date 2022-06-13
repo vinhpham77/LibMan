@@ -9,7 +9,7 @@ namespace DAL
 {
     public class LoanDAL
     {
-        public static List<LoanDTO> GetLoans(string username = "")
+        public static List<LoanDTO> GetLoanList(string username = "")
         {
             using (LibManDataContext context = new LibManDataContext())
             {
@@ -18,36 +18,18 @@ namespace DAL
 
                 foreach (var row in query)
                 {
-                    LoanDTO loan = new LoanDTO()
-                    {
-                        ID = row.ID,
-                        Username = row.Username,
-                        BookID = row.BookID,
-                        LoanDate = row.LoanDate,
-                        DueDate = row.DueDate
-                    };
-
-                    loans.Add(loan);
+                    loans.Add(new LoanDTO(row));
                 }
 
                 return loans;
             }
         }
 
-        public static LoanDTO GetLoan(int id)
+        public static Loan GetLoan(int id)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                Loan loan = context.Loans.Where(l => l.ID == id).FirstOrDefault();
-                
-                return new LoanDTO()
-                {
-                    ID = loan.ID,
-                    Username = loan.Username,
-                    BookID = loan.BookID,
-                    LoanDate = loan.LoanDate,
-                    DueDate = loan.DueDate
-                };
+                return context.Loans.Where(l => l.ID == id).FirstOrDefault();
             }
         }
 
@@ -64,6 +46,7 @@ namespace DAL
                 };
 
                 context.Loans.InsertOnSubmit(loan);
+                context.SubmitChanges();
             }
         }
     }

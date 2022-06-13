@@ -9,21 +9,17 @@ namespace DAL
 {
     public class RoleDAL
     {
-        public static List<RoleDTO> GetRoles()
+        public static List<RoleDTO> GetRoleList()
         {
             List<RoleDTO> roles = new List<RoleDTO>();
 
             using (LibManDataContext context = new LibManDataContext())
             {
                 var query = context.Roles;
+                
                 foreach(var row in query)
                 {
-                    RoleDTO role = new RoleDTO()
-                    {
-                        ID = row.ID,
-                        Name = row.Name,
-                    };
-                    roles.Add(role);
+                    roles.Add(new RoleDTO(row));
                 }
 
                 return roles;

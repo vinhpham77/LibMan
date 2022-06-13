@@ -9,10 +9,15 @@
     Title="Thư viện"
     Width="1200"
     Height="750"
-    Background="{DynamicResource MaterialDesignDarkBackground}"
-    Icon="img/icon.png"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="img/logo.png"
     ResizeMode="CanMinimize"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -57,7 +62,7 @@
                         VerticalAlignment="Center"
                         FontSize="18"
                         FontWeight="Bold">
-                        QUẢN LÝ THƯ VIỆN
+                        HỆ THỐNG QUẢN LÝ THƯ VIỆN
                     </Label>
                 </StackPanel>
             </DockPanel>
@@ -66,7 +71,8 @@
             <ListView
                 x:Name="lvwMenu"
                 Grid.Row="1"
-                HorizontalContentAlignment="Center" SelectionChanged="lvwMenu_SelectionChanged">
+                HorizontalContentAlignment="Center"
+                SelectionChanged="lvwMenu_SelectionChanged">
                 <ListView.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="FontSize" Value="18" />
@@ -98,8 +104,6 @@
             <Frame
                 x:Name="frmChild"
                 Margin="40"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
                 NavigationUIVisibility="Hidden" />
         </materialDesign:Card>
         <!--<materialDesign:Card Grid.Row="1">

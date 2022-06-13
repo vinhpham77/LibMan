@@ -29,6 +29,7 @@ CREATE TABLE Account
 )
 
 INSERT Account(Username, Password, RoleID, Fullname, Birthday, Gender, ID, Address, Status) VALUES
+	('lib', 'lib', '2', N'Trần Hoài Lâm', '1/12/2000', '1', '987654321111', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1'),
 	('admin', 'admin', '3', NULL, NULL, NULL, NULL, NULL, '1'),
 	('johnweak', 'dog123', '1', N'John Wick', '12/10/2002', '1', '123456789000', N'123 Wal Shrek, New York', '1'),
 	('jasonmama', 'seaman', '1', N'Jason Mamoa', '8/1/1999', '1', '123456789001', N'123 Shrimpon, Alaska', '1'),
@@ -56,8 +57,8 @@ CREATE TABLE Loan
 	ID INT CONSTRAINT PK_LoanID PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	Username VARCHAR(30) CONSTRAINT FK_Username FOREIGN KEY REFERENCES Account(Username) NOT NULL,
 	BookID INT CONSTRAINT FK_BookID FOREIGN KEY REFERENCES Book(ID) NOT NULL,
-	LoanDate DATE,
-	DueDate DATE
+	LoanDate DATE NOT NULL,
+	DueDate DATE NOT NULL
 )
 
 INSERT Loan(Username, BookID, LoanDate, DueDate) VALUES
@@ -65,6 +66,7 @@ INSERT Loan(Username, BookID, LoanDate, DueDate) VALUES
 	('jasonmama', '3', '6/24/2022', '6/29/2022'),
 	('johnweak', '1', '6/25/2022', '6/30/2022'),
 	('johnweak', '5', '6/25/2022', '7/1/2022')
+
 
 CREATE TABLE Returned
 (

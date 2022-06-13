@@ -8,8 +8,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="16"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
     <Grid>
@@ -18,18 +22,31 @@
             <RowDefinition Height="0.1*" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <StackPanel Margin="0,0,0,14" Orientation="Horizontal">
+            <DockPanel Margin="0,0,0,14">
                 <materialDesign:PackIcon
                     Width="30"
                     Height="30"
+                    DockPanel.Dock="Left"
                     Kind="BookSearchOutline" />
                 <TextBox
                     x:Name="txtBookSearch"
                     Margin="5,0,0,0"
                     materialDesign:HintAssist.Hint="Nhập tên sách cần tìm"
                     materialDesign:TransitionAssist.DisableTransitions="True"
+                    DockPanel.Dock="Left"
                     TextChanged="txtBookSearch_TextChanged" />
-            </StackPanel>
+                <Button
+                    x:Name="btnRefresh"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Click="btnRefresh_Click"
+                    Content="{materialDesign:PackIcon Kind=Refresh}"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                    ToolTip="Làm mới" />
+            </DockPanel>
+
             <DataGrid
                 x:Name="dtgBook"
                 Height="Auto"
@@ -81,36 +98,36 @@
                 x:Name="btnAddBook"
                 Grid.Column="0"
                 Margin="6,0"
+                Click="btnAddBook_Click"
                 Content="Thêm sách"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="btnAddBook_Click" />
+                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
             <Button
                 x:Name="btnEditBook"
                 Grid.Column="1"
                 Margin="6,0"
+                Click="btnEditBook_Click"
                 Content="Sửa sách"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" Click="btnEditBook_Click" />
+                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
             <Button
                 x:Name="btnDeleteBook"
                 Grid.Column="2"
                 Margin="6,0"
+                Click="btnDeleteBook_Click"
                 Content="Xoá sách"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
             <Button
                 x:Name="btnBorrowBook"
                 Grid.Column="3"
                 Margin="6,0"
+                Click="btnBorrowBook_Click"
                 Content="Mượn sách"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
             <Button
                 x:Name="btnReturnBook"
                 Grid.Column="4"
                 Margin="6,0"
+                Click="btnReturnBook_Click"
                 Content="Trả sách"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
         </Grid>
     </Grid>

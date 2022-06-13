@@ -15,28 +15,12 @@ namespace DAL
 
             using (LibManDataContext context = new LibManDataContext())
             {
-                var query = context.Accounts.Where(acc => acc.Fullname.Contains(fullname));
-                
-                if (status != null)
-                {
-                    query = context.Accounts.Where(acc => acc.Fullname.Contains(fullname) && acc.Status == status);
-                }
+                var query = status is null ? context.Accounts.Where(acc => acc.Fullname.Contains(fullname)) 
+                                           : context.Accounts.Where(acc => acc.Fullname.Contains(fullname) && acc.Status == status);
 
                 foreach (var row in query)
                 {
-                    AccountDTO account = new AccountDTO
-                    {
-                        Username = row.Username,
-                        Password = row.Password,
-                        RoleID = row.RoleID,
-                        Fullname = row.Fullname,
-                        Birthday = row.Birthday,
-                        Gender = row.Gender,
-                        ID = row.ID,
-                        Address = row.Address
-                    };
-
-                    accounts.Add(account);
+                    accounts.Add(new AccountDTO(row));
                 }
             }
             
@@ -44,7 +28,7 @@ namespace DAL
         }
 
         public static void CreateAccount(string username, string password, int roleID, string fullname
-                                            , string birthday, bool gender, string id, string address)
+                                            , DateTime birthday, bool? gender, string id, string address)
         {
             using(LibManDataContext context = new LibManDataContext())
             {
@@ -54,7 +38,7 @@ namespace DAL
                     Password = password,
                     RoleID = roleID,
                     Fullname = fullname,
-                    Birthday = Convert.ToDateTime(birthday),
+                    Birthday = birthday,
                     Gender = gender,
                     ID = id,
                     Address = address
@@ -67,18 +51,13 @@ namespace DAL
 
         public static Account GetAccount(string usernameOrID, bool isID = false)
         {
-            using(LibManDataContext context = new LibManDataContext())
+            using (LibManDataContext context = new LibManDataContext())
             {
                 string field = usernameOrID;
-                
-                if (isID)
-                {
-                    return context.Accounts.Where(acc => acc.ID.Equals(field)).FirstOrDefault();
-                } 
-                else
-                {
-                    return context.Accounts.Where(acc => acc.Username.Equals(field)).FirstOrDefault();
-                }
+                var account = isID ? context.Accounts.Where(acc => acc.ID.Equals(field)).FirstOrDefault()
+                                   : context.Accounts.Where(acc => acc.Username.Equals(field)).FirstOrDefault();
+
+                return account;
             }
         }
 
@@ -150,30 +129,6 @@ namespace DAL
                 {
                     return false;
                 }
-            }
-        }
-
-        public static string CheckLogin(string username, string password)
-        {
-            using (LibManDataContext context = new LibManDataContext())
-            {
-                Account account = context.Accounts.Where(acc => acc.Username.Equals(username)).FirstOrDefault();
-                string message = null;
-
-                if (account == null)
-                {
-                    message = "Tài khoản không tồn tại trong hệ thống!";
-                }
-                else if (account.Password != password)
-                {
-                    message = "Sai mật khẩu";
-                } 
-                else if (account.Status == false)
-                {
-                    message = "Tài khoản không có sẵn, vui lòng chờ hoặc liên hệ người có thẩm quyền";
-                }
-
-                return message;
             }
         }
     }

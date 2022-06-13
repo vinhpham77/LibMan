@@ -25,23 +25,23 @@
       <Association Name="Book_Loan" Member="Loans" ThisKey="ID" OtherKey="BookID" Type="Loan" />
     </Type>
   </Table>
-  <Table Name="dbo.Loan" Member="Loans">
-    <Type Name="Loan">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="BookID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LoanDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="DueDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="Loan_Returned" Member="Returneds" ThisKey="ID" OtherKey="LoanID" Type="Returned" />
-      <Association Name="Book_Loan" Member="Book" ThisKey="BookID" OtherKey="ID" Type="Book" IsForeignKey="true" />
-      <Association Name="Account_Loan" Member="Account" ThisKey="Username" OtherKey="Username" Type="Account" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Role" Member="Roles">
     <Type Name="Role">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
       <Association Name="Role_Account" Member="Accounts" ThisKey="ID" OtherKey="RoleID" Type="Account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Loan" Member="Loans">
+    <Type Name="Loan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="BookID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LoanDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Loan_Returned" Member="Returneds" ThisKey="ID" OtherKey="LoanID" Type="Returned" />
+      <Association Name="Book_Loan" Member="Book" ThisKey="BookID" OtherKey="ID" Type="Book" IsForeignKey="true" />
+      <Association Name="Account_Loan" Member="Account" ThisKey="Username" OtherKey="Username" Type="Account" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Returned" Member="Returneds">

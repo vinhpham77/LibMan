@@ -35,7 +35,7 @@ namespace GUI
                     frmChild.Navigate(book);
                     break;
                 case 1:
-                    Child.LoanPage loan = new Child.LoanPage("a");
+                    Child.LoanManPage loan = new Child.LoanManPage();
                     frmChild.Navigate(loan);
                     break;
             }

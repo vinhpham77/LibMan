@@ -22,26 +22,37 @@ namespace GUI.Child.AddWindow
     public partial class BookManWindow : Window
     {
         private readonly int _bookID;
-        public BookManWindow()
+        public BookManWindow(string title)
         {
             InitializeComponent();
-            Title = "Thêm sách";
+            Title = title;
+            txtTitle.Focus();
+            cbxCatalog_Load();
         }
 
-        public BookManWindow(BookDTO book)
+        public BookManWindow(string title, BookDTO book)
         {
             InitializeComponent();
-            Title = "Sửa sách";
+            Title = title;
+            txtTitle.Focus();
             _bookID = book.ID;
+            cbxCatalog_Load();
             LoadTextElements(book);
         }
 
         public void LoadTextElements(BookDTO book)
         {
             txtTitle.Text = book.Title;
-            txtCatalog.Text = book.Catalog;
             txtAuthor.Text = book.Author;
+            cbxCatalog.Text = book.Catalog; 
             txtPublisher.Text = book.Publisher;
+        }
+
+        public void cbxCatalog_Load()
+        {
+            cbxCatalog.ItemsSource = BookBLL.GetBookList();
+            cbxCatalog.DisplayMemberPath = "Catalog";
+            //cbxCatalog.SelectedValuePath = "Catalog";
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -55,16 +66,15 @@ namespace GUI.Child.AddWindow
 
             if (Title.Equals("Thêm sách"))
             {
-                successful = BookBLL.AddBook(txtTitle.Text, txtCatalog.Text, txtAuthor.Text, txtPublisher.Text);
+                successful = BookBLL.AddBook(txtTitle.Text, cbxCatalog.Text, txtAuthor.Text, txtPublisher.Text);
             }
             else
             {
-                successful = BookBLL.UpdateBook(_bookID, txtTitle.Text, txtCatalog.Text, txtAuthor.Text, txtPublisher.Text);
+                successful = BookBLL.UpdateBook(_bookID, txtTitle.Text, cbxCatalog.Text, txtAuthor.Text, txtPublisher.Text);
             }
 
             if (successful)
             {
-                //BookLibrarianPage parent = (BookLibrarianPage)Parent;
                 MessageBox.Show("Thành công!", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }

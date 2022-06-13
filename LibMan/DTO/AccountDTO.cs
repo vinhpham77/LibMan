@@ -17,5 +17,30 @@ namespace DTO
         public string ID { get; set; }
         public string Address { get; set; }
         public bool? Status { get; set; }
+
+        public AccountDTO(string username, string password, int roleID, string fullname, DateTime? birthday, bool? gender, string id, string address, bool? status)
+        {
+            Username = username;
+            Password = password;
+            RoleID = roleID;
+            Fullname = fullname;
+            Birthday = birthday;
+            Gender = gender;
+            ID = id;
+            Address = address;
+            Status = status;
+        }
+
+        public AccountDTO (Account acc)
+        {
+            Username = acc.Username;
+            Password = acc.Password;
+            RoleID = acc.RoleID;
+            Birthday = acc.Birthday;
+            Gender = acc.Gender;
+            ID = acc.ID;
+            Address = acc.Address;
+            Status = acc.Status;
+        }
     }
 }

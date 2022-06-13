@@ -30,17 +30,36 @@ namespace BLL
             }
         }
 
-        public static void CreateAccount(string username, string password, int roleID, string fullname
-                                            , string birthday, bool gender, string id, string address)
+        public static string CreateAccount(string username, string password, string rePassword, int roleID, string fullname
+                                            , string birthday, bool? gender, string id, string address)
         {
-            AccountDAL.CreateAccount(username, password, roleID, fullname, birthday, gender, id, address);
+            Account acc = GetAccount(username);
+            
+            if (acc != null)
+            {
+                return "Tài khoản đã được đăng ký trước đó";
+            }
+
+            username = username.Trim();
+            fullname = fullname.Trim();
+            id = id.Trim();
+            address = address.Trim();
+            string[] formInputs = { username, password, rePassword, fullname, birthday, id, address };
+            string error = ValidateRegister(formInputs);
+            if (error is null)
+            {
+                DateTime birth = Convert.ToDateTime(birthday);
+                AccountDAL.CreateAccount(username, password, roleID, fullname, birth, gender, id, address);
+            }
+
+            return error;
         }
 
-        public static void ApproveAccount(Account acc)
-        {
-            CreateAccount(acc.Username, acc.Password, acc.RoleID, acc.Fullname, acc.Birthday.ToString(),
-                            (bool)acc.Gender, acc.ID, acc.Address);
-        }
+        //public static void ApproveAccount(Account acc)
+        //{
+        //    CreateAccount(acc.Username, acc.Password, acc.RoleID, acc.Fullname, acc.Birthday.ToString(),
+        //                    (bool)acc.Gender, acc.ID, acc.Address);
+        //}
 
         public static Account GetAccount(string usernameOrID, bool isID = false)
         {
@@ -65,10 +84,23 @@ namespace BLL
             {
                 return "Vui lòng không để trống!";
             }
-            else
+
+            string message = null;
+            Account account = GetAccount(username);
+            if (account == null)
             {
-                return AccountDAL.CheckLogin(username, password);
+                message = "Tài khoản không tồn tại trong hệ thống!";
             }
+            else if (account.Password != password)
+            {
+                message = "Sai mật khẩu";
+            }
+            else if (account.Status == false)
+            {
+                message = "Tài khoản không có sẵn, vui lòng chờ hoặc liên hệ người có thẩm quyền";
+            }
+
+            return message;
         }
 
         public static int GetRoleID(string usernameOrID, bool isID = false)

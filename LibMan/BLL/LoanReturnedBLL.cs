@@ -10,10 +10,15 @@ namespace BLL
 {
     public class LoanReturnedBLL
     {
-        public static List<LoanReturnedDTO> GetLoanReturneds(string username)
+        public static List<LoanReturnedDTO> GetLoanReturnedList(string username = "")
         {
-            return LoanReturnedDAL.GetLoanReturneds(username);
+            username = username.Trim();
+            return LoanReturnedDAL.GetLoanReturnedList(username);
+        }
+        
+        public static List<LoanReturnedDTO> GetNotReturnedList()
+        {
+            return LoanReturnedDAL.GetNotReturnedList();
         }
     }
-
 }

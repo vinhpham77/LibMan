@@ -47,3 +47,9 @@ C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\BookPage.baml
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\LoanPage.baml
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\BookManWindow.g.cs
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\BookManWindow.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\LoanBookWindow.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\LoanBookWindow.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\LoanManPage.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\LoanManPage.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ReturnBookWindow.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ReturnBookWindow.baml

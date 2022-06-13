@@ -64,15 +64,11 @@ namespace GUI
             }
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow register = new RegisterWindow();
             register.Show();
+            Close();
         }
     }
 }

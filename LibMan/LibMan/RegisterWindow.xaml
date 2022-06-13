@@ -7,40 +7,45 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Thư viện"
-    Width="780"
+    Width="850"
     Height="720"
-    Background="{DynamicResource MaterialDesignDarkBackground}"
-    Icon="img/icon.png"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="img/logo.png"
     ResizeMode="CanMinimize"
-    TextBlock.FontSize="14"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextBlock.FontSize="16"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <materialDesign:Card Margin="120,50" UniformCornerRadius="10">
-        <Grid Margin="60,20">
+    <materialDesign:Card Margin="140,50" UniformCornerRadius="10">
+        <Grid Margin="70,20">
             <Grid.Resources>
-                <Style x:Key="Heading" TargetType="Label">
+                <Style TargetType="Label">
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
-                    <Setter Property="FontSize" Value="26" />
+                    <Setter Property="FontSize" Value="24" />
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.2*" />
+                <RowDefinition Height="1.4*" />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition Height="2.6*" />
                 <RowDefinition Height="1.8*" />
-                <RowDefinition Height="0.8*" />
-                <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.40*" />
-                <ColumnDefinition Width="0.10*" />
-                <ColumnDefinition Width="0.50*" />
+                <ColumnDefinition Width="0.12*" />
+                <ColumnDefinition Width="0.48*" />
             </Grid.ColumnDefinitions>
-            <Label Style="{StaticResource Heading}">
+            <Label>
                 TÀI KHOẢN
             </Label>
             <TextBox
@@ -48,22 +53,22 @@
                 Grid.Row="1"
                 Margin="0,6"
                 materialDesign:HintAssist.Hint="Tên đăng nhập"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <PasswordBox
                 x:Name="txtPassword"
                 Grid.Row="2"
                 Margin="0,6"
                 materialDesign:HintAssist.Hint="Mật khẩu"
-                Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
             <PasswordBox
                 x:Name="txtRePassword"
                 Grid.Row="3"
                 Margin="0,6"
                 materialDesign:HintAssist.Hint="Nhập lại mật khẩu"
-                Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
 
-            <Label Grid.Column="2" Style="{StaticResource Heading}">
+            <Label Grid.Column="2">
                 THÔNG TIN
             </Label>
             <TextBox
@@ -72,76 +77,80 @@
                 Grid.Column="2"
                 Margin="0,6"
                 materialDesign:HintAssist.Hint="Họ tên"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <DatePicker
                 x:Name="dpBirthday"
                 Grid.Row="2"
                 Grid.Column="2"
                 Margin="0,6"
-                materialDesign:HintAssist.Hint="Ngày sinh: mm/dd/yyyy"
-                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-            <Border
+                materialDesign:HintAssist.Hint="Ngày sinh"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+            <StackPanel
                 Grid.Row="3"
                 Grid.Column="2"
-                Margin="0,6"
-                BorderBrush="White"
-                BorderThickness="1"
-                CornerRadius="4">
-                <StackPanel
-                    Margin="4,0"
-                    Orientation="Horizontal"
-                    ToolTip="Giới tính">
-                    <RadioButton
-                        x:Name="rdMale"
-                        Margin="6,0,12,0"
-                        Content="Nam"
-                        IsChecked="True"
-                        Style="{StaticResource MaterialDesignRadioButton}"
-                        Tag="True" />
-                    <RadioButton
-                        x:Name="rdFemale"
-                        Content="Nữ"
-                        Style="{StaticResource MaterialDesignRadioButton}"
-                        Tag="False" />
-                </StackPanel>
-            </Border>
+                Orientation="Horizontal"
+                ToolTip="Giới tính">
+                <RadioButton
+                    x:Name="rdMale"
+                    Margin="0,6"
+                    BorderBrush="{DynamicResource MaterialDesignBody}"
+                    IsChecked="True"
+                    Style="{StaticResource MaterialDesignTabRadioButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Kind="GenderMale" />
+                        <TextBlock Margin="0,4,0,0" Text="Nam" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton
+                    x:Name="rdFemale"
+                    Margin="0,6"
+                    BorderBrush="{DynamicResource MaterialDesignBody}"
+                    Style="{StaticResource MaterialDesignTabRadioButton}">
+                    <StackPanel>
+                        <materialDesign:PackIcon HorizontalAlignment="Center" Kind="GenderFemale" />
+                        <TextBlock Margin="0,4,0,0" Text="Nữ" />
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
             <TextBox
                 x:Name="txtID"
                 Grid.Row="4"
                 Grid.Column="2"
                 Margin="0,6"
                 materialDesign:HintAssist.Hint="CCCD/CMND"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <TextBox
                 x:Name="txtAddress"
                 Grid.Row="5"
                 Grid.Column="2"
-                Height="90"
+                Height="110"
                 Margin="0,6"
                 VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
                 materialDesign:HintAssist.Hint="Địa chỉ"
                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" />
-            <Button
-                x:Name="btnRegister"
+            <StackPanel
                 Grid.Row="6"
                 Grid.ColumnSpan="3"
-                Height="40"
-                materialDesign:ButtonAssist.CornerRadius="4"
-                Click="btnRegister_Click"
-                Content="ĐĂNG KÝ"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignFlatMidBgButton}" />
-            <Button
-                x:Name="btnBack"
-                Grid.Row="7"
-                Grid.ColumnSpan="3"
-                VerticalAlignment="Top"
-                Click="btnBack_Click"
-                Content="Quay lại"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignFlatButton}" />
+                Margin="0,20">
+                <Button
+                    x:Name="btnRegister"
+                    materialDesign:ButtonAssist.CornerRadius="4"
+                    Click="btnRegister_Click"
+                    Content="ĐĂNG KÝ"
+                    IsDefault="True"
+                    Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+                <Button
+                    x:Name="btnCancel"
+                    Grid.Row="7"
+                    Grid.ColumnSpan="3"
+                    VerticalAlignment="Top"
+                    Click="btnCancel_Click"
+                    Content="Quay lại"
+                    Style="{StaticResource MaterialDesignFlatButton}" />
+            </StackPanel>
         </Grid>
     </materialDesign:Card>
 </Window>

@@ -6,33 +6,41 @@
     xmlns:local="clr-namespace:GUI"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="350"
-    Height="500"
-    Background="{DynamicResource MaterialDesignCardBackground}"
+    Width="460"
+    Height="360"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="../../img/logo.png"
     ResizeMode="NoResize"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
-    WindowStartupLocation="CenterOwner"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <Grid Margin="60,20">
+    <Grid Margin="100,20">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="1.4*" />
         </Grid.RowDefinitions>
         <TextBox
             x:Name="txtTitle"
             VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Tựa đề"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <TextBox
-            x:Name="txtCatalog"
+        <ComboBox
+            x:Name="cbxCatalog"
             Grid.Row="1"
-            VerticalAlignment="Center"
+            materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Danh mục"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+            IsEditable="True"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <TextBox
             x:Name="txtAuthor"
             Grid.Row="2"
@@ -51,25 +59,21 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button
-                x:Name="btnCancel"
-                Grid.Column="0"
-                Height="40"
-                Margin="0,0,10,0"
-                materialDesign:ButtonAssist.CornerRadius="4"
-                Click="btnCancel_Click"
-                Content="Huỷ bỏ"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignOutlinedButton}" />
-            <Button
                 x:Name="btnSubmit"
-                Grid.Column="1"
-                Height="40"
+                Grid.Column="0"
+                Margin="0,0,10,0"
                 materialDesign:ButtonAssist.CornerRadius="4"
                 Click="btnSubmit_Click"
                 Content="Xác nhận"
                 IsDefault="True"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+            <Button
+                x:Name="btnCancel"
+                Grid.Column="1"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnCancel_Click"
+                Content="Huỷ bỏ"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
         </Grid>
     </Grid>
 </Window>

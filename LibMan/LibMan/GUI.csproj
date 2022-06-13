@@ -69,11 +69,20 @@
     <Compile Include="Child\AddWindow\BookManWindow.xaml.cs">
       <DependentUpon>BookManWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Child\AddWindow\LoanBookWindow.xaml.cs">
+      <DependentUpon>LoanBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\AddWindow\ReturnBookWindow.xaml.cs">
+      <DependentUpon>ReturnBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Child\BookLibrarianPage.xaml.cs">
       <DependentUpon>BookLibrarianPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\LoanManPage.xaml.cs">
+      <DependentUpon>LoanManPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\LoanPage.xaml.cs">
       <DependentUpon>LoanPage.xaml</DependentUpon>
@@ -98,11 +107,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Child\AddWindow\LoanBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\AddWindow\ReturnBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Child\BookLibrarianPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Child\BookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\LoanManPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

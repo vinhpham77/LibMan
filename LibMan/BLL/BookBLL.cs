@@ -63,6 +63,7 @@ namespace BLL
         public static bool UpdateBook(int id, string title, string catalog, string author, string publisher)
         {            
             bool valid = ValidateBook(ref title, ref catalog, ref author, ref publisher);
+        
             if (valid)
             {
                 BookDAL.UpdateBook(id, title, catalog, author, publisher);
@@ -74,5 +75,9 @@ namespace BLL
             }
         }
 
+        public static bool DeleteBook(int id)
+        {
+            return BookDAL.DeleteBook(id);
+        }
     }
 }

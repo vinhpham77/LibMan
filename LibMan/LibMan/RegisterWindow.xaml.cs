@@ -23,32 +23,24 @@ namespace GUI
         public RegisterWindow()
         {
             InitializeComponent();
+            txtUsername.Focus();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            Close();
+            LoginWindow login = new LoginWindow();
+            login.Show();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string pass = txtPassword.Password.Trim();
-            string repass = txtRePassword.Password.Trim();
-            string fullname = txtUsername.Text.Trim();
-            string birthday = dpBirthday.Text.Trim();
-            bool gender = rdMale.IsChecked == true;
-            string id = txtID.Text.Trim();
-            string address = txtAddress.Text.Trim();
-            object[] formInputs = { username, pass, repass, fullname, birthday, gender, id, address};
-
-            string error = AccountBLL.ValidateRegister(formInputs);
+            
+            string error = AccountBLL.CreateAccount(txtAddress.Text, txtPassword.Password, txtRePassword.Password, 1
+                                          , txtFullname.Text, dpBirthday.Text, rdMale.IsChecked, txtID.Text, txtAddress.Text);
             if (error is null)
             {
-                AccountBLL.CreateAccount(username, pass, 1, fullname, birthday, gender, id, address);
                 MessageBox.Show("Đăng ký thành công! Vui lòng đợi phê duyệt tài khoản", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                btnBack_Click(null, null);
+                btnCancel_Click(null, null);
             }
             else
             {

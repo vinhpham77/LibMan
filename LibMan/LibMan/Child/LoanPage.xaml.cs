@@ -29,7 +29,7 @@ namespace GUI.Child
 
         public void dtgLoan_Load(string username)
         {
-            dtgLoan.ItemsSource = LoanReturnedBLL.GetLoanReturneds(username);
+            dtgLoan.ItemsSource = LoanReturnedBLL.GetLoanReturnedList(username);
         }
     }
 }

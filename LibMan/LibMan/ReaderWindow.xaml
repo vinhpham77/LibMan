@@ -9,10 +9,14 @@
     Title="Thư viện"
     Width="1200"
     Height="750"
-    Background="{DynamicResource MaterialDesignDarkBackground}"
-    Icon="img/icon.png"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="img/logo.png"
     ResizeMode="CanMinimize"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
