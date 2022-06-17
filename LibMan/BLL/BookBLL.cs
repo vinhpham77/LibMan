@@ -15,29 +15,28 @@ namespace BLL
             return BookDAL.GetBookList(title);
         }
 
-        public static bool AddBook(string title, string catalog, string author, string publisher)
+        public static void AddBook(string title, int? catalogID, string author, string publisher)
         {
-            bool valid = ValidateBook(ref title, ref catalog, ref author, ref publisher);
+            bool valid = ValidateBook(ref title, ref catalogID, ref author, ref publisher);
             
             if (valid)
             {
-                BookDAL.AddBook(title, catalog, author, publisher);
-                return true;
+                BookDAL.AddBook(title, catalogID, author, publisher);
             } else
             {
-                return false;
+                throw new Exception("Vui lòng cung cấp đầy đủ thông tin!");
             }
         }
 
-        public static bool ValidateBook(ref string title, ref string catalog, ref string author, ref string publisher)
+        public static bool ValidateBook(ref string title, ref int? catalog, ref string author, ref string publisher)
         {
             title = title.Trim();
             if (string.IsNullOrEmpty(title))
             {
                 return false;
             }
-            catalog = catalog.Trim();
-            if (string.IsNullOrEmpty(catalog))
+
+            if (catalog is null)
             {
                 return false;
             }
@@ -55,29 +54,28 @@ namespace BLL
             return true;
         }
 
-        public static Book GetBook(int id)
+        public static BookDTO GetBook(int id)
         {
-            return BookDAL.GetBook(id);
+            return new BookDTO(BookDAL.GetBook(id));
         }
 
-        public static bool UpdateBook(int id, string title, string catalog, string author, string publisher)
+        public static void UpdateBook(int id, string title, int? catalog, string author, string publisher)
         {            
             bool valid = ValidateBook(ref title, ref catalog, ref author, ref publisher);
         
             if (valid)
             {
                 BookDAL.UpdateBook(id, title, catalog, author, publisher);
-                return true;
             }
             else
             {
-                return false;
+                throw new Exception("Vui lòng cung cấp đầy đủ thông tin!");
             }
         }
 
-        public static bool DeleteBook(int id)
+        public static void DeleteBook(int bookID)
         {
-            return BookDAL.DeleteBook(id);
+            BookDAL.DeleteBook(bookID);
         }
     }
 }

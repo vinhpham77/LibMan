@@ -10,7 +10,7 @@
     TextElement.Foreground="{DynamicResource MaterialDesignDarkBackground}"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <Grid>
         <DataGrid
             x:Name="dtgLoan"
             AutoGenerateColumns="False"
@@ -19,39 +19,34 @@
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            SelectionMode="Extended">
+            SelectionMode="Extended"
+            VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Binding="{Binding LoanID}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Mã dịch vụ" />
                 <DataGridTextColumn
                     Binding="{Binding BookID}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Mã sách" />
                 <DataGridTextColumn
-                    Binding="{Binding LoanDate}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding LoanDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày mượn" />
                 <DataGridTextColumn
-                    Binding="{Binding DueDate}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding DueDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày hẹn trả" />
                 <DataGridTextColumn
-                    Binding="{Binding ReturnedDate}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding ReturnedDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày trả" />
                 <DataGridTextColumn
-                    Binding="{Binding Fine}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding Fine, StringFormat=\{0:N0\}đ}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Tiền phạt" />
+                    Header="Phí" />
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+    </Grid>
 </Page>

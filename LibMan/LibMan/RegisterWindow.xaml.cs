@@ -23,12 +23,12 @@ namespace GUI
         public RegisterWindow()
         {
             InitializeComponent();
-            txtUsername.Focus();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow login = new LoginWindow();
+            Close();
             login.Show();
         }
 

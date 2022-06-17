@@ -22,37 +22,36 @@ namespace GUI.Child.AddWindow
     public partial class BookManWindow : Window
     {
         private readonly int _bookID;
-        public BookManWindow(string title)
+        public BookManWindow()
         {
             InitializeComponent();
-            Title = title;
-            txtTitle.Focus();
+            Title = "Thêm sách";
+            _bookID = 0;
             cbxCatalog_Load();
         }
 
-        public BookManWindow(string title, BookDTO book)
+        public BookManWindow(BookCatalogDTO bc)
         {
             InitializeComponent();
-            Title = title;
-            txtTitle.Focus();
-            _bookID = book.ID;
+            Title = "Sửa sách";
+            _bookID = bc.BookID;
             cbxCatalog_Load();
-            LoadTextElements(book);
+            cbxCatalog.Text = bc.CatalogName;
+            LoadTextBoxes(bc);
         }
 
-        public void LoadTextElements(BookDTO book)
+        public void LoadTextBoxes(BookCatalogDTO bc)
         {
-            txtTitle.Text = book.Title;
-            txtAuthor.Text = book.Author;
-            cbxCatalog.Text = book.Catalog; 
-            txtPublisher.Text = book.Publisher;
+            txtTitle.Text = bc.BookTitle;
+            txtAuthor.Text = bc.Author;
+            txtPublisher.Text = bc.Publisher;
         }
 
         public void cbxCatalog_Load()
         {
-            cbxCatalog.ItemsSource = BookBLL.GetBookList();
-            cbxCatalog.DisplayMemberPath = "Catalog";
-            //cbxCatalog.SelectedValuePath = "Catalog";
+            cbxCatalog.ItemsSource = CatalogBLL.GetCatalogList();
+            cbxCatalog.DisplayMemberPath = "Name";
+            cbxCatalog.SelectedValuePath = "ID";
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -62,26 +61,29 @@ namespace GUI.Child.AddWindow
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            bool successful;
-
-            if (Title.Equals("Thêm sách"))
+            try
             {
-                successful = BookBLL.AddBook(txtTitle.Text, cbxCatalog.Text, txtAuthor.Text, txtPublisher.Text);
-            }
-            else
-            {
-                successful = BookBLL.UpdateBook(_bookID, txtTitle.Text, cbxCatalog.Text, txtAuthor.Text, txtPublisher.Text);
-            }
-
-            if (successful)
-            {
-                MessageBox.Show("Thành công!", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                if (_bookID == 0)
+                {
+                   BookBLL.AddBook(txtTitle.Text, cbxCatalog.SelectedValue as int?, txtAuthor.Text, txtPublisher.Text);
+                }
+                else
+                {
+                    BookBLL.UpdateBook(_bookID, txtTitle.Text, cbxCatalog.SelectedValue as int?, txtAuthor.Text, txtPublisher.Text);
+                }
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Thất bại, vui lòng điền đầy đủ thông tin!", Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void btnAddCatalog_Click(object sender, RoutedEventArgs e)
+        {
+            CatalogManWindow catalogMan = new CatalogManWindow();
+            catalogMan.Owner = this;
+            catalogMan.ShowDialog();
         }
     }
 }

@@ -8,59 +8,76 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="16"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
-    <StackPanel>
-        <StackPanel Margin="0,0,0,14" Orientation="Horizontal">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel Margin="0,0,0,14">
             <materialDesign:PackIcon
                 Width="30"
                 Height="30"
+                Margin="3,0"
+                DockPanel.Dock="Left"
                 Kind="BookSearchOutline" />
             <TextBox
                 x:Name="txtBookSearch"
-                Margin="5,0,0,0"
                 materialDesign:HintAssist.Hint="Nhập tên sách cần tìm"
-                materialDesign:TransitionAssist.DisableTransitions="True"
+                DockPanel.Dock="Left"
                 TextChanged="txtBookSearch_TextChanged" />
-        </StackPanel>
+            <Button
+                x:Name="btnRefresh"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Right"
+                Click="btnRefresh_Click"
+                Content="{materialDesign:PackIcon Kind=Refresh,
+                                                  Size=25}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Làm mới" />
+        </DockPanel>
         <DataGrid
             x:Name="dtgBook"
+            Grid.Row="1"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            SelectionMode="Extended">
+            VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Binding="{Binding ID}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding BookID}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Mã" />
+                    Header="Mã sách" />
                 <DataGridTextColumn
-                    Binding="{Binding Title}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding BookTitle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Tựa đề" />
                 <DataGridTextColumn
-                    Binding="{Binding Catalog}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding CatalogName}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Danh mục" />
                 <DataGridTextColumn
                     Binding="{Binding Author}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Tác giả" />
                 <DataGridTextColumn
                     Binding="{Binding Publisher}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Nhà xuất bản" />
+
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+    </Grid>
 </Page>

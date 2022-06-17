@@ -18,117 +18,111 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.9*" />
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <DockPanel Margin="0,0,0,14">
-                <materialDesign:PackIcon
-                    Width="30"
-                    Height="30"
-                    DockPanel.Dock="Left"
-                    Kind="BookSearchOutline" />
-                <TextBox
-                    x:Name="txtBookSearch"
-                    Margin="5,0,0,0"
-                    materialDesign:HintAssist.Hint="Nhập tên sách cần tìm"
-                    materialDesign:TransitionAssist.DisableTransitions="True"
-                    DockPanel.Dock="Left"
-                    TextChanged="txtBookSearch_TextChanged" />
-                <Button
-                    x:Name="btnRefresh"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    Click="btnRefresh_Click"
-                    Content="{materialDesign:PackIcon Kind=Refresh}"
-                    DockPanel.Dock="Right"
-                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                    ToolTip="Làm mới" />
-            </DockPanel>
-
-            <DataGrid
-                x:Name="dtgBook"
-                Height="Auto"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                HeadersVisibility="Column"
-                HorizontalScrollBarVisibility="Auto"
-                IsReadOnly="True"
-                SelectionMode="Extended">
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Binding="{Binding ID}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Mã" />
-                    <DataGridTextColumn
-                        Binding="{Binding Title}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Tựa đề" />
-                    <DataGridTextColumn
-                        Binding="{Binding Catalog}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Danh mục" />
-                    <DataGridTextColumn
-                        Binding="{Binding Author}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Tác giả" />
-                    <DataGridTextColumn
-                        Binding="{Binding Publisher}"
-                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
-                        ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        Header="Nhà xuất bản" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </StackPanel>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <DockPanel Margin="0,0,0,14">
             <Button
                 x:Name="btnAddBook"
-                Grid.Column="0"
-                Margin="6,0"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Left"
                 Click="btnAddBook_Click"
-                Content="Thêm sách"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
+                Content="{materialDesign:PackIcon Kind=BookPlusOutline,
+                                                  Size=30}"
+                DockPanel.Dock="Left"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Thêm sách" />
+            <materialDesign:PackIcon
+                Width="30"
+                Height="30"
+                Margin="3,0"
+                DockPanel.Dock="Left"
+                Kind="BookSearchOutline" />
+            <TextBox
+                x:Name="txtBookSearch"
+                materialDesign:HintAssist.Hint="Nhập tên sách cần tìm"
+                DockPanel.Dock="Left"
+                TextChanged="txtBookSearch_TextChanged" />
             <Button
-                x:Name="btnEditBook"
-                Grid.Column="1"
-                Margin="6,0"
-                Click="btnEditBook_Click"
-                Content="Sửa sách"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
-            <Button
-                x:Name="btnDeleteBook"
-                Grid.Column="2"
-                Margin="6,0"
-                Click="btnDeleteBook_Click"
-                Content="Xoá sách"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
-            <Button
-                x:Name="btnBorrowBook"
-                Grid.Column="3"
-                Margin="6,0"
-                Click="btnBorrowBook_Click"
-                Content="Mượn sách"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
-            <Button
-                x:Name="btnReturnBook"
-                Grid.Column="4"
-                Margin="6,0"
-                Click="btnReturnBook_Click"
-                Content="Trả sách"
-                Style="{StaticResource MaterialDesignFlatDarkBgButton}" />
-        </Grid>
+                x:Name="btnRefresh"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Right"
+                Click="btnRefresh_Click"
+                Content="{materialDesign:PackIcon Kind=Refresh,
+                                                  Size=25}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Làm mới" />
+        </DockPanel>
+        <DataGrid
+            x:Name="dtgBook"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            HeadersVisibility="Column"
+            HorizontalScrollBarVisibility="Auto"
+            IsReadOnly="True"
+            VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding BookID}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Mã sách" />
+                <DataGridTextColumn
+                    Binding="{Binding BookTitle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Tựa đề" />
+                <DataGridTextColumn
+                    Binding="{Binding CatalogName}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Danh mục" />
+                <DataGridTextColumn
+                    Binding="{Binding Author}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Tác giả" />
+                <DataGridTextColumn
+                    Binding="{Binding Publisher}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Nhà xuất bản" />
+                <DataGridTemplateColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Thao tác">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="btnEditBook_Click"
+                                    Content="{materialDesign:PackIcon Kind=Edit}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Sửa" />
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Margin="5,0"
+                                    Padding="0"
+                                    Click="btnDeleteBook_Click"
+                                    Content="{materialDesign:PackIcon Kind=Delete}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Xoá" />
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Padding="0"
+                                    Click="btnBorrowBook_Click"
+                                    Content="{materialDesign:PackIcon Kind=HandExtended}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Cho mượn" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

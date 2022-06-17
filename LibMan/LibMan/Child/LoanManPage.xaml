@@ -4,59 +4,133 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:GUI.Child"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    TextElement.Foreground="{DynamicResource MaterialDesignDarkBackground}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
 
-    <StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel Margin="0,0,0,14">
+            <Button
+                x:Name="btnReturnBook"
+                Width="30"
+                Height="30"
+                Click="btnReturnBook_Click"
+                Content="{materialDesign:PackIcon Kind=ReceiptTextPlusOutline,
+                                                  Size=30}"
+                DockPanel.Dock="Left"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Lập hoá đơn" />
+            <materialDesign:PackIcon
+                Width="30"
+                Height="30"
+                Margin="3,0"
+                DockPanel.Dock="Left"
+                Kind="TextBoxSearchOutline" />
+            <TextBox
+                x:Name="txtLoanReturnSearch"
+                materialDesign:HintAssist.Hint="Nhập tên đăng nhập cần tra cứu"
+                DockPanel.Dock="Left"
+                TextChanged="txtLoanReturnSearch_TextChanged" />
+            <Button
+                x:Name="btnRefresh"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Right"
+                Click="btnRefresh_Click"
+                Content="{materialDesign:PackIcon Kind=Refresh,
+                                                  Size=25}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                ToolTip="Làm mới" />
+        </DockPanel>
         <DataGrid
             x:Name="dtgLoan"
+            Grid.Row="1"
             AutoGenerateColumns="False"
             CanUserAddRows="False"
             CanUserDeleteRows="False"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            SelectionMode="Extended">
+            SelectionMode="Extended"
+            VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Binding="{Binding LoanID}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Mã dịch vụ" />
                 <DataGridTextColumn
                     Binding="{Binding Username}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Tài khoản" />
                 <DataGridTextColumn
                     Binding="{Binding BookID}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Mã sách" />
                 <DataGridTextColumn
-                    Binding="{Binding LoanDate, StringFormat=d, ConverterCulture=vi-VN}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding LoanDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày mượn" />
                 <DataGridTextColumn
-                    Binding="{Binding DueDate, StringFormat=d, ConverterCulture=vi-VN}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding DueDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày hẹn trả" />
                 <DataGridTextColumn
-                    Binding="{Binding ReturnedDate, StringFormat=d, ConverterCulture=vi-VN}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding ReturnedDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày trả" />
                 <DataGridTextColumn
-                    Binding="{Binding Fine}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"
+                    Binding="{Binding Fine, StringFormat=\{0:N0\}đ}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Tiền phạt" />
+                    Header="Phí" />
+                <DataGridTemplateColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Thao tác">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Padding="0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="btnEditLoan_Click"
+                                    Content="{materialDesign:PackIcon Kind=Edit}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Sửa" />
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Margin="5,0"
+                                    Padding="0"
+                                    Click="btnDeleteLoan_Click"
+                                    Content="{materialDesign:PackIcon Kind=Delete}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Xoá" />
+                                <Button
+                                    Width="25"
+                                    Height="25"
+                                    Padding="0"
+                                    Click="btnReturnBook_Click"
+                                    Content="{materialDesign:PackIcon Kind=ReceiptTextPlusOutline}"
+                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                    ToolTip="Lập hoá đơn" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+    </Grid>
 </Page>

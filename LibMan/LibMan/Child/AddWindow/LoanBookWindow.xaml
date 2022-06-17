@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:GUI.Child.AddWindow"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="420"
-    Height="320"
+    Title="Mượn sách"
+    Width="400"
+    Height="360"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="../../img/logo.png"
@@ -24,28 +25,35 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
             <RowDefinition Height="1.4*" />
         </Grid.RowDefinitions>
+        <TextBox
+            x:Name="txtBookID"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Mã sách"
+            IsReadOnly="True"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <ComboBox
             x:Name="cbxUsername"
+            Grid.Row="1"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Tên đăng nhập"
             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
-            IsEditable="False"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <DatePicker
             x:Name="dtpLoanDate"
-            Grid.Row="1"
+            Grid.Row="2"
             materialDesign:CalendarAssist.IsHeaderVisible="False"
             materialDesign:HintAssist.Hint="Ngày mượn"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
         <DatePicker
             x:Name="dtpDueDate"
-            Grid.Row="2"
+            Grid.Row="3"
             materialDesign:CalendarAssist.IsHeaderVisible="False"
             materialDesign:HintAssist.Hint="Ngày hẹn trả"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -65,6 +73,7 @@
                 materialDesign:ButtonAssist.CornerRadius="4"
                 Click="btnCancel_Click"
                 Content="Huỷ bỏ"
+                IsCancel="True"
                 Style="{StaticResource MaterialDesignOutlinedButton}" />
         </Grid>
     </Grid>

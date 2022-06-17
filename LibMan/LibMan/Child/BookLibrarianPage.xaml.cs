@@ -31,7 +31,7 @@ namespace GUI.Child
 
         private void dtgBook_Load(string title = "")
         {
-            dtgBook.ItemsSource = BookBLL.GetBookList(title);
+            dtgBook.ItemsSource = BookCatalogBLL.GetBookCatalogList(title);
         }
 
         private void txtBookSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -41,45 +41,38 @@ namespace GUI.Child
 
         private void btnAddBook_Click(object sender, RoutedEventArgs e)
         {
-            BookManWindow addBook = new BookManWindow(btnAddBook.Content.ToString());
+            BookManWindow addBook = new BookManWindow();
             addBook.ShowDialog();
         }
 
         private void btnEditBook_Click(object sender, RoutedEventArgs e)
         {
-            string title = btnEditBook.Content.ToString();
-            if (!(dtgBook.SelectedItem is BookDTO book))
-            {
-                MessageBox.Show("Vui lòng chọn sách cần sửa!", title, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                BookManWindow bookMan = new BookManWindow(title, book);
-                bookMan.ShowDialog();
-            }
+            BookManWindow bookMan = new BookManWindow(dtgBook.SelectedItem as BookCatalogDTO);
+            bookMan.ShowDialog();
         }
 
         private void btnDeleteBook_Click(object sender, RoutedEventArgs e)
         {
-            string title = btnDeleteBook.Content.ToString();
-            if (!(dtgBook.SelectedItem is BookDTO book))
+            string title = "Xoá sách";
+            BookCatalogDTO bc = dtgBook.SelectedItem as BookCatalogDTO;
+            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá sách mã '{bc.BookID}' không?", title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Vui lòng chọn sách cần xoá!", title, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá sách '{book.Title}' không?", title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                bool successful;
+                try
                 {
-                    bool successful = BookBLL.DeleteBook(book.ID);
-                    if (successful)
-                    {
-                        MessageBox.Show("Thành công!", title, MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Thất bại, sách '{book.Title}' không tồn tại!", title, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                    BookBLL.DeleteBook(bc.BookID);
+                    successful = true;
+                }
+                catch (Exception ex)
+                {
+                    successful = false;
+                    MessageBox.Show(ex.Message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                if (successful)
+                {
+                    btnRefresh_Click(null, null);
                 }
             }
         }
@@ -92,20 +85,14 @@ namespace GUI.Child
 
         private void btnBorrowBook_Click(object sender, RoutedEventArgs e)
         {
-            if (!(dtgBook.SelectedItem is BookDTO book))
-            {
-                MessageBox.Show("Vui lòng chọn sách cần cho mượn!", btnBorrowBook.Content.ToString(), MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                LoanBookWindow loan = new LoanBookWindow(btnBorrowBook.Content.ToString(), book.ID);
-                loan.ShowDialog();
-            }
+            BookCatalogDTO bc = dtgBook.SelectedItem as BookCatalogDTO;
+            LoanBookWindow loan = new LoanBookWindow(bc.BookID);
+            loan.ShowDialog();
         }
 
         private void btnReturnBook_Click(object sender, RoutedEventArgs e)
         {
-            ReturnBookWindow returnBook = new ReturnBookWindow(btnReturnBook.Content.ToString());
+            ReturnBookWindow returnBook = new ReturnBookWindow();
             returnBook.ShowDialog();
         }
     }

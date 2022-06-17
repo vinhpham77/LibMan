@@ -53,3 +53,11 @@ C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\LoanManPage.g.cs
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\LoanManPage.baml
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ReturnBookWindow.g.cs
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ReturnBookWindow.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\CatalogManWindow.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\CatalogManWindow.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\CatalogLibrarianPage.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\CatalogLibrarianPage.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AccountManPage.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AccountManPage.baml
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ChangePasswordWindow.g.cs
+C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\obj\Debug\Child\AddWindow\ChangePasswordWindow.baml

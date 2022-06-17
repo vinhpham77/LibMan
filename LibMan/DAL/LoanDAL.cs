@@ -49,5 +49,23 @@ namespace DAL
                 context.SubmitChanges();
             }
         }
+
+        public static void DeleteLoan(int loanID)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                Loan loan = context.Loans.Where(l => l.ID == loanID).FirstOrDefault();
+
+                if (loan is null)
+                {
+                    throw new Exception($"Không tồn tại dịch vụ mã '{loanID}' trong hệ thống!");
+                }
+                else
+                {
+                    context.Loans.DeleteOnSubmit(loan);
+                    context.SubmitChanges();
+                }
+            }
+        }
     }
 }

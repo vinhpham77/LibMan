@@ -22,12 +22,16 @@ namespace GUI
     public partial class ReaderWindow : Window
     {
         private string _username { get; set; }
-
+        Child.BookPage book;
+        Child.LoanPage loan;
         public ReaderWindow(string username)
         {
             InitializeComponent();
             this._username = username;
+            book = new Child.BookPage();
+            loan = new Child.LoanPage(_username);
             lblFullname.Content = AccountBLL.GetAccount(username).Fullname;
+            lvwMenu.SelectedIndex = 0;
         }
 
         private void lvwMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,12 +40,15 @@ namespace GUI
             switch (lvwMenu.SelectedIndex)
             {
                 case 0:
-                    Child.BookPage book = new Child.BookPage();
                     frmChild.Navigate(book);
                     break;
                 case 1:
-                    Child.LoanPage loan = new Child.LoanPage(_username);
                     frmChild.Navigate(loan);
+                    break;
+                case 2:
+                    LoginWindow login = new LoginWindow();
+                    Close();
+                    login.Show();
                     break;
             }
         }

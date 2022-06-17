@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:GUI.Child.AddWindow"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Trả sách"
     Width="440"
-    Height="360"
+    Height="400"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="../../img/logo.png"
@@ -30,25 +31,31 @@
         <ComboBox
             x:Name="cbxUsername"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
-            materialDesign:HintAssist.Hint="Tài khoản"
+            materialDesign:HintAssist.Hint="Tên đăng nhập"
             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
-            IsEditable="True"
-            StaysOpenOnEdit="True"
-            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-            TextBoxBase.TextChanged="cbxUsername_TextChanged" />
-        <ComboBox
-            x:Name="cbxLoanID"
-            Grid.Row="1"
-            materialDesign:HintAssist.Hint="Mã dịch vụ"
-            DisplayMemberPath="ID"
-            SelectedValue="ID"
-            SelectionChanged="cbxLoanID_SelectionChanged">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-        </ComboBox>
+            SelectionChanged="cbxUsername_SelectionChanged"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox
+                x:Name="cbxLoanID"
+                Margin="0,0,10,0"
+                materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+                materialDesign:HintAssist.Hint="Mã dịch vụ"
+                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+                SelectionChanged="cbxLoanID_SelectionChanged"
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+            <TextBox
+                x:Name="txtBookID"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Mã sách"
+                IsReadOnly="True"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -56,8 +63,7 @@
             </Grid.ColumnDefinitions>
             <TextBox
                 x:Name="txtLoanDate"
-                Grid.Column="0"
-                Margin="0,0,5,0"
+                Margin="0,0,10,0"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Ngày mượn"
                 IsReadOnly="True"
@@ -65,7 +71,6 @@
             <TextBox
                 x:Name="txtDueDate"
                 Grid.Column="1"
-                Margin="5,0,0,0"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Ngày hẹn trả"
                 IsReadOnly="True"
@@ -98,6 +103,7 @@
                 materialDesign:ButtonAssist.CornerRadius="4"
                 Click="btnCancel_Click"
                 Content="Huỷ bỏ"
+                IsCancel="True"
                 Style="{StaticResource MaterialDesignOutlinedButton}" />
         </Grid>
     </Grid>

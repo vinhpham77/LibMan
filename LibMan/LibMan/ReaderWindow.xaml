@@ -13,6 +13,7 @@
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="img/logo.png"
     ResizeMode="CanMinimize"
+    TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
@@ -74,7 +75,8 @@
                 SelectionChanged="lvwMenu_SelectionChanged">
                 <ListView.Resources>
                     <Style TargetType="TextBlock">
-                        <Setter Property="FontSize" Value="18" />
+                        <Setter Property="FontSize" Value="15" />
+                        <Setter Property="Padding" Value="2" />
                         <Setter Property="VerticalAlignment" Value="Center" />
                         <Setter Property="Foreground" Value="White" />
                     </Style>
@@ -97,124 +99,21 @@
                         <TextBlock Text="Mượn trả" />
                     </StackPanel>
                 </ListViewItem>
+                <ListViewItem x:Name="lwiLogout">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Logout" />
+                        <TextBlock Text="Đăng xuất" />
+                    </StackPanel>
+                </ListViewItem>
             </ListView>
         </Grid>
         <materialDesign:Card Grid.Row="1" Grid.Column="1">
             <Frame
                 x:Name="frmChild"
-                Margin="40"
+                Margin="35"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 NavigationUIVisibility="Hidden" />
         </materialDesign:Card>
-        <!--<materialDesign:Card Grid.Row="1">
-            <TabControl
-                materialDesign:ColorZoneAssist.Mode="Standard"
-                materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                Style="{StaticResource MaterialDesignNavigationRailTabControl}">
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                HorizontalAlignment="Center"
-                                Kind="Book" />
-                            <TextBlock HorizontalAlignment="Center" Text="Sách" />
-                        </StackPanel>
-                    </TabItem.Header>
-
-                </TabItem>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel Width="auto" Height="auto">
-                            <materialDesign:PackIcon
-                                Width="24"
-                                Height="24"
-                                HorizontalAlignment="Center"
-                                Kind="BookClock" />
-                            <TextBlock HorizontalAlignment="Center" Text="Mượn trả" />
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-            </TabControl>
-        </materialDesign:Card>-->
-        <!--<Border>
-                <StackPanel Orientation="Horizontal">
-                    <Image
-                        Height="40"
-                        Source="img/online-library.png"
-                        Stretch="Fill" />
-                    <Label
-                        x:Name="lblHome"
-                        VerticalAlignment="Center"
-                        FontSize="16"
-                        FontWeight="Bold">
-                        QUẢN LÝ THƯ VIỆN
-                    </Label>
-                </StackPanel>
-            </Border>
-            <Border Grid.Column="1" Background="#ddffff" />
-            <Border
-                Grid.Row="1"
-                Grid.RowSpan="5"
-                Grid.Column="1"
-                Background="GhostWhite" />
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Image
-                    Height="32"
-                    Source="img/book.png"
-                    Stretch="Fill" />
-                <Button
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    FontSize="16"
-                    Foreground="White">
-                    Sách
-                </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <Image
-                    Height="32"
-                    Source="img/loan.png"
-                    Stretch="Fill" />
-                <Button
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    FontSize="16"
-                    Foreground="White">
-                    Hoạt động mượn trả
-                </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                <Image
-                    Height="32"
-                    Source="img/logout.png"
-                    Stretch="Fill" />
-                <Button
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    FontSize="16"
-                    Foreground="White">
-                    Đăng xuất
-                </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="4" Orientation="Horizontal">
-                <Image
-                    Height="32"
-                    Source="img/exit.png"
-                    Stretch="Fill" />
-                <Button
-                    VerticalContentAlignment="Center"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    FontSize="16"
-                    Foreground="White">
-                    Thoát
-                </Button>-->
-        <!--</StackPanel>-->
     </Grid>
 </Window>

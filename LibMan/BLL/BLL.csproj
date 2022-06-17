@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountBLL.cs" />
+    <Compile Include="AccountRoleBLL.cs" />
     <Compile Include="BookBLL.cs" />
+    <Compile Include="BookCatalogBLL.cs" />
+    <Compile Include="CatalogBLL.cs" />
     <Compile Include="LoanReturnedBLL.cs" />
     <Compile Include="ReturnedBLL.cs" />
     <Compile Include="LoanBLL.cs" />

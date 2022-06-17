@@ -23,14 +23,14 @@ namespace DAL
             return books;
         }
 
-        public static void AddBook(string title, string catalog, string author, string publisher)
+        public static void AddBook(string title, int? catalogID, string author, string publisher)
         {
             using(LibManDataContext context = new LibManDataContext())
             {
                 Book book = new Book
                 {
                     Title = title,
-                    Catalog = catalog,
+                    CatalogID = catalogID,
                     Author = author,
                     Publisher = publisher,
                 };
@@ -40,7 +40,7 @@ namespace DAL
             }
         }
 
-        public static bool UpdateBook(int id, string title, string catalog, string author, string publisher)
+        public static void UpdateBook(int id, string title, int? catalogID, string author, string publisher)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
@@ -48,17 +48,16 @@ namespace DAL
                 
                 if (book is null)
                 {
-                    return false;
+                    throw new Exception($"Không tồn tại sách mã '{id}' trong hệ thống!");
                 }
                 else
                 {
                     book.Title = title;
-                    book.Catalog = catalog;
+                    book.CatalogID = catalogID;
                     book.Author = author;
                     book.Publisher = publisher;
                     
                     context.SubmitChanges();
-                    return true;
                 }
             }
         }
@@ -71,7 +70,7 @@ namespace DAL
             }
         }
 
-        public static bool DeleteBook(int id)
+        public static void DeleteBook(int id)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
@@ -79,13 +78,12 @@ namespace DAL
 
                 if (book is null)
                 {
-                    return false;
+                    throw new Exception($"Không tồn tại sách mã '{id}' trong hệ thống!");
                 }
                 else
                 {
                     context.Books.DeleteOnSubmit(book);
                     context.SubmitChanges();
-                    return true;
                 }
             }
         }

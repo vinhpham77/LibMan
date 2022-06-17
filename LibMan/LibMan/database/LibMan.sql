@@ -1,5 +1,4 @@
-﻿DROP DATABASE LibMan
-CREATE DATABASE LibMan
+﻿CREATE DATABASE LibMan
 GO
 USE LibMan
 GO
@@ -36,21 +35,34 @@ INSERT Account(Username, Password, RoleID, Fullname, Birthday, Gender, ID, Addre
 	('thiLan', 'vanDiep', '2', N'Nguyễn Thị Lan', '10/12/2002', '0', '987654321000', N'67 Bạch Đằng, Đống Đa, Hà Nội', '0'),
 	('hoaiLam123', 'doilabekho', '2', N'Trần Hoài Lâm', '1/12/2000', '1', '987654321101', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1')
 
+CREATE TABLE Catalog
+(
+	ID INT CONSTRAINT PK_CatalogID NOT NULL IDENTITY(1,1),
+	Name NVARCHAR(255) UNIQUE NOT NULL,
+)
+
+INSERT Catalog(Name) VALUES
+	(N'Động vật'),
+	(N'Khoa học'),
+	(N'Toán học'),
+	(N'Võ thuật'),
+	(N'Văn học')
+
 CREATE TABLE Book
 (
 	ID INT CONSTRAINT PK_MaSach PRIMARY KEY NOT NULL IDENTITY(1,1),
 	Title NVARCHAR(255),
-	Catalog NVARCHAR(255),
+	CatalogID INT CONSTRAINT FK_CatalogID FOREIGN KEY REFERENCES Catalog(ID) ON DELETE SET NULL,
 	Author NVARCHAR(255),
 	Publisher NVARCHAR(255)
 )
 
-INSERT Book(Title, Catalog, Author, Publisher) VALUES
-	(N'Mười vạn câu hỏi vì sao', N'Khoa học', N'Phạm Hoài', N'Thanh Niên'),
-	(N'Ngựa vằn kỳ thú', N'Động vật', N'Lê Bôn', N'Kim Nguyên'),
-	(N'Xác suất và sự thành công', N'Toán học', N'Thomas Edinsone', N'Kim Đồng'),
-	(N'Cuộc đời của huyền thoại Muhammad Ali', N'Võ thuật', N'Mike Tyson', N'Kungfu BL'),
-	(N'Biển bạc', N'Văn học', N'Thanh Thảo', N'Kim Nguyên')
+INSERT Book(Title, CatalogID, Author, Publisher) VALUES
+	(N'Mười vạn câu hỏi vì sao', '2', N'Phạm Hoài', N'Thanh Niên'),
+	(N'Ngựa vằn kỳ thú', '1', N'Lê Bôn', N'Kim Nguyên'),
+	(N'Xác suất và sự thành công', '3', N'Thomas Edinsone', N'Kim Đồng'),
+	(N'Cuộc đời của huyền thoại Muhammad Ali', '4', N'Mike Tyson', N'Kungfu BL'),
+	(N'Biển bạc', '5', N'Thanh Thảo', N'Kim Nguyên')
 
 CREATE TABLE Loan
 (
@@ -62,10 +74,10 @@ CREATE TABLE Loan
 )
 
 INSERT Loan(Username, BookID, LoanDate, DueDate) VALUES
-	('jasonmama', '4', '6/24/2022', '6/29/2022'),
-	('jasonmama', '3', '6/24/2022', '6/29/2022'),
-	('johnweak', '1', '6/25/2022', '6/30/2022'),
-	('johnweak', '5', '6/25/2022', '7/1/2022')
+	('jasonmama', '4', '5/24/2022', '5/29/2022'),
+	('jasonmama', '3', '5/24/2022', '5/29/2022'),
+	('johnweak', '1', '5/25/2022', '5/30/2022'),
+	('johnweak', '5', '5/25/2022', '6/1/2022')
 
 
 CREATE TABLE Returned
@@ -75,7 +87,3 @@ CREATE TABLE Returned
 	Date DATE,
 	Fine FLOAT
 )
-
-INSERT Returned(LoanID, Date, Fine) VALUES
-	('1', '7/1/2020', '80000'),
-	('4', '8/1/2020', '10000')

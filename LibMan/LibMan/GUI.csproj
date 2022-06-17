@@ -66,8 +66,17 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Child\AccountManPage.xaml.cs">
+      <DependentUpon>AccountManPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Child\AddWindow\BookManWindow.xaml.cs">
       <DependentUpon>BookManWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\AddWindow\CatalogManWindow.xaml.cs">
+      <DependentUpon>CatalogManWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\AddWindow\ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\AddWindow\LoanBookWindow.xaml.cs">
       <DependentUpon>LoanBookWindow.xaml</DependentUpon>
@@ -80,6 +89,9 @@
     </Compile>
     <Compile Include="Child\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\CatalogLibrarianPage.xaml.cs">
+      <DependentUpon>CatalogLibrarianPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\LoanManPage.xaml.cs">
       <DependentUpon>LoanManPage.xaml</DependentUpon>
@@ -103,7 +115,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Child\AccountManPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Child\AddWindow\BookManWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\AddWindow\CatalogManWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\AddWindow\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Child\BookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\CatalogLibrarianPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

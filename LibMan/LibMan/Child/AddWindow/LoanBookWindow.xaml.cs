@@ -22,17 +22,12 @@ namespace GUI.Child.AddWindow
     /// </summary>
     public partial class LoanBookWindow : Window
     {
-        private readonly int _bookID;
-        public LoanBookWindow(string title, int bookID)
+        public LoanBookWindow(int bookID)
         {
             InitializeComponent();
-            _bookID = bookID;
-            Title = title;
+            txtBookID.Text = bookID.ToString();
             cbxUsername_Load();
-            dtpLoanDate.Language = XmlLanguage.GetLanguage("vi-VN");
-            dtpDueDate.Language = XmlLanguage.GetLanguage("vi-VN");
             dtpLoanDate.SelectedDate = DateTime.Now;
-            
         }
 
         private void cbxUsername_Load()
@@ -49,16 +44,15 @@ namespace GUI.Child.AddWindow
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            string error = LoanBLL.LoanBook(cbxUsername.Text, _bookID, dtpLoanDate.Text, dtpDueDate.Text);
-            if (error is null)
+            try
             {
-                MessageBox.Show("Thành công!", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                LoanBLL.LoanBook(cbxUsername.Text, Convert.ToInt32(txtBookID.Text), dtpLoanDate.Text, dtpDueDate.Text);
                 Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show($"Thất bại! {error}", Title, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }            
         }
     }
 }

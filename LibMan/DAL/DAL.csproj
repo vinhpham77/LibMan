@@ -43,7 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDAL.cs" />
+    <Compile Include="AccountRoleDAL.cs" />
+    <Compile Include="BookCatalogDAL.cs" />
     <Compile Include="BookDAL.cs" />
+    <Compile Include="CatalogDAL.cs" />
     <Compile Include="LoanReturnedDAL.cs" />
     <Compile Include="ReturnedDAL.cs" />
     <Compile Include="LoanDAL.cs" />

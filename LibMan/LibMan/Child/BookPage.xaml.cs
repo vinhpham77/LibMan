@@ -31,12 +31,18 @@ namespace GUI.Child
 
         private void dtgBook_Load(string title = "")
         {
-            dtgBook.ItemsSource = BookBLL.GetBookList(title);
+            dtgBook.ItemsSource = BookCatalogBLL.GetBookCatalogList(title);
         }
 
         private void txtBookSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             dtgBook_Load(txtBookSearch.Text);
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            txtBookSearch.Clear();
+            dtgBook_Load();
         }
     }
 }

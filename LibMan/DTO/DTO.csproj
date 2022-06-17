@@ -43,14 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDTO.cs" />
+    <Compile Include="AccountRoleDTO.cs" />
+    <Compile Include="BookCatalogDTO.cs" />
     <Compile Include="BookDTO.cs" />
-    <Compile Include="LoanReturnedDTO.cs" />
-    <Compile Include="ReturnedDTO.cs" />
+    <Compile Include="CatalogDTO.cs" />
     <Compile Include="LibMan.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LibMan.dbml</DependentUpon>
     </Compile>
+    <Compile Include="LoanReturnedDTO.cs" />
+    <Compile Include="ReturnedDTO.cs" />
     <Compile Include="LoanDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

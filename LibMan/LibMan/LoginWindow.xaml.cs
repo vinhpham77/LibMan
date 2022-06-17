@@ -24,7 +24,6 @@ namespace GUI
         public LoginWindow()
         {
             InitializeComponent();
-            txtUsername.Focus();
         }
 
         private void Login(string username)
@@ -53,14 +52,15 @@ namespace GUI
         {
             string username = txtUsername.Text;
             string password = txtPassword.Password;
-            string message = AccountBLL.CheckLogin(username, password);
-            if (message is null)
+            try
             {
+                AccountBLL.CheckLogin(username, password);
                 Login(username);
             }
-            else
-            {   
-                MessageBox.Show(message, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Hand);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Đăng nhập", MessageBoxButton.OK, MessageBoxImage.Hand);
+                throw;
             }
         }
 

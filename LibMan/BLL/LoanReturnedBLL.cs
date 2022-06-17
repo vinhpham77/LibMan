@@ -12,13 +12,29 @@ namespace BLL
     {
         public static List<LoanReturnedDTO> GetLoanReturnedList(string username = "")
         {
-            username = username.Trim();
-            return LoanReturnedDAL.GetLoanReturnedList(username);
+            return LoanReturnedDAL.GetLoanReturnedList(username.Trim());
         }
         
         public static List<LoanReturnedDTO> GetNotReturnedList()
         {
             return LoanReturnedDAL.GetNotReturnedList();
+        }
+
+        public static List<string> GetUsernamesNotReturned()
+        {
+            return LoanReturnedDAL.GetUsernamesNotReturned();
+        }
+
+        public static void DeleteLoanReturned(int loanID)
+        {
+            ReturnedDAL.DeleteReturned(loanID);
+            LoanDAL.DeleteLoan(loanID);
+        }
+
+        public static List<int> GetLoanIDsNotReturned(string username = "")
+        {
+            return LoanReturnedDAL.GetLoanIDsNotReturned(username.Trim());
+            //return loanIDs.ConvertAll<string>(lID => lID.ToString());
         }
     }
 }

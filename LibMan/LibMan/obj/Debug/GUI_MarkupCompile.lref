@@ -1,11 +1,15 @@
 ﻿
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\App.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\AdminWindow.xaml;;
+FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AccountManPage.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AddWindow\BookManWindow.xaml;;
+FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AddWindow\CatalogManWindow.xaml;;
+FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AddWindow\ChangePasswordWindow.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AddWindow\LoanBookWindow.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\AddWindow\ReturnBookWindow.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\BookLibrarianPage.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\BookPage.xaml;;
+FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\CatalogLibrarianPage.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\LoanManPage.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\Child\LoanPage.xaml;;
 FC:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\LibrarianWindow.xaml;;

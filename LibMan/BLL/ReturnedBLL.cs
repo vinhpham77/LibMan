@@ -67,7 +67,7 @@ namespace BLL
             }
             if (returnedDate is null)
             {
-                throw new Exception("Vui lòng chọn ngày trả sách!");
+                throw new Exception("Vui lòng điền ngày trả sách!");
             }
 
             CultureInfo vn = new CultureInfo("vi-VN");
@@ -78,12 +78,14 @@ namespace BLL
                 throw new Exception("Ngày trả không thể trước ngày mượn!");
             }
             DateTime due = Convert.ToDateTime(dueDate, vn);
-            Hashtable fields = new Hashtable();
-            fields.Add("username", username);
-            fields.Add("loanID", Convert.ToInt32(loanID));
-            fields.Add("loanDate", loan);
-            fields.Add("dueDate", due);
-            fields.Add("returnedDate", returned);
+            Hashtable fields = new Hashtable
+            {
+                { "username", username },
+                { "loanID", Convert.ToInt32(loanID) },
+                { "loanDate", loan },
+                { "dueDate", due },
+                { "returnedDate", returned }
+            };
 
             return fields;
         }

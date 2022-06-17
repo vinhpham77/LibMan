@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using GUI.Child;
 namespace GUI
 {
     /// <summary>
@@ -19,26 +19,38 @@ namespace GUI
     /// </summary>
     public partial class LibrarianWindow : Window
     {
+        private readonly BookLibrarianPage _book;
+        private readonly CatalogLibrarianPage _catalog;
+        private readonly LoanManPage _loan;
+
         public LibrarianWindow(string username)
         {
+            _book = new Child.BookLibrarianPage();
+            _catalog = new Child.CatalogLibrarianPage();
+            _loan = new Child.LoanManPage();
             InitializeComponent();
             lblFullname.Content = username;
         }
 
         private void lvwMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             switch (lvwMenu.SelectedIndex)
             {
-                case 0:
-                    Child.BookLibrarianPage book = new Child.BookLibrarianPage();
-                    frmChild.Navigate(book);
+                case 0:            
+                    frmChild.Navigate(_book);
                     break;
                 case 1:
-                    Child.LoanManPage loan = new Child.LoanManPage();
-                    frmChild.Navigate(loan);
+                    frmChild.Navigate(_catalog);
                     break;
-            }
+                case 2:
+                    frmChild.Navigate(_loan);
+                    break;
+                case 3:
+                    LoginWindow login = new LoginWindow();
+                    Close();
+                    login.Show();
+                    break;
+            }            
         }
     }
 }

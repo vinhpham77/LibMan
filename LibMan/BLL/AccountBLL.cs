@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 
@@ -15,9 +12,9 @@ namespace BLL
             return AccountDAL.GetAccountList(fullname, status);
         }
 
-        public static bool DeleteAccountApproval(string username)
+/*        public static bool DeleteAccountApproval(string username)
         {
-            Account acc = GetAccount(username);
+            Account acc = AccountDAL.GetAccount(username);
 
             if (acc is null)
             {
@@ -28,7 +25,7 @@ namespace BLL
                 AccountDAL.DeleteAccount(acc);
                 return true;
             }
-        }
+        }*/
 
         public static string CreateAccount(string username, string password, string rePassword, int roleID, string fullname
                                             , string birthday, bool? gender, string id, string address)
@@ -63,50 +60,56 @@ namespace BLL
 
         public static Account GetAccount(string usernameOrID, bool isID = false)
         {
-            return AccountDAL.GetAccount(usernameOrID, isID);
+            return AccountDAL.GetAccount(usernameOrID);
         }
 
         public static bool UpdateAccount(string username, string fullname, string birthday, bool gender, string id, string address)
         {
-            return AccountDAL.UpdateAccount(username, fullname, birthday, gender, id, address);
+            Account acc = AccountDAL.GetAccount(username);
+            if (acc is null)
+            {
+                return false;
+            }
+            else
+            {
+                AccountDAL.UpdateAccount(username, fullname, birthday, gender, id, address);
+                return true;
+            }
         }
 
-        public static bool ChangePassword(string username, string newPassword)
+        public static void ChangePassword(string username, string newPassword)
         {
-            return AccountDAL.ChangePassword(username, newPassword);
+            AccountDAL.ChangePassword(username, newPassword);
         }
 
-        public static string CheckLogin(string username, string password)
+        public static void CheckLogin(string username, string password)
         {
             username = username.Trim();
             password = password.Trim();
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return "Vui lòng không để trống!";
+                throw new Exception("Vui lòng không để trống!");
             }
 
-            string message = null;
-            Account account = GetAccount(username);
+            AccountDTO account = AccountDAL.CheckLogin(username);
             if (account == null)
             {
-                message = "Tài khoản không tồn tại trong hệ thống!";
+                throw new Exception("Tài khoản không tồn tại trong hệ thống!");
             }
             else if (account.Password != password)
             {
-                message = "Sai mật khẩu";
+                throw new Exception ("Sai mật khẩu!");
             }
             else if (account.Status == false)
             {
-                message = "Tài khoản không có sẵn, vui lòng chờ hoặc liên hệ người có thẩm quyền";
+                throw new Exception("Tài khoản không có sẵn, vui lòng chờ hoặc liên hệ người có thẩm quyền!");
             }
-
-            return message;
         }
 
         public static int GetRoleID(string usernameOrID, bool isID = false)
         {
             string field = usernameOrID.Trim();
-            return AccountDAL.GetAccount(field, isID).RoleID;
+            return AccountDAL.GetAccount(field).RoleID;
         }
 
         public static string ValidateRegister(object[] formInputs)
@@ -140,6 +143,11 @@ namespace BLL
             }
 
             return null;
+        }
+
+        public static void ChangeStatus(string username, bool status)
+        {
+            AccountDAL.ChangeStatus(username, status);
         }
     }
 }

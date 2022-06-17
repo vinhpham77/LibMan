@@ -18,18 +18,9 @@ namespace DAL
                 var query = from l in context.Loans
                             join r in context.Returneds on l.ID equals r.LoanID into lReturned
                             from lr in lReturned.DefaultIfEmpty()
-                            where l.Username.Equals(username)
+                            where l.Username.Contains(username)
                             select new { l.ID, l.Username, l.BookID, l.LoanDate, l.DueDate, lr.Date, lr.Fine };
-
-                if (string.IsNullOrEmpty(username))
-                {
-                    query = from l in context.Loans
-                            join r in context.Returneds on l.ID equals r.LoanID into lReturned
-                            from lr in lReturned.DefaultIfEmpty()
-                            select new { l.ID, l.Username, l.BookID, l.LoanDate, l.DueDate, lr.Date, lr.Fine };
-                }
-
-                
+                        
                 foreach (var row in query)
                 {
                     LoanReturnedDTO loanReturned = new LoanReturnedDTO()
@@ -79,6 +70,34 @@ namespace DAL
                 }
 
                 return lrs;
+            }
+        }
+
+        public static List<string> GetUsernamesNotReturned()
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var query = from l in context.Loans
+                            join r in context.Returneds on l.ID equals r.LoanID into lReturned
+                            from lr in lReturned.DefaultIfEmpty()
+                            where lr.Date == null
+                            select l.Username;
+
+                return query.Distinct().ToList();
+            }
+        }
+
+        public static List<int> GetLoanIDsNotReturned(string username = "")
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var query = from l in context.Loans
+                            join r in context.Returneds on l.ID equals r.LoanID into lReturned
+                            from lr in lReturned.DefaultIfEmpty()
+                            where lr.Date == null && l.Username.Contains(username)
+                            select l.ID ;
+
+                return query.ToList();
             }
         }
     }

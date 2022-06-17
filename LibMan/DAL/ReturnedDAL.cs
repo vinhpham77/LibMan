@@ -35,5 +35,18 @@ namespace DAL
                 context.SubmitChanges();
             }
         }
+
+        public static void DeleteReturned(int loanID)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                Returned returned = context.Returneds.Where(r => r.LoanID == loanID).FirstOrDefault();
+                if (returned != null)
+                {
+                    context.Returneds.DeleteOnSubmit(returned);
+                    context.SubmitChanges();
+                }
+            }
+        }
     }
 }

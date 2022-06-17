@@ -21,7 +21,10 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <materialDesign:Card Margin="140,50" UniformCornerRadius="10">
+    <materialDesign:Card
+        Margin="140,50"
+        FocusManager.FocusedElement="{Binding ElementName=txtUsername}"
+        UniformCornerRadius="10">
         <materialDesign:DialogHost Margin="70,20">
             <StackPanel>
                 <Image

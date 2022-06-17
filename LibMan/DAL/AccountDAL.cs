@@ -49,86 +49,105 @@ namespace DAL
             }
         }
 
-        public static Account GetAccount(string usernameOrID, bool isID = false)
+        public static Account GetAccount(string username)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                string field = usernameOrID;
-                var account = isID ? context.Accounts.Where(acc => acc.ID.Equals(field)).FirstOrDefault()
-                                   : context.Accounts.Where(acc => acc.Username.Equals(field)).FirstOrDefault();
-
-                return account;
+                return context.Accounts.Where(acc => acc.Username.Equals(username)).FirstOrDefault();
             }
         }
 
-        public static void DeleteAccount(Account acc)
+        public static void DeleteAccount(string username)
         {
             using(LibManDataContext context = new LibManDataContext())
             {
-                context.Accounts.DeleteOnSubmit(acc);
-            }
-        }
-
-        public static bool UpdateAccount(string username, string fullname, string birthday, bool gender, string id, string address)
-        {
-            using (LibManDataContext context = new LibManDataContext())
-            {
-                Account account = GetAccount(username);
-
-                if (account != null)
+                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                
+                if (acc is null)
                 {
-                    account.Fullname = fullname;
-                    account.Birthday = Convert.ToDateTime(birthday);
-                    account.Gender = gender;
-                    account.ID = id;
-                    account.Address = address;
-
-                    context.SubmitChanges();
-                    return true;
+                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
                 }
                 else
                 {
-                    return false;
+                    context.Accounts.DeleteOnSubmit(acc);
+                    context.SubmitChanges();
                 }
             }
         }
 
-        public static bool ChangeStatus(string usernameOrID, bool status, bool isID = false)
+        public static void UpdateAccount(string username, string fullname, string birthday, bool gender, string id, string address)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                Account account = GetAccount(usernameOrID, isID);
-
-                if (account != null)
+                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                
+                if (acc is null)
                 {
-                    account.Status = status;
-
-                    context.SubmitChanges();
-                    return true;
+                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
                 }
                 else
                 {
-                    return false;
+                    acc.Fullname = fullname;
+                    acc.Birthday = Convert.ToDateTime(birthday);
+                    acc.Gender = gender;
+                    acc.ID = id;
+                    acc.Address = address;
+
+                    context.SubmitChanges();
                 }
             }
         }
 
-        public static bool ChangePassword(string username, string newPassword)
+        public static void ChangeStatus(string username, bool status)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                Account account = GetAccount(username);
-
-                if (account != null)
+                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                
+                if (acc is null)
                 {
-                    account.Password = newPassword;
-                    context.SubmitChanges();
-                    return true;
+                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
                 }
                 else
                 {
-                    return false;
+                    acc.Status = status;
+                    context.SubmitChanges();
                 }
+            }
+        }
+
+        public static void ChangePassword(string username, string newPassword)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                if (acc is null)
+                {
+                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
+                }
+                else
+                {
+                    acc.Password = newPassword;
+                    context.SubmitChanges();
+                }
+            }
+        }
+
+        public static AccountDTO CheckLogin(string username)
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                var query = context.Accounts.Where(acc => acc.Username.Equals(username)).Select(acc => new {acc.Username, acc.Password, acc.RoleID, acc.Status }).FirstOrDefault();
+
+                Account account = new Account
+                {
+                    Username = query.Username,
+                    Password = query.Password,
+                    RoleID = query.RoleID,
+                    Status = query.Status
+                };
+
+                return new AccountDTO(account);
             }
         }
     }
