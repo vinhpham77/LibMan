@@ -22,13 +22,18 @@ namespace BLL
             return LoanDAL.GetLoan(id);
         }
 
+        public static void DeleteLoan(int loanID)
+        {
+            LoanDAL.DeleteLoan(loanID);
+        }
+
         public static void LoanBook(string username, int bookID, string loanDate, string dueDate)
         {
             username = username.Trim();
             loanDate = loanDate.Trim();
             dueDate = dueDate.Trim();
             Account acc = AccountDAL.GetAccount(username);
-            BookDTO book = BookBLL.GetBook(bookID);
+            Book book = BookBLL.GetBook(bookID);
 
             if (book is null)
             {

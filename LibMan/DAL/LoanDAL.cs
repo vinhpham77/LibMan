@@ -11,17 +11,28 @@ namespace DAL
     {
         public static List<LoanDTO> GetLoanList(string username = "")
         {
+            List<LoanDTO> list = new List<LoanDTO>();
             using (LibManDataContext context = new LibManDataContext())
             {
-                List<LoanDTO> loans = new List<LoanDTO>();
-                var query = string.IsNullOrEmpty(username) ? context.Loans : context.Loans.Where(l => l.Username == username);
+                var query = string.IsNullOrEmpty(username) 
+                            ? context.Loans 
+                            : context.Loans.Where(l => l.Username.Contains(username));
 
+                LoanDTO loan;
                 foreach (var row in query)
                 {
-                    loans.Add(new LoanDTO(row));
+                    loan = new LoanDTO()
+                    {
+                        ID = row.ID,
+                        Username = row.Username,
+                        BookID = row.BookID,
+                        DueDate = row.DueDate,
+                        LoanDate = row.LoanDate
+                    };
+                    list.Add(loan);
                 }
-
-                return loans;
+                
+                return list;
             }
         }
 

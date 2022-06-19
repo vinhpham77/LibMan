@@ -1,0 +1,56 @@
+﻿<Window
+    x:Class="GUI.Child.Dialog.CatalogManWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GUI.Child.Dialog"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="350"
+    Height="250"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="../../img/logo.ico"
+    ResizeMode="NoResize"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <DockPanel Margin="40,30" FocusManager.FocusedElement="{Binding ElementName=txtCatalogName}">
+        <TextBox
+            x:Name="txtCatalogName"
+            Height="90"
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint="Tên danh mục mới"
+            DockPanel.Dock="Top"
+            MaxLength="100"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" />
+        <Grid VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="btnSubmit"
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnSubmit_Click"
+                Content="Xác nhận"
+                IsDefault="True"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+            <Button
+                x:Name="btnCancel"
+                Grid.Column="1"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnCancel_Click"
+                Content="Huỷ bỏ"
+                IsCancel="True"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
+        </Grid>
+    </DockPanel>
+</Window>

@@ -33,27 +33,30 @@
                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                 ToolTip="Tạo tài khoản" />
             <materialDesign:PackIcon
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 Margin="3,0"
+                VerticalAlignment="Bottom"
                 DockPanel.Dock="Left"
-                Kind="AccountSearchOutline" />
+                Kind="Search" />
             <TextBox
                 x:Name="txtAccountSearch"
-                materialDesign:HintAssist.Hint="Nhập tên đăng nhập cần tìm"
+                VerticalAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Tên đăng nhập, họ tên hoặc mã định danh công dân"
                 DockPanel.Dock="Left"
                 TextChanged="txtAccountSearch_TextChanged" />
             <Button
                 x:Name="btnRefresh"
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 Click="btnRefresh_Click"
                 Content="{materialDesign:PackIcon Kind=Refresh,
-                                                  Size=25}"
+                                                  Size=28}"
                 DockPanel.Dock="Right"
                 Style="{StaticResource MaterialDesignIconForegroundButton}"
-                ToolTip="Làm mới" />
+                ToolTip="Làm mới(F5)" />
         </DockPanel>
         <DataGrid
             x:Name="dtgAccount"

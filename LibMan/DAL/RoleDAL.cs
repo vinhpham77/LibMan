@@ -11,18 +11,21 @@ namespace DAL
     {
         public static List<RoleDTO> GetRoleList()
         {
-            List<RoleDTO> roles = new List<RoleDTO>();
-
+            List<RoleDTO> list = new List<RoleDTO>();
             using (LibManDataContext context = new LibManDataContext())
             {
-                var query = context.Roles;
-                
-                foreach(var row in query)
+                RoleDTO role;
+                foreach (var row in context.Roles)
                 {
-                    roles.Add(new RoleDTO(row));
+                    role = new RoleDTO()
+                    {
+                        ID = row.ID,
+                        Name = row.Name
+                    };
+                    list.Add(role);
                 }
 
-                return roles;
+                return list;
             }
         }
     }

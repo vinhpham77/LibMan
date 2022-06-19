@@ -29,9 +29,9 @@ namespace GUI.Child
             dtgBook_Load();
         }
 
-        private void dtgBook_Load(string title = "")
+        private void dtgBook_Load(string keywords = "")
         {
-            dtgBook.ItemsSource = BookCatalogBLL.GetBookCatalogList(title);
+            dtgBook.ItemsSource = BookCatalogBLL.GetBookCatalogList(keywords);
         }
 
         private void txtBookSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -41,8 +41,10 @@ namespace GUI.Child
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
+            txtBookSearch.TextChanged -= txtBookSearch_TextChanged;
             txtBookSearch.Clear();
             dtgBook_Load();
+            txtBookSearch.TextChanged += txtBookSearch_TextChanged;
         }
     }
 }

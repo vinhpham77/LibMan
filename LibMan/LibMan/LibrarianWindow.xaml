@@ -7,13 +7,12 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Thư viện"
-    Width="1200"
+    Width="1300"
     Height="750"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
-    Icon="img/logo.png"
-    ResizeMode="CanMinimize"
-    TextElement.FontSize="13"
+    Icon="img/logo.ico"
+    TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextOptions.TextFormattingMode="Ideal"
@@ -48,14 +47,14 @@
                             Kind="Account" />
                     </Label>
                     <Label
-                        x:Name="lblFullname"
+                        x:Name="lblUsername"
                         VerticalContentAlignment="Center"
                         FontSize="16" />
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                     <Image
                         Height="40"
-                        Source="img/logo.png"
+                        Source="img/logo.ico"
                         Stretch="Fill" />
                     <Label
                         x:Name="lblHome"

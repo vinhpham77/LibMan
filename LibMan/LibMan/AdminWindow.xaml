@@ -10,9 +10,13 @@
     Width="1300"
     Height="750"
     Background="{DynamicResource MaterialDesignDarkBackground}"
-    Icon="img/icon.png"
-    ResizeMode="CanMinimize"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="img/logo.ico"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignDarkForeground}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -50,7 +54,7 @@
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                     <Image
                         Height="40"
-                        Source="img/logo.png"
+                        Source="img/logo.ico"
                         Stretch="Fill" />
                     <Label
                         x:Name="lblHome"
@@ -83,7 +87,7 @@
                 </ListView.Resources>
                 <ListViewItem x:Name="lwiAccount">
                     <StackPanel>
-                        <materialDesign:PackIcon Kind="Book" />
+                        <materialDesign:PackIcon Kind="AccountBox" />
                         <TextBlock Text="Tài khoản" />
                     </StackPanel>
                 </ListViewItem>
@@ -91,6 +95,12 @@
                     <StackPanel>
                         <materialDesign:PackIcon Kind="Book" />
                         <TextBlock Text="Sách" />
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem x:Name="lwiCatalog">
+                    <StackPanel>
+                        <materialDesign:PackIcon Kind="Tag" />
+                        <TextBlock Text="Danh mục" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem x:Name="lwiLoan">

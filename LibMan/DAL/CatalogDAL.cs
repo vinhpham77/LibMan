@@ -11,17 +11,25 @@ namespace DAL
     {
         public static List<CatalogDTO> GetCatalogList(string catalogName = "")
         {
-            List<CatalogDTO> catalogs = new List<CatalogDTO>();
+            List<CatalogDTO> list = new List<CatalogDTO>();
             using (LibManDataContext context = new LibManDataContext())
             {
-                var query = context.Catalogs.Where(cat => cat.Name.Contains(catalogName));
+                var query = string.IsNullOrEmpty(catalogName)
+                            ? context.Catalogs
+                            : context.Catalogs.Where(cat => cat.Name.Contains(catalogName));
+                
+                CatalogDTO catalog;
                 foreach (var row in query)
                 {
-                    catalogs.Add(new CatalogDTO(row));
+                    catalog = new CatalogDTO()
+                    {
+                        ID = row.ID,
+                        Name = row.Name
+                    };
+                    list.Add(catalog);
                 }
+                return list;
             }
-
-            return catalogs;
         }
 
         public static void CreateCatalog(string catalogName)

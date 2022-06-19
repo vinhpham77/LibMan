@@ -19,17 +19,18 @@ namespace GUI
     /// </summary>
     public partial class LibrarianWindow : Window
     {
-        private readonly BookLibrarianPage _book;
-        private readonly CatalogLibrarianPage _catalog;
+        private readonly BookManPage _book;
+        private readonly CatalogManPage _catalog;
         private readonly LoanManPage _loan;
 
         public LibrarianWindow(string username)
         {
-            _book = new Child.BookLibrarianPage();
-            _catalog = new Child.CatalogLibrarianPage();
-            _loan = new Child.LoanManPage();
             InitializeComponent();
-            lblFullname.Content = username;
+            _book = new BookManPage();
+            _catalog = new CatalogManPage();
+            _loan = new LoanManPage();
+            lblUsername.Content = username;
+            lwiBook.IsSelected = true;
         }
 
         private void lvwMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)

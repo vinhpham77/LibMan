@@ -10,7 +10,7 @@ namespace BLL
 {
     public class RoleBLL
     {
-        public static List<RoleDTO> GetRoles()
+        public static List<RoleDTO> GetRoleList()
         {
             return RoleDAL.GetRoleList();
         }

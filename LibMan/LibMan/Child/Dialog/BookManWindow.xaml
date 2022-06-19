@@ -1,0 +1,93 @@
+﻿<Window
+    x:Class="GUI.Child.Dialog.BookManWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GUI"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="460"
+    Height="360"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="../../img/logo.ico"
+    ResizeMode="NoResize"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Grid Margin="100,20" FocusManager.FocusedElement="{Binding ElementName=txtTitle}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="1.4*" />
+        </Grid.RowDefinitions>
+        <TextBox
+            x:Name="txtTitle"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Tựa đề"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ComboBox
+                x:Name="cbxCatalog"
+                materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+                materialDesign:HintAssist.Hint="Danh mục"
+                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+            <Button
+                x:Name="btnAddCatalog"
+                Grid.Column="1"
+                Width="45"
+                Margin="10,10,0,0"
+                Padding="0"
+                Click="btnAddCatalog_Click"
+                Content="{materialDesign:PackIcon Kind=Plus}"
+                ToolTip="Thêm danh mục mới" />
+        </Grid>
+        <TextBox
+            x:Name="txtAuthor"
+            Grid.Row="2"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Tác giả"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <TextBox
+            x:Name="txtPublisher"
+            Grid.Row="3"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Nhà xuất bản"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="btnSubmit"
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnSubmit_Click"
+                Content="Xác nhận"
+                IsDefault="True"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+            <Button
+                x:Name="btnCancel"
+                Grid.Column="1"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnCancel_Click"
+                Content="Huỷ bỏ"
+                IsCancel="True"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
+        </Grid>
+    </Grid>
+</Window>

@@ -29,7 +29,6 @@ namespace GUI
         private void Login(string username)
         {
             int roleID = AccountBLL.GetRoleID(username);
-            Hide();
             switch (roleID)
             {
                 case 1:
@@ -50,7 +49,7 @@ namespace GUI
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUsername.Text;
+            string username = txtUsername.Text.Trim();
             string password = txtPassword.Password;
             try
             {
@@ -59,8 +58,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Đăng nhập", MessageBoxButton.OK, MessageBoxImage.Hand);
-                throw;
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 

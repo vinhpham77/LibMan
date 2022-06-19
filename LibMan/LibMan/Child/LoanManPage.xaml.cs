@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BLL;
-using GUI.Child.AddWindow;
+using GUI.Child.Dialog;
 using DTO;
 
 namespace GUI.Child
@@ -29,9 +29,9 @@ namespace GUI.Child
             dtgLoan_Load();
         }
 
-        public void dtgLoan_Load(string username = "")
+        public void dtgLoan_Load(string keywords = "")
         {
-            dtgLoan.ItemsSource = LoanReturnedBLL.GetLoanReturnedList(username);
+            dtgLoan.ItemsSource = LoanReturnedBookBLL.GetLoanReturnedList(keywords);
         }
 
         private void btnReturnBook_Click(object sender, RoutedEventArgs e)
@@ -45,15 +45,15 @@ namespace GUI.Child
             }
             else
             {
-                LoanReturnedDTO lr = dtgLoan.SelectedItem as LoanReturnedDTO;
+                var lr = dtgLoan.SelectedItem as LoanReturnedBookDTO;
                 if (lr.ReturnedDate is null)
                 {
-                    returnBook = new ReturnBookWindow(dtgLoan.SelectedItem as LoanReturnedDTO);
+                    returnBook = new ReturnBookWindow(lr);
                     returnBook.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show($"Dịch vụ mã '{lr.LoanID}' đã hoàn trả sách trước đó!",
+                    MessageBox.Show($"Giao dịch mã '{lr.LoanID}' đã hoàn trả sách trước đó!",
                                     "Lập hoá đơn", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
@@ -61,25 +61,22 @@ namespace GUI.Child
 
         private void btnDeleteLoan_Click(object sender, RoutedEventArgs e)
         {
-            LoanReturnedDTO lr = dtgLoan.SelectedItem as LoanReturnedDTO;
-            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá dịch vụ mã '{lr.LoanID}' không?", "Xoá dịch vụ", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            string title = "Xoá giao dịch";
+            LoanReturnedBookDTO lr = dtgLoan.SelectedItem as LoanReturnedBookDTO;
+            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá giao dịch mã '{lr.LoanID}' không?", title,
+                                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result is MessageBoxResult.Yes)
             {
                 try
                 {
-                    LoanReturnedBLL.DeleteLoanReturned(lr.LoanID);
-                    btnRefresh_Click(null, null);
+                    LoanBLL.DeleteLoan(lr.LoanID);
+                    dtgLoan_Load(txtLoanReturnSearch.Text);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Xoá dịch vụ", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, title, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-
-        private void btnEditLoan_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void txtLoanReturnSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -89,13 +86,10 @@ namespace GUI.Child
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            dtgLoan_Load();
+            txtLoanReturnSearch.TextChanged -= txtLoanReturnSearch_TextChanged;
             txtLoanReturnSearch.Clear();
-        }
-
-        private void txtLoanReturnSearch_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
+            dtgLoan_Load();
+            txtLoanReturnSearch.TextChanged += txtLoanReturnSearch_TextChanged;
         }
     }
 }

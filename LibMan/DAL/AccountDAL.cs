@@ -9,26 +9,48 @@ namespace DAL
 {
     public class AccountDAL
     {
-        public static List<AccountDTO> GetAccountList(string fullname = "", bool? status = null)
+        public static List<AccountDTO> GetAccountList(string keyword = "")
         {
-            List<AccountDTO> accounts = new List<AccountDTO>();
-
+            List<AccountDTO> list = new List<AccountDTO>();
             using (LibManDataContext context = new LibManDataContext())
             {
-                var query = status is null ? context.Accounts.Where(acc => acc.Fullname.Contains(fullname)) 
-                                           : context.Accounts.Where(acc => acc.Fullname.Contains(fullname) && acc.Status == status);
+                var query = string.IsNullOrEmpty(keyword)
+                                ? context.Accounts
+                                : context.Accounts.Where(acc => acc.Fullname.Contains(keyword) 
+                                  || acc.Username.Contains(keyword) 
+                                  || acc.ID.Contains(keyword));
 
+                AccountDTO account;
                 foreach (var row in query)
                 {
-                    accounts.Add(new AccountDTO(row));
+                    account = new AccountDTO()
+                    { 
+                        Username = row.Username,
+                        Password = row.Password,
+                        RoleID = row.RoleID,
+                        Fullname = row.Fullname,
+                        Birthday = row.Birthday,
+                        Gender = row.Gender,
+                        ID = row.ID,
+                        Address = row.Address,
+                        Status = row.Status
+                    };
+                    list.Add(account);
                 }
+                return list;
             }
-            
-            return accounts;
+        }
+
+        public static List<string> GetUsernameList()
+        {
+            using (LibManDataContext context = new LibManDataContext())
+            {
+                return context.Accounts.Select(acc => acc.Username).ToList();
+            }
         }
 
         public static void CreateAccount(string username, string password, int roleID, string fullname
-                                            , DateTime birthday, bool? gender, string id, string address)
+                                            , DateTime birthday, bool? gender, string id, string address, bool status)
         {
             using(LibManDataContext context = new LibManDataContext())
             {
@@ -41,7 +63,8 @@ namespace DAL
                     Birthday = birthday,
                     Gender = gender,
                     ID = id,
-                    Address = address
+                    Address = address,
+                    Status = status
                 };
 
                 context.Accounts.InsertOnSubmit(account);
@@ -53,7 +76,7 @@ namespace DAL
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                return context.Accounts.Where(acc => acc.Username.Equals(username)).FirstOrDefault();
+                return context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();                
             }
         }
 
@@ -75,7 +98,8 @@ namespace DAL
             }
         }
 
-        public static void UpdateAccount(string username, string fullname, string birthday, bool gender, string id, string address)
+        public static void UpdateAccount(string username, int roleID, string fullname,
+                                            DateTime birthday, bool gender, string id, string address)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
@@ -87,8 +111,9 @@ namespace DAL
                 }
                 else
                 {
+                    acc.RoleID = roleID;
                     acc.Fullname = fullname;
-                    acc.Birthday = Convert.ToDateTime(birthday);
+                    acc.Birthday = birthday;
                     acc.Gender = gender;
                     acc.ID = id;
                     acc.Address = address;
@@ -133,21 +158,19 @@ namespace DAL
             }
         }
 
-        public static AccountDTO CheckLogin(string username)
+        public static int GetRoleID(string username)
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                var query = context.Accounts.Where(acc => acc.Username.Equals(username)).Select(acc => new {acc.Username, acc.Password, acc.RoleID, acc.Status }).FirstOrDefault();
-
-                Account account = new Account
+                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                if (acc is null)
                 {
-                    Username = query.Username,
-                    Password = query.Password,
-                    RoleID = query.RoleID,
-                    Status = query.Status
-                };
-
-                return new AccountDTO(account);
+                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
+                }
+                else
+                {
+                    return acc.RoleID;
+                }
             }
         }
     }

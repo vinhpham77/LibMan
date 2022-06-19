@@ -52,7 +52,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibMan.dbml</DependentUpon>
     </Compile>
-    <Compile Include="LoanReturnedDTO.cs" />
+    <Compile Include="LoanReturnedBookDTO.cs" />
     <Compile Include="ReturnedDTO.cs" />
     <Compile Include="LoanDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

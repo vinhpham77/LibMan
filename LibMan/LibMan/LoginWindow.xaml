@@ -11,7 +11,7 @@
     Height="600"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
-    Icon="img/logo.png"
+    Icon="img/logo.ico"
     ResizeMode="CanMinimize"
     TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
@@ -30,7 +30,7 @@
                 <Image
                     Width="90"
                     Margin="0,25"
-                    Source="img/logo.png" />
+                    Source="img/logo.ico" />
                 <TextBox
                     x:Name="txtUsername"
                     Margin="0,10"

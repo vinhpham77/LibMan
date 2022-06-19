@@ -47,7 +47,7 @@
     <Compile Include="BookCatalogDAL.cs" />
     <Compile Include="BookDAL.cs" />
     <Compile Include="CatalogDAL.cs" />
-    <Compile Include="LoanReturnedDAL.cs" />
+    <Compile Include="LoanReturnedBookDAL.cs" />
     <Compile Include="ReturnedDAL.cs" />
     <Compile Include="LoanDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

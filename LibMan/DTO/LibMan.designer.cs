@@ -30,24 +30,24 @@ namespace DTO
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertReturned(Returned instance);
-    partial void UpdateReturned(Returned instance);
-    partial void DeleteReturned(Returned instance);
-    partial void InsertRole(Role instance);
-    partial void UpdateRole(Role instance);
-    partial void DeleteRole(Role instance);
-    partial void InsertLoan(Loan instance);
-    partial void UpdateLoan(Loan instance);
-    partial void DeleteLoan(Loan instance);
-    partial void InsertCatalog(Catalog instance);
-    partial void UpdateCatalog(Catalog instance);
-    partial void DeleteCatalog(Catalog instance);
     partial void InsertBook(Book instance);
     partial void UpdateBook(Book instance);
     partial void DeleteBook(Book instance);
+    partial void InsertCatalog(Catalog instance);
+    partial void UpdateCatalog(Catalog instance);
+    partial void DeleteCatalog(Catalog instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertReturned(Returned instance);
+    partial void UpdateReturned(Returned instance);
+    partial void DeleteReturned(Returned instance);
+    partial void InsertLoan(Loan instance);
+    partial void UpdateLoan(Loan instance);
+    partial void DeleteLoan(Loan instance);
     #endregion
 		
 		public LibManDataContext() : 
@@ -80,27 +80,11 @@ namespace DTO
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Returned> Returneds
+		public System.Data.Linq.Table<Book> Books
 		{
 			get
 			{
-				return this.GetTable<Returned>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Role> Roles
-		{
-			get
-			{
-				return this.GetTable<Role>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Loan> Loans
-		{
-			get
-			{
-				return this.GetTable<Loan>();
+				return this.GetTable<Book>();
 			}
 		}
 		
@@ -112,11 +96,11 @@ namespace DTO
 			}
 		}
 		
-		public System.Data.Linq.Table<Book> Books
+		public System.Data.Linq.Table<Role> Roles
 		{
 			get
 			{
-				return this.GetTable<Book>();
+				return this.GetTable<Role>();
 			}
 		}
 		
@@ -127,676 +111,21 @@ namespace DTO
 				return this.GetTable<Account>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Returned")]
-	public partial class Returned : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _LoanID;
-		
-		private System.Nullable<System.DateTime> _Date;
-		
-		private System.Nullable<double> _Fine;
-		
-		private EntityRef<Loan> _Loan;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnLoanIDChanging(int value);
-    partial void OnLoanIDChanged();
-    partial void OnDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateChanged();
-    partial void OnFineChanging(System.Nullable<double> value);
-    partial void OnFineChanged();
-    #endregion
-		
-		public Returned()
-		{
-			this._Loan = default(EntityRef<Loan>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		public System.Data.Linq.Table<Returned> Returneds
 		{
 			get
 			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
+				return this.GetTable<Returned>();
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanID", DbType="Int NOT NULL")]
-		public int LoanID
+		public System.Data.Linq.Table<Loan> Loans
 		{
 			get
 			{
-				return this._LoanID;
+				return this.GetTable<Loan>();
 			}
-			set
-			{
-				if ((this._LoanID != value))
-				{
-					if (this._Loan.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLoanIDChanging(value);
-					this.SendPropertyChanging();
-					this._LoanID = value;
-					this.SendPropertyChanged("LoanID");
-					this.OnLoanIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date")]
-		public System.Nullable<System.DateTime> Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fine", DbType="Float")]
-		public System.Nullable<double> Fine
-		{
-			get
-			{
-				return this._Fine;
-			}
-			set
-			{
-				if ((this._Fine != value))
-				{
-					this.OnFineChanging(value);
-					this.SendPropertyChanging();
-					this._Fine = value;
-					this.SendPropertyChanged("Fine");
-					this.OnFineChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_Returned", Storage="_Loan", ThisKey="LoanID", OtherKey="ID", IsForeignKey=true)]
-		public Loan Loan
-		{
-			get
-			{
-				return this._Loan.Entity;
-			}
-			set
-			{
-				Loan previousValue = this._Loan.Entity;
-				if (((previousValue != value) 
-							|| (this._Loan.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Loan.Entity = null;
-						previousValue.Returneds.Remove(this);
-					}
-					this._Loan.Entity = value;
-					if ((value != null))
-					{
-						value.Returneds.Add(this);
-						this._LoanID = value.ID;
-					}
-					else
-					{
-						this._LoanID = default(int);
-					}
-					this.SendPropertyChanged("Loan");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
-	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private EntitySet<Account> _Accounts;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Role()
-		{
-			this._Accounts = new EntitySet<Account>(new Action<Account>(this.attach_Accounts), new Action<Account>(this.detach_Accounts));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(60)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Account", Storage="_Accounts", ThisKey="ID", OtherKey="RoleID")]
-		public EntitySet<Account> Accounts
-		{
-			get
-			{
-				return this._Accounts;
-			}
-			set
-			{
-				this._Accounts.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Accounts(Account entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = this;
-		}
-		
-		private void detach_Accounts(Account entity)
-		{
-			this.SendPropertyChanging();
-			entity.Role = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Loan")]
-	public partial class Loan : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Username;
-		
-		private int _BookID;
-		
-		private System.DateTime _LoanDate;
-		
-		private System.DateTime _DueDate;
-		
-		private EntitySet<Returned> _Returneds;
-		
-		private EntityRef<Book> _Book;
-		
-		private EntityRef<Account> _Account;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnBookIDChanging(int value);
-    partial void OnBookIDChanged();
-    partial void OnLoanDateChanging(System.DateTime value);
-    partial void OnLoanDateChanged();
-    partial void OnDueDateChanging(System.DateTime value);
-    partial void OnDueDateChanged();
-    #endregion
-		
-		public Loan()
-		{
-			this._Returneds = new EntitySet<Returned>(new Action<Returned>(this.attach_Returneds), new Action<Returned>(this.detach_Returneds));
-			this._Book = default(EntityRef<Book>);
-			this._Account = default(EntityRef<Account>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					if (this._Account.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookID", DbType="Int NOT NULL")]
-		public int BookID
-		{
-			get
-			{
-				return this._BookID;
-			}
-			set
-			{
-				if ((this._BookID != value))
-				{
-					if (this._Book.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnBookIDChanging(value);
-					this.SendPropertyChanging();
-					this._BookID = value;
-					this.SendPropertyChanged("BookID");
-					this.OnBookIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanDate", DbType="Date NOT NULL")]
-		public System.DateTime LoanDate
-		{
-			get
-			{
-				return this._LoanDate;
-			}
-			set
-			{
-				if ((this._LoanDate != value))
-				{
-					this.OnLoanDateChanging(value);
-					this.SendPropertyChanging();
-					this._LoanDate = value;
-					this.SendPropertyChanged("LoanDate");
-					this.OnLoanDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DueDate", DbType="Date NOT NULL")]
-		public System.DateTime DueDate
-		{
-			get
-			{
-				return this._DueDate;
-			}
-			set
-			{
-				if ((this._DueDate != value))
-				{
-					this.OnDueDateChanging(value);
-					this.SendPropertyChanging();
-					this._DueDate = value;
-					this.SendPropertyChanged("DueDate");
-					this.OnDueDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_Returned", Storage="_Returneds", ThisKey="ID", OtherKey="LoanID")]
-		public EntitySet<Returned> Returneds
-		{
-			get
-			{
-				return this._Returneds;
-			}
-			set
-			{
-				this._Returneds.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Loan", Storage="_Book", ThisKey="BookID", OtherKey="ID", IsForeignKey=true)]
-		public Book Book
-		{
-			get
-			{
-				return this._Book.Entity;
-			}
-			set
-			{
-				Book previousValue = this._Book.Entity;
-				if (((previousValue != value) 
-							|| (this._Book.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Book.Entity = null;
-						previousValue.Loans.Remove(this);
-					}
-					this._Book.Entity = value;
-					if ((value != null))
-					{
-						value.Loans.Add(this);
-						this._BookID = value.ID;
-					}
-					else
-					{
-						this._BookID = default(int);
-					}
-					this.SendPropertyChanged("Book");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Loan", Storage="_Account", ThisKey="Username", OtherKey="Username", IsForeignKey=true)]
-		public Account Account
-		{
-			get
-			{
-				return this._Account.Entity;
-			}
-			set
-			{
-				Account previousValue = this._Account.Entity;
-				if (((previousValue != value) 
-							|| (this._Account.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Account.Entity = null;
-						previousValue.Loans.Remove(this);
-					}
-					this._Account.Entity = value;
-					if ((value != null))
-					{
-						value.Loans.Add(this);
-						this._Username = value.Username;
-					}
-					else
-					{
-						this._Username = default(string);
-					}
-					this.SendPropertyChanged("Account");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Returneds(Returned entity)
-		{
-			this.SendPropertyChanging();
-			entity.Loan = this;
-		}
-		
-		private void detach_Returneds(Returned entity)
-		{
-			this.SendPropertyChanging();
-			entity.Loan = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Catalog")]
-	public partial class Catalog : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private EntitySet<Book> _Books;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public Catalog()
-		{
-			this._Books = new EntitySet<Book>(new Action<Book>(this.attach_Books), new Action<Book>(this.detach_Books));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Catalog_Book", Storage="_Books", ThisKey="ID", OtherKey="CatalogID")]
-		public EntitySet<Book> Books
-		{
-			get
-			{
-				return this._Books;
-			}
-			set
-			{
-				this._Books.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Books(Book entity)
-		{
-			this.SendPropertyChanging();
-			entity.Catalog = this;
-		}
-		
-		private void detach_Books(Book entity)
-		{
-			this.SendPropertyChanging();
-			entity.Catalog = null;
 		}
 	}
 	
@@ -1024,6 +353,234 @@ namespace DTO
 		{
 			this.SendPropertyChanging();
 			entity.Book = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Catalog")]
+	public partial class Catalog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private EntitySet<Book> _Books;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Catalog()
+		{
+			this._Books = new EntitySet<Book>(new Action<Book>(this.attach_Books), new Action<Book>(this.detach_Books));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Catalog_Book", Storage="_Books", ThisKey="ID", OtherKey="CatalogID")]
+		public EntitySet<Book> Books
+		{
+			get
+			{
+				return this._Books;
+			}
+			set
+			{
+				this._Books.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Books(Book entity)
+		{
+			this.SendPropertyChanging();
+			entity.Catalog = this;
+		}
+		
+		private void detach_Books(Book entity)
+		{
+			this.SendPropertyChanging();
+			entity.Catalog = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private EntitySet<Account> _Accounts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Role()
+		{
+			this._Accounts = new EntitySet<Account>(new Action<Account>(this.attach_Accounts), new Action<Account>(this.detach_Accounts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(60)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Account", Storage="_Accounts", ThisKey="ID", OtherKey="RoleID")]
+		public EntitySet<Account> Accounts
+		{
+			get
+			{
+				return this._Accounts;
+			}
+			set
+			{
+				this._Accounts.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Accounts(Account entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = this;
+		}
+		
+		private void detach_Accounts(Account entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = null;
 		}
 	}
 	
@@ -1347,6 +904,449 @@ namespace DTO
 		{
 			this.SendPropertyChanging();
 			entity.Account = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Returned")]
+	public partial class Returned : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _LoanID;
+		
+		private System.Nullable<System.DateTime> _Date;
+		
+		private System.Nullable<double> _Fee;
+		
+		private EntityRef<Loan> _Loan;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnLoanIDChanging(int value);
+    partial void OnLoanIDChanged();
+    partial void OnDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateChanged();
+    partial void OnFeeChanging(System.Nullable<double> value);
+    partial void OnFeeChanged();
+    #endregion
+		
+		public Returned()
+		{
+			this._Loan = default(EntityRef<Loan>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanID", DbType="Int NOT NULL")]
+		public int LoanID
+		{
+			get
+			{
+				return this._LoanID;
+			}
+			set
+			{
+				if ((this._LoanID != value))
+				{
+					if (this._Loan.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoanIDChanging(value);
+					this.SendPropertyChanging();
+					this._LoanID = value;
+					this.SendPropertyChanged("LoanID");
+					this.OnLoanIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date")]
+		public System.Nullable<System.DateTime> Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fee", DbType="Float")]
+		public System.Nullable<double> Fee
+		{
+			get
+			{
+				return this._Fee;
+			}
+			set
+			{
+				if ((this._Fee != value))
+				{
+					this.OnFeeChanging(value);
+					this.SendPropertyChanging();
+					this._Fee = value;
+					this.SendPropertyChanged("Fee");
+					this.OnFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_Returned", Storage="_Loan", ThisKey="LoanID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Loan Loan
+		{
+			get
+			{
+				return this._Loan.Entity;
+			}
+			set
+			{
+				Loan previousValue = this._Loan.Entity;
+				if (((previousValue != value) 
+							|| (this._Loan.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Loan.Entity = null;
+						previousValue.Returneds.Remove(this);
+					}
+					this._Loan.Entity = value;
+					if ((value != null))
+					{
+						value.Returneds.Add(this);
+						this._LoanID = value.ID;
+					}
+					else
+					{
+						this._LoanID = default(int);
+					}
+					this.SendPropertyChanged("Loan");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Loan")]
+	public partial class Loan : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Username;
+		
+		private int _BookID;
+		
+		private System.DateTime _LoanDate;
+		
+		private System.DateTime _DueDate;
+		
+		private EntitySet<Returned> _Returneds;
+		
+		private EntityRef<Book> _Book;
+		
+		private EntityRef<Account> _Account;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnBookIDChanging(int value);
+    partial void OnBookIDChanged();
+    partial void OnLoanDateChanging(System.DateTime value);
+    partial void OnLoanDateChanged();
+    partial void OnDueDateChanging(System.DateTime value);
+    partial void OnDueDateChanged();
+    #endregion
+		
+		public Loan()
+		{
+			this._Returneds = new EntitySet<Returned>(new Action<Returned>(this.attach_Returneds), new Action<Returned>(this.detach_Returneds));
+			this._Book = default(EntityRef<Book>);
+			this._Account = default(EntityRef<Account>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					if (this._Account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookID", DbType="Int NOT NULL")]
+		public int BookID
+		{
+			get
+			{
+				return this._BookID;
+			}
+			set
+			{
+				if ((this._BookID != value))
+				{
+					if (this._Book.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookID = value;
+					this.SendPropertyChanged("BookID");
+					this.OnBookIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanDate", DbType="Date NOT NULL")]
+		public System.DateTime LoanDate
+		{
+			get
+			{
+				return this._LoanDate;
+			}
+			set
+			{
+				if ((this._LoanDate != value))
+				{
+					this.OnLoanDateChanging(value);
+					this.SendPropertyChanging();
+					this._LoanDate = value;
+					this.SendPropertyChanged("LoanDate");
+					this.OnLoanDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DueDate", DbType="Date NOT NULL")]
+		public System.DateTime DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this.OnDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._DueDate = value;
+					this.SendPropertyChanged("DueDate");
+					this.OnDueDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_Returned", Storage="_Returneds", ThisKey="ID", OtherKey="LoanID")]
+		public EntitySet<Returned> Returneds
+		{
+			get
+			{
+				return this._Returneds;
+			}
+			set
+			{
+				this._Returneds.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Loan", Storage="_Book", ThisKey="BookID", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Book Book
+		{
+			get
+			{
+				return this._Book.Entity;
+			}
+			set
+			{
+				Book previousValue = this._Book.Entity;
+				if (((previousValue != value) 
+							|| (this._Book.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Book.Entity = null;
+						previousValue.Loans.Remove(this);
+					}
+					this._Book.Entity = value;
+					if ((value != null))
+					{
+						value.Loans.Add(this);
+						this._BookID = value.ID;
+					}
+					else
+					{
+						this._BookID = default(int);
+					}
+					this.SendPropertyChanged("Book");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Loan", Storage="_Account", ThisKey="Username", OtherKey="Username", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Account Account
+		{
+			get
+			{
+				return this._Account.Entity;
+			}
+			set
+			{
+				Account previousValue = this._Account.Entity;
+				if (((previousValue != value) 
+							|| (this._Account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Account.Entity = null;
+						previousValue.Loans.Remove(this);
+					}
+					this._Account.Entity = value;
+					if ((value != null))
+					{
+						value.Loans.Add(this);
+						this._Username = value.Username;
+					}
+					else
+					{
+						this._Username = default(string);
+					}
+					this.SendPropertyChanged("Account");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Returneds(Returned entity)
+		{
+			this.SendPropertyChanging();
+			entity.Loan = this;
+		}
+		
+		private void detach_Returneds(Returned entity)
+		{
+			this.SendPropertyChanging();
+			entity.Loan = null;
 		}
 	}
 }

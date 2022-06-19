@@ -10,18 +10,5 @@ namespace DTO
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
-        public RoleDTO(int id, string name)
-        {
-            ID = id;
-            Name = name;
-        }
-
-        public RoleDTO(Role role)
-        {
-            ID = role.ID;
-            Name = role.Name;
-        }
     }
-
 }

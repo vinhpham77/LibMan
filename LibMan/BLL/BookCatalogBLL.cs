@@ -10,9 +10,9 @@ namespace BLL
 {
     public class BookCatalogBLL
     {
-        public static List<BookCatalogDTO> GetBookCatalogList(string bookTitle = "")
+        public static List<BookCatalogDTO> GetBookCatalogList(string keywords = "")
         {
-            return BookCatalogDAL.GetBookCatalogList(bookTitle.Trim());
+            return BookCatalogDAL.GetBookCatalogList(keywords.Trim());
         }
     }
 }

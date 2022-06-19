@@ -21,7 +21,8 @@ namespace GUI
     public partial class AdminWindow : Window
     {
         private readonly AccountManPage _account;
-        private readonly BookPage _book;
+        private readonly BookManPage _book;
+        private readonly CatalogManPage _catalog;
         private readonly LoanManPage _loan;
 
         public AdminWindow(string username)
@@ -29,9 +30,10 @@ namespace GUI
             InitializeComponent();
             lblUsername.Content = username;
             _account = new AccountManPage();
-            _book = new BookPage();
+            _book = new BookManPage();
+            _catalog = new CatalogManPage();
             _loan = new LoanManPage();
-            lvwMenu.SelectedIndex = 0;
+            lwiAccount.IsSelected = true;
         }
 
         private void lvwMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,9 +47,12 @@ namespace GUI
                     frmChild.Navigate(_book);
                     break;
                 case 2:
-                    frmChild.Navigate(_loan);
+                    frmChild.Navigate(_catalog);
                     break;
                 case 3:
+                    frmChild.Navigate(_loan);
+                    break;
+                case 4:
                     LoginWindow login = new LoginWindow();
                     Close();
                     login.Show();

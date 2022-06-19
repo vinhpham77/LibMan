@@ -12,19 +12,14 @@ namespace BLL
 {
     public class ReturnedBLL
     {
-        public static Returned GetReturned(int returnIDOrLoanID, bool isLoanID = false)
-        {
-            return ReturnedDAL.GetReturned(returnIDOrLoanID, isLoanID); 
-        }
-
-        public static void CreateReturned(int loanID, DateTime date, double? fee)
+        public static void CreateReturned(int loanID, DateTime date, double fee)
         {
             ReturnedDAL.CreateReturned(loanID, date, fee);
         }
 
         public static double GetFee(DateTime loanDate, DateTime dueDate, DateTime returnedDate)
         {
-            int numOfLoanDueDays = (dueDate - loanDate).Days;
+            int numOfReturnedDays = (returnedDate - loanDate).Days;
             int numOfLateDays = (returnedDate - dueDate).Days;
             double fee;
             const float LATE_FEE = 5000; 
@@ -33,13 +28,13 @@ namespace BLL
             const byte DAYS_OF_WEEK = 7;
             const byte DAYS_OF_MONTH = 30;
 
-            if (numOfLoanDueDays <= DAYS_OF_WEEK)
+            if (numOfReturnedDays <= DAYS_OF_WEEK)
             { 
                 fee = 0;
             }
-            else if (numOfLoanDueDays <= DAYS_OF_MONTH)
+            else if (numOfReturnedDays <= DAYS_OF_MONTH)
             {
-                fee = (numOfLoanDueDays - DAYS_OF_WEEK) * DAY_M_FEE;
+                fee = (numOfReturnedDays - DAYS_OF_WEEK) * DAY_M_FEE;
             }
             else
             {
@@ -70,14 +65,13 @@ namespace BLL
                 throw new Exception("Vui lòng điền ngày trả sách!");
             }
 
-            CultureInfo vn = new CultureInfo("vi-VN");
-            DateTime returned = Convert.ToDateTime(returnedDate, vn);
-            DateTime loan = Convert.ToDateTime(loanDate, vn);
+            DateTime returned = Convert.ToDateTime(returnedDate);
+            DateTime loan = Convert.ToDateTime(loanDate);
             if (returned < loan)
             {
                 throw new Exception("Ngày trả không thể trước ngày mượn!");
             }
-            DateTime due = Convert.ToDateTime(dueDate, vn);
+            DateTime due = Convert.ToDateTime(dueDate);
             Hashtable fields = new Hashtable
             {
                 { "username", username },

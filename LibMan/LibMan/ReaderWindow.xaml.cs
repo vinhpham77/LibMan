@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BLL;
+using GUI.Child;
 
 namespace GUI
 {
@@ -22,16 +23,16 @@ namespace GUI
     public partial class ReaderWindow : Window
     {
         private string _username { get; set; }
-        Child.BookPage book;
-        Child.LoanPage loan;
+        private readonly BookPage _book;
+        private readonly LoanPage _loan;
         public ReaderWindow(string username)
         {
             InitializeComponent();
             this._username = username;
-            book = new Child.BookPage();
-            loan = new Child.LoanPage(_username);
-            lblFullname.Content = AccountBLL.GetAccount(username).Fullname;
-            lvwMenu.SelectedIndex = 0;
+            _book = new BookPage();
+            _loan = new LoanPage(_username);
+            lblUsername.Content = username;
+            lwiBook.IsSelected = true;
         }
 
         private void lvwMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,10 +41,10 @@ namespace GUI
             switch (lvwMenu.SelectedIndex)
             {
                 case 0:
-                    frmChild.Navigate(book);
+                    frmChild.Navigate(_book);
                     break;
                 case 1:
-                    frmChild.Navigate(loan);
+                    frmChild.Navigate(_loan);
                     break;
                 case 2:
                     LoginWindow login = new LoginWindow();

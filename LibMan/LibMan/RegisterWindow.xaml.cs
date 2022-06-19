@@ -34,17 +34,19 @@ namespace GUI
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            int readerRole = 1;
+            bool status = false;
             
-            string error = AccountBLL.CreateAccount(txtAddress.Text, txtPassword.Password, txtRePassword.Password, 1
-                                          , txtFullname.Text, dpBirthday.Text, rdMale.IsChecked, txtID.Text, txtAddress.Text);
-            if (error is null)
+            try
             {
-                MessageBox.Show("Đăng ký thành công! Vui lòng đợi phê duyệt tài khoản", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                AccountBLL.CreateAccount(txtUsername.Text, txtPassword.Password, txtRePassword.Password, readerRole,
+                        txtFullname.Text, dpBirthday.SelectedDate, (bool)rdMale.IsChecked, txtID.Text, txtAddress.Text, status);
+                MessageBox.Show("Đăng ký thành công! Vui lòng đợi phê duyệt tài khoản", Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 btnCancel_Click(null, null);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(error, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

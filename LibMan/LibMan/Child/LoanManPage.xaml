@@ -27,27 +27,30 @@
                 Width="30"
                 Height="30"
                 Click="btnReturnBook_Click"
-                Content="{materialDesign:PackIcon Kind=ReceiptTextPlusOutline,
+                Content="{materialDesign:PackIcon Kind=Add,
                                                   Size=30}"
                 DockPanel.Dock="Left"
                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                 ToolTip="Lập hoá đơn" />
             <materialDesign:PackIcon
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 Margin="3,0"
+                VerticalAlignment="Bottom"
                 DockPanel.Dock="Left"
-                Kind="TextBoxSearchOutline" />
+                Kind="Search" />
             <TextBox
                 x:Name="txtLoanReturnSearch"
-                materialDesign:HintAssist.Hint="Nhập tên đăng nhập cần tra cứu"
+                VerticalAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Tên đăng nhập"
                 DockPanel.Dock="Left"
                 TextChanged="txtLoanReturnSearch_TextChanged" />
             <Button
                 x:Name="btnRefresh"
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 Click="btnRefresh_Click"
                 Content="{materialDesign:PackIcon Kind=Refresh,
                                                   Size=25}"
@@ -70,15 +73,19 @@
                 <DataGridTextColumn
                     Binding="{Binding LoanID}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Mã dịch vụ" />
+                    Header="Mã giao dịch" />
                 <DataGridTextColumn
                     Binding="{Binding Username}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Tài khoản" />
+                    Header="Tên đăng nhập" />
                 <DataGridTextColumn
                     Binding="{Binding BookID}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Mã sách" />
+                <DataGridTextColumn
+                    Binding="{Binding BookTitle}"
+                    ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
+                    Header="Tựa đề" />
                 <DataGridTextColumn
                     Binding="{Binding LoanDate, StringFormat=d}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
@@ -92,9 +99,9 @@
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Ngày trả" />
                 <DataGridTextColumn
-                    Binding="{Binding Fine, StringFormat=\{0:N0\}đ}"
+                    Binding="{Binding Fee, StringFormat=\{0:N0\}}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                    Header="Phí" />
+                    Header="Phí(đ)" />
                 <DataGridTemplateColumn CellStyle="{StaticResource MaterialDesignDataGridCell}" Header="Thao tác">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -103,12 +110,10 @@
                                     Width="25"
                                     Height="25"
                                     Padding="0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    Click="btnEditLoan_Click"
-                                    Content="{materialDesign:PackIcon Kind=Edit}"
+                                    Click="btnReturnBook_Click"
+                                    Content="{materialDesign:PackIcon Kind=ReceiptTextPlusOutline}"
                                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                                    ToolTip="Sửa" />
+                                    ToolTip="Lập hoá đơn" />
                                 <Button
                                     Width="25"
                                     Height="25"
@@ -118,14 +123,6 @@
                                     Content="{materialDesign:PackIcon Kind=Delete}"
                                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                     ToolTip="Xoá" />
-                                <Button
-                                    Width="25"
-                                    Height="25"
-                                    Padding="0"
-                                    Click="btnReturnBook_Click"
-                                    Content="{materialDesign:PackIcon Kind=ReceiptTextPlusOutline}"
-                                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                                    ToolTip="Lập hoá đơn" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

@@ -23,24 +23,28 @@
         </Grid.RowDefinitions>
         <DockPanel Margin="0,0,0,14">
             <materialDesign:PackIcon
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 Margin="3,0"
+                VerticalAlignment="Bottom"
                 DockPanel.Dock="Left"
-                Kind="BookSearchOutline" />
+                Kind="Search" />
             <TextBox
                 x:Name="txtBookSearch"
-                materialDesign:HintAssist.Hint="Nhập tên sách cần tìm"
+                Width="220"
+                VerticalContentAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Tựa đề hoặc tác giả"
                 DockPanel.Dock="Left"
                 TextChanged="txtBookSearch_TextChanged" />
             <Button
                 x:Name="btnRefresh"
-                Width="30"
-                Height="30"
+                Width="28"
+                Height="28"
                 HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 Click="btnRefresh_Click"
                 Content="{materialDesign:PackIcon Kind=Refresh,
-                                                  Size=25}"
+                                                  Size=28}"
                 DockPanel.Dock="Right"
                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                 ToolTip="Làm mới" />
@@ -76,7 +80,6 @@
                     Binding="{Binding Publisher}"
                     ElementStyle="{StaticResource MaterialDesignDataGridTextColumnStyle}"
                     Header="Nhà xuất bản" />
-
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

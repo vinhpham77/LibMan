@@ -10,12 +10,6 @@ namespace DTO
     {
         public int ID { get; set; }        
         public string Name { get; set; }
-        
-        public CatalogDTO(Catalog catalog)
-        {
-            ID = catalog.ID;
-            Name = catalog.Name;
-        }
     }
 
 }

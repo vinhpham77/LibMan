@@ -1,0 +1,82 @@
+﻿<Window
+    x:Class="GUI.Child.Dialog.LoanBookWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:GUI.Child.Dialog"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="Mượn sách"
+    Width="420"
+    Height="360"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    Icon="../../img/logo.ico"
+    ResizeMode="CanMinimize"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="100,20" FocusManager.FocusedElement="{Binding ElementName=cbxUsername}">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="1.4*" />
+        </Grid.RowDefinitions>
+        <TextBox
+            x:Name="txtBookID"
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Mã sách"
+            IsEnabled="False"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+        <ComboBox
+            x:Name="cbxUsername"
+            Grid.Row="1"
+            materialDesign:ColorZoneAssist.Mode="PrimaryLight"
+            materialDesign:HintAssist.Hint="Tên đăng nhập"
+            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+        <DatePicker
+            x:Name="dtpLoanDate"
+            Grid.Row="2"
+            materialDesign:CalendarAssist.IsHeaderVisible="False"
+            materialDesign:HintAssist.Hint="Ngày mượn"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+            Text="{Binding Source={x:Static sys:DateTime.Now}}" />
+        <DatePicker
+            x:Name="dtpDueDate"
+            Grid.Row="3"
+            materialDesign:CalendarAssist.IsHeaderVisible="False"
+            materialDesign:HintAssist.Hint="Ngày hẹn trả"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="btnSubmit"
+                Grid.Column="0"
+                Margin="0,0,10,0"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnSubmit_Click"
+                Content="Xác nhận"
+                IsDefault="True"
+                Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+            <Button
+                x:Name="btnCancel"
+                Grid.Column="1"
+                materialDesign:ButtonAssist.CornerRadius="4"
+                Click="btnCancel_Click"
+                Content="Huỷ bỏ"
+                IsCancel="True"
+                Style="{StaticResource MaterialDesignOutlinedButton}" />
+        </Grid>
+    </Grid>
+</Window>

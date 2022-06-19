@@ -6,7 +6,7 @@ GO
 CREATE TABLE Role
 (
 	ID INT CONSTRAINT PK_RoleID PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	Name NVARCHAR(60)
+	Name NVARCHAR(50)
 )
 
 INSERT Role(Name) VALUES
@@ -22,23 +22,23 @@ CREATE TABLE Account
 	Fullname NVARCHAR(60),
 	Birthday DATE,
 	Gender BIT,
-	ID CHAR(12) CONSTRAINT UN_ID UNIQUE,
-	Address NVARCHAR(200),
-	Status BIT CONSTRAINT DF_AccountStatus DEFAULT 0
+	ID VARCHAR(12) CONSTRAINT UN_ID UNIQUE,
+	Address NVARCHAR(255),
+	Status BIT
 )
 
 INSERT Account(Username, Password, RoleID, Fullname, Birthday, Gender, ID, Address, Status) VALUES
-	('lib', 'lib', '2', N'Trần Hoài Lâm', '1/12/2000', '1', '987654321111', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1'),
-	('admin', 'admin', '3', NULL, NULL, NULL, NULL, NULL, '1'),
-	('johnweak', 'dog123', '1', N'John Wick', '12/10/2002', '1', '123456789000', N'123 Wal Shrek, New York', '1'),
-	('jasonmama', 'seaman', '1', N'Jason Mamoa', '8/1/1999', '1', '123456789001', N'123 Shrimpon, Alaska', '1'),
+	('admin', 'admin', '3', N'Phạm Văn Vinh', '1/1/2002', '1', '4351050443', N'Trường Đại học Quy Nhơn', '1'),
+	('lib', 'lib', '2', N'Hồ Quý', '1/12/2000', '0', '987654321111', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1'),
+	('johnweak', 'doeg123', '1', N'John Wick', '12/10/2002', '1', '123456789000', N'123 Wal Shrek, New York', '1'),
+	('jasonmama', 'seaman', '1', N'Jason Mamoa', '8/1/1999', '1', '123456789001', N'123 Shrimpon, Alaska', '0'),
 	('thiLan', 'vanDiep', '2', N'Nguyễn Thị Lan', '10/12/2002', '0', '987654321000', N'67 Bạch Đằng, Đống Đa, Hà Nội', '0'),
 	('hoaiLam123', 'doilabekho', '2', N'Trần Hoài Lâm', '1/12/2000', '1', '987654321101', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1')
 
 CREATE TABLE Catalog
 (
-	ID INT CONSTRAINT PK_CatalogID NOT NULL IDENTITY(1,1),
-	Name NVARCHAR(255) UNIQUE NOT NULL,
+	ID INT CONSTRAINT PK_CatalogID PRIMARY KEY NOT NULL IDENTITY(1,1),
+	Name NVARCHAR(50) CONSTRAINT UN_CatalogName UNIQUE NOT NULL,
 )
 
 INSERT Catalog(Name) VALUES
@@ -53,8 +53,8 @@ CREATE TABLE Book
 	ID INT CONSTRAINT PK_MaSach PRIMARY KEY NOT NULL IDENTITY(1,1),
 	Title NVARCHAR(255),
 	CatalogID INT CONSTRAINT FK_CatalogID FOREIGN KEY REFERENCES Catalog(ID) ON DELETE SET NULL,
-	Author NVARCHAR(255),
-	Publisher NVARCHAR(255)
+	Author NVARCHAR(100),
+	Publisher NVARCHAR(150)
 )
 
 INSERT Book(Title, CatalogID, Author, Publisher) VALUES
@@ -67,8 +67,8 @@ INSERT Book(Title, CatalogID, Author, Publisher) VALUES
 CREATE TABLE Loan
 (
 	ID INT CONSTRAINT PK_LoanID PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	Username VARCHAR(30) CONSTRAINT FK_Username FOREIGN KEY REFERENCES Account(Username) NOT NULL,
-	BookID INT CONSTRAINT FK_BookID FOREIGN KEY REFERENCES Book(ID) NOT NULL,
+	Username VARCHAR(30) CONSTRAINT FK_Username FOREIGN KEY REFERENCES Account(Username) ON DELETE CASCADE NOT NULL,
+	BookID INT CONSTRAINT FK_BookID FOREIGN KEY REFERENCES Book(ID) ON DELETE CASCADE NOT NULL,
 	LoanDate DATE NOT NULL,
 	DueDate DATE NOT NULL
 )
@@ -83,7 +83,7 @@ INSERT Loan(Username, BookID, LoanDate, DueDate) VALUES
 CREATE TABLE Returned
 (
 	ID INT CONSTRAINT PK_FineID PRIMARY KEY IDENTITY(1,1) NOT NULL,
-	LoanID INT CONSTRAINT FK_LoanID FOREIGN KEY REFERENCES Loan(ID) NOT NULL,
+	LoanID INT CONSTRAINT FK_LoanID FOREIGN KEY REFERENCES Loan(ID) ON DELETE CASCADE NOT NULL,
 	Date DATE,
-	Fine FLOAT
+	Fee FLOAT
 )

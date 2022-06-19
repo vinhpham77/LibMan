@@ -46,7 +46,7 @@
     <Compile Include="BookBLL.cs" />
     <Compile Include="BookCatalogBLL.cs" />
     <Compile Include="CatalogBLL.cs" />
-    <Compile Include="LoanReturnedBLL.cs" />
+    <Compile Include="LoanReturnedBookBLL.cs" />
     <Compile Include="ReturnedBLL.cs" />
     <Compile Include="LoanBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -69,29 +69,35 @@
     <Compile Include="Child\AccountManPage.xaml.cs">
       <DependentUpon>AccountManPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\AddWindow\BookManWindow.xaml.cs">
+    <Compile Include="Child\Dialog\BookManWindow.xaml.cs">
       <DependentUpon>BookManWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\AddWindow\CatalogManWindow.xaml.cs">
+    <Compile Include="Child\Dialog\CatalogManWindow.xaml.cs">
       <DependentUpon>CatalogManWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\AddWindow\ChangePasswordWindow.xaml.cs">
+    <Compile Include="Child\Dialog\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\AddWindow\LoanBookWindow.xaml.cs">
+    <Compile Include="Child\Dialog\CreateAccountWindow.xaml.cs">
+      <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\Dialog\LoanBookWindow.xaml.cs">
       <DependentUpon>LoanBookWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\AddWindow\ReturnBookWindow.xaml.cs">
+    <Compile Include="Child\Dialog\ReturnBookWindow.xaml.cs">
       <DependentUpon>ReturnBookWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\BookLibrarianPage.xaml.cs">
-      <DependentUpon>BookLibrarianPage.xaml</DependentUpon>
+    <Compile Include="Child\Dialog\UpdateAccountWindow.xaml.cs">
+      <DependentUpon>UpdateAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Child\BookManPage.xaml.cs">
+      <DependentUpon>BookManPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\BookPage.xaml.cs">
       <DependentUpon>BookPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Child\CatalogLibrarianPage.xaml.cs">
-      <DependentUpon>CatalogLibrarianPage.xaml</DependentUpon>
+    <Compile Include="Child\CatalogManPage.xaml.cs">
+      <DependentUpon>CatalogManPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Child\LoanManPage.xaml.cs">
       <DependentUpon>LoanManPage.xaml</DependentUpon>
@@ -108,9 +114,6 @@
     <Compile Include="RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UC\ControlBarUC.xaml.cs">
-      <DependentUpon>ControlBarUC.xaml</DependentUpon>
-    </Compile>
     <Page Include="AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,27 +122,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\AddWindow\BookManWindow.xaml">
+    <Page Include="Child\Dialog\BookManWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\AddWindow\CatalogManWindow.xaml">
+    <Page Include="Child\Dialog\CatalogManWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\AddWindow\ChangePasswordWindow.xaml">
+    <Page Include="Child\Dialog\ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\AddWindow\LoanBookWindow.xaml">
+    <Page Include="Child\Dialog\CreateAccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\AddWindow\ReturnBookWindow.xaml">
+    <Page Include="Child\Dialog\LoanBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\BookLibrarianPage.xaml">
+    <Page Include="Child\Dialog\ReturnBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\Dialog\UpdateAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Child\BookManPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Child\CatalogLibrarianPage.xaml">
+    <Page Include="Child\CatalogManPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,10 +194,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UC\ControlBarUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -219,9 +226,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{f68bce06-504b-4ce5-9dc1-0b66f938981e}</Project>
       <Name>BLL</Name>
@@ -232,13 +236,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="database\LibMan.sql" />
+    <Resource Include="img\logo.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

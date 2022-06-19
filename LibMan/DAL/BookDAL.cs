@@ -9,18 +9,24 @@ namespace DAL
     {
         public static List<BookDTO> GetBookList(string title = "")
         {
-            List<BookDTO> books = new List<BookDTO>();
-
+            List<BookDTO> list = new List<BookDTO>();
             using (LibManDataContext context = new LibManDataContext())
             {
                 var query = context.Books.Where(b => b.Title.ToLower().Contains(title.ToLower()));
+                BookDTO book;
                 foreach (var row in query)
                 {
-                    books.Add(new BookDTO(row));
+                    book = new BookDTO()
+                    {
+                        ID = row.ID,
+                        Title = row.Title,
+                        Author = row.Author,
+                        CatalogID = row.CatalogID,
+                        Publisher = row.Publisher
+                    };
                 }
+                return list;
             }
-
-            return books;
         }
 
         public static void AddBook(string title, int? catalogID, string author, string publisher)

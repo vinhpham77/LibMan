@@ -10,7 +10,6 @@ namespace DTO
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public int RoleID { get; set; }
         public string RoleName { get; set; }
         public string Fullname { get; set; }
         public DateTime? Birthday { get; set; }
@@ -18,19 +17,5 @@ namespace DTO
         public string ID { get; set; }
         public string Address { get; set; }
         public bool? Status { get; set; }
-
-        public AccountRoleDTO(Account acc, Role role)
-        {
-            Username = acc.Username;
-            Password = acc.Password;
-            RoleID = acc.RoleID;
-            RoleName = role.Name;
-            Fullname = acc.Fullname;
-            Birthday = acc.Birthday;
-            Gender = acc.Gender;
-            ID = acc.ID;
-            Address = acc.Address;
-            Status = acc.Status;
-        }
     }
 }

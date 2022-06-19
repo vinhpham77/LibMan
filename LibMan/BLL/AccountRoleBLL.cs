@@ -10,9 +10,9 @@ namespace BLL
 {
     public class AccountRoleBLL
     {
-        public static List<AccountRoleDTO> GetAccountRoleList(string username = "")
+        public static List<AccountRoleDTO> GetAccountRoleList(string keyword = "")
         {
-            return AccountRoleDAL.GetAccountRoleList(username);
+            return AccountRoleDAL.GetAccountRoleList(keyword.Trim());
         }
     }
 }
