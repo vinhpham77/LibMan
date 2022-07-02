@@ -1,0 +1,10 @@
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\bin\Release\DAL.dll
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\bin\Release\DAL.pdb
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\bin\Release\DTO.dll
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\bin\Release\DTO.pdb
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\bin\Release\DTO.dll.config
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\obj\Release\DAL.csproj.AssemblyReference.cache
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\obj\Release\DAL.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\obj\Release\DAL.csproj.CopyComplete
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\obj\Release\DAL.dll
+C:\Users\LENOVO LEGION\LibMan\LibMan\DAL\obj\Release\DAL.pdb

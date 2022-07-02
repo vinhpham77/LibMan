@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DTO;
+﻿using DTO;
 using DAL;
+using System.Collections.ObjectModel;
 
 namespace BLL
 {
     public class AccountRoleBLL
     {
-        public static List<AccountRoleDTO> GetAccountRoleList(string keyword = "")
+        public static ObservableCollection<AccountRoleDTO> GetAccountRoles(string keyword = "")
         {
-            return AccountRoleDAL.GetAccountRoleList(keyword.Trim());
+            return AccountRoleDAL.GetAccountRoles(keyword.Trim());
         }
     }
 }

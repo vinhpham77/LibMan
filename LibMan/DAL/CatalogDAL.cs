@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 
 namespace DAL
 {
     public class CatalogDAL
     {
-        public static List<CatalogDTO> GetCatalogList(string catalogName = "")
+        public static ObservableCollection<CatalogDTO> GetCatalogs(string catalogName = "")
         {
-            List<CatalogDTO> list = new List<CatalogDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var catalogs = new ObservableCollection<CatalogDTO>();  
+            using (var context = new LibManDataContext())
             {
                 var query = string.IsNullOrEmpty(catalogName)
                             ? context.Catalogs
@@ -26,15 +24,15 @@ namespace DAL
                         ID = row.ID,
                         Name = row.Name
                     };
-                    list.Add(catalog);
+                    catalogs.Add(catalog);
                 }
-                return list;
+                return catalogs;
             }
         }
 
         public static void CreateCatalog(string catalogName)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
                 Catalog catalog = new Catalog
                 {
@@ -48,25 +46,26 @@ namespace DAL
 
         public static Catalog GetCatalog(string catalogName)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                return context.Catalogs.Where(c => c.Name.Equals(catalogName)).FirstOrDefault();
+                return context.Catalogs.FirstOrDefault(c => c.Name.Equals(catalogName));
             }
         }
 
         public static Catalog GetCatalog(int catalogID)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                return context.Catalogs.Where(c => c.ID == catalogID).FirstOrDefault();
+                return context.Catalogs.FirstOrDefault(c => c.ID == catalogID);
             }
         }
 
         public static void DeleteCatalog(int catalogID)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var catalog = context.Catalogs.Where(c => c.ID == catalogID).FirstOrDefault();
+                var catalog = context.Catalogs.FirstOrDefault(c => c.ID == catalogID);
+                
                 if (catalog is null)
                 {
                     throw new Exception($"Không tồn tại danh mục mã '{catalogID}' trong hệ thống!");
@@ -81,9 +80,10 @@ namespace DAL
 
         public static void UpdateCatalog(int catalogID, string catalogName)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var catalog = context.Catalogs.Where(c => c.ID == catalogID).FirstOrDefault();
+                var catalog = context.Catalogs.FirstOrDefault(c => c.ID == catalogID);
+
                 if (catalog is null)
                 {
                     throw new Exception($"Không tồn tại danh mục mã '{catalogID}' trong hệ thống!");

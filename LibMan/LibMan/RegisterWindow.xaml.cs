@@ -1,23 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BLL;
 
 namespace GUI
 {
-    /// <summary>
-    /// Interaction logic for RegisterWindow.xaml
-    /// </summary>
     public partial class RegisterWindow : Window
     {
         public RegisterWindow()
@@ -27,21 +13,30 @@ namespace GUI
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow login = new LoginWindow();
+            var login = new LoginWindow();
             Close();
             login.Show();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
+            string username = txtUsername.Text.Trim();
+            string pass = txtPassword.Password;
+            string repass = txtRePassword.Password;
             int readerRole = 1;
+            string fullname = txtFullname.Text.Trim();
+            DateTime? birthday = dpBirthday.SelectedDate;
+            bool gender = (bool)rdMale.IsChecked;
+            string id = txtID.Text.Trim();
+            string address = txtAddress.Text.Trim();
             bool status = false;
             
             try
             {
-                AccountBLL.CreateAccount(txtUsername.Text, txtPassword.Password, txtRePassword.Password, readerRole,
-                        txtFullname.Text, dpBirthday.SelectedDate, (bool)rdMale.IsChecked, txtID.Text, txtAddress.Text, status);
-                MessageBox.Show("Đăng ký thành công! Vui lòng đợi phê duyệt tài khoản", Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                AccountBLL.CreateAccount(username,pass, repass, readerRole, fullname, 
+                                            birthday, gender, id, address, status);
+                string message = "Đăng ký thành công! Vui lòng đợi phê duyệt tài khoản";
+                MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
                 btnCancel_Click(null, null);
             }
             catch (Exception ex)

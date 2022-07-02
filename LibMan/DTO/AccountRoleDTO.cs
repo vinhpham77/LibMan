@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace DTO
 {
-    public class AccountRoleDTO
+    public class AccountRoleDTO : INotifyPropertyChanged
     {
         public string Username { get; set; }
         public string Password { get; set; }
@@ -16,6 +13,21 @@ namespace DTO
         public bool? Gender { get; set; }
         public string ID { get; set; }
         public string Address { get; set; }
-        public bool? Status { get; set; }
+        private bool? _status { get; set; }
+        
+        public bool? Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Status"));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

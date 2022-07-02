@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 
 namespace DAL
 {
     public class LoanReturnedBookDAL
     {
-        public static List<LoanReturnedBookDTO> GetLoanReturnedList(string keywords = "")
+        public static ObservableCollection<LoanReturnedBookDTO> GetLoanReturneds(string keywords = "")
         {
-            List<LoanReturnedBookDTO> lrs = new List<LoanReturnedBookDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var lrs = new ObservableCollection<LoanReturnedBookDTO>();
+            using (var context = new LibManDataContext())
             {
                 var query = string.IsNullOrEmpty(keywords)
                             ? from l in context.Loans
@@ -24,12 +22,11 @@ namespace DAL
                               join b in context.Books on l.BookID equals b.ID 
                               join r in context.Returneds on l.ID equals r.LoanID into lReturned
                               from lr in lReturned.DefaultIfEmpty()
-                              where l.Username.Contains(keywords)
+                              where l.Username.Contains(keywords) || b.Title.Contains(keywords)
                               select new { l.ID, l.Username, l.BookID, b.Title, l.LoanDate, l.DueDate, lr.Date, lr.Fee };
-
                 foreach (var row in query)
                 {
-                    LoanReturnedBookDTO loanReturned = new LoanReturnedBookDTO()
+                    var loanReturned = new LoanReturnedBookDTO()
                     {
                         LoanID = row.ID,
                         Username = row.Username,
@@ -42,14 +39,13 @@ namespace DAL
                     };
                     lrs.Add(loanReturned);
                 }
-
                 return lrs;
             }
         }
 
         public static List<string> GetUsernamesNotReturned()
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
                 var query = from l in context.Loans
                             join r in context.Returneds on l.ID equals r.LoanID into lReturned
@@ -61,15 +57,15 @@ namespace DAL
             }
         }
 
-        public static List<int> GetLoanIDsNotReturned(string username = "")
+        public static List<int> GetLoanIDsNotReturned(string username)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
                 var query = from l in context.Loans
                             join r in context.Returneds on l.ID equals r.LoanID into lReturned
                             from lr in lReturned.DefaultIfEmpty()
                             where lr.Date == null && l.Username == username
-                            select l.ID ;
+                            select l.ID;
 
                 return query.ToList();
             }

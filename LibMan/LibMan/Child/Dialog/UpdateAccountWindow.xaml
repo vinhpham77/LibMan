@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="480"
-    Height="600"
+    Height="580"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="../../img/logo.ico"
@@ -33,34 +33,36 @@
         </Grid.RowDefinitions>
         <TextBox
             x:Name="txtUsername"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             materialDesign:HintAssist.Hint="Tên tài khoản"
             IsEnabled="False"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <ComboBox
             x:Name="cbxRole"
             Grid.Row="1"
+            VerticalAlignment="Bottom"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Vai trò"
-            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
             DisplayMemberPath="Name"
+            IsTextSearchEnabled="True"
             SelectedValuePath="ID"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <TextBox
             x:Name="txtFullname"
             Grid.Row="2"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             materialDesign:HintAssist.Hint="Họ tên"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <DatePicker
             x:Name="dtpBirthday"
             Grid.Row="3"
+            VerticalAlignment="Bottom"
             materialDesign:HintAssist.Hint="Ngày sinh"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
         <StackPanel
             Grid.Row="4"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Bottom"
             Orientation="Horizontal"
             ToolTip="Giới tính">
             <RadioButton
@@ -89,6 +91,7 @@
             Grid.Row="5"
             VerticalAlignment="Bottom"
             materialDesign:HintAssist.Hint="CMND/CCCD"
+            MaxLength="12"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox
             x:Name="txtAddress"

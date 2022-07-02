@@ -1,24 +1,9 @@
 ﻿using BLL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GUI
 {
-    /// <summary>
-    /// Interaction logic for LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -26,21 +11,20 @@ namespace GUI
             InitializeComponent();
         }
 
-        private void Login(string username)
+        private void Login(string username, int roleID)
         {
-            int roleID = AccountBLL.GetRoleID(username);
             switch (roleID)
             {
                 case 1:
-                    ReaderWindow reader = new ReaderWindow(username);
+                    var reader = new ReaderWindow(username);
                     reader.Show();
                     break;
                 case 2:
-                    LibrarianWindow librarian = new LibrarianWindow(username);
+                    var librarian = new LibrarianWindow(username);
                     librarian.Show();
                     break;
                 case 3:
-                    AdminWindow admin = new AdminWindow(username);
+                    var admin = new AdminWindow(username);
                     admin.Show();
                     break;
             }
@@ -51,10 +35,11 @@ namespace GUI
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Password;
+
             try
             {
-                AccountBLL.CheckLogin(username, password);
-                Login(username);
+                int roleID = AccountBLL.CheckLogin(username, password);
+                Login(username, roleID);
             }
             catch (Exception ex)
             {
@@ -64,9 +49,9 @@ namespace GUI
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow register = new RegisterWindow();
-            register.Show();
+            var register = new RegisterWindow();
             Close();
+            register.Show();
         }
     }
 }

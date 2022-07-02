@@ -44,12 +44,13 @@
                             Width="30"
                             Height="30"
                             Foreground="White"
-                            Kind="Account" />
+                            Kind="AccountSettings"
+                            ToolTip="Thủ thư" />
                     </Label>
                     <Label
                         x:Name="lblUsername"
                         VerticalContentAlignment="Center"
-                        FontSize="16" />
+                        FontSize="18" />
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                     <Image
@@ -61,7 +62,7 @@
                         VerticalAlignment="Center"
                         FontSize="18"
                         FontWeight="Bold">
-                        HỆ THỐNG QUẢN LÝ THƯ VIỆN
+                        QUẢN LÝ THƯ VIỆN
                     </Label>
                 </StackPanel>
             </DockPanel>
@@ -115,7 +116,7 @@
         <materialDesign:Card Grid.Row="1" Grid.Column="1">
             <Frame
                 x:Name="frmChild"
-                Margin="35"
+                Margin="35,25,35,40"
                 NavigationUIVisibility="Hidden" />
         </materialDesign:Card>
     </Grid>

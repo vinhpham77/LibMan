@@ -2,17 +2,15 @@
 using DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
     public class AccountDAL
     {
-        public static List<AccountDTO> GetAccountList(string keyword = "")
+        public static List<AccountDTO> GetAccounts(string keyword = "")
         {
-            List<AccountDTO> list = new List<AccountDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var accounts = new List<AccountDTO>();
+            using (var context = new LibManDataContext())
             {
                 var query = string.IsNullOrEmpty(keyword)
                                 ? context.Accounts
@@ -35,26 +33,29 @@ namespace DAL
                         Address = row.Address,
                         Status = row.Status
                     };
-                    list.Add(account);
+
+                    accounts.Add(account);
                 }
-                return list;
+
+                return accounts;
             }
         }
 
-        public static List<string> GetUsernameList()
+        public static List<string> GetUsernames()
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
                 return context.Accounts.Select(acc => acc.Username).ToList();
             }
         }
 
-        public static void CreateAccount(string username, string password, int roleID, string fullname
-                                            , DateTime birthday, bool? gender, string id, string address, bool status)
+        public static void CreateAccount(string username, string password, int roleID, 
+                                            string fullname, DateTime birthday, bool? gender,
+                                            string id, string address, bool status)
         {
-            using(LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                Account account = new Account
+                var account = new Account
                 {
                     Username = username,
                     Password = password,
@@ -72,19 +73,22 @@ namespace DAL
             }
         }
 
-        public static Account GetAccount(string username)
+        public static Account GetAccount(string usernameOrID, bool isID = false)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                return context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();                
+                string field = usernameOrID;
+                var query = isID ? context.Accounts.FirstOrDefault(a => a.ID.Equals(field))
+                                 : context.Accounts.FirstOrDefault(a => a.Username.Equals(field));
+                return query;
             }
         }
 
         public static void DeleteAccount(string username)
         {
-            using(LibManDataContext context = new LibManDataContext())
+            using(var context = new LibManDataContext())
             {
-                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                var acc = context.Accounts.FirstOrDefault(a => a.Username.Equals(username));
                 
                 if (acc is null)
                 {
@@ -101,9 +105,9 @@ namespace DAL
         public static void UpdateAccount(string username, int roleID, string fullname,
                                             DateTime birthday, bool gender, string id, string address)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                var acc = context.Accounts.FirstOrDefault(a => a.Username.Equals(username));
                 
                 if (acc is null)
                 {
@@ -123,19 +127,18 @@ namespace DAL
             }
         }
 
-        public static void ChangeStatus(string username, bool status)
+        public static void ChangeStatus(string username)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
-                
+                var acc = context.Accounts.FirstOrDefault(a => a.Username.Equals(username));
                 if (acc is null)
                 {
                     throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
                 }
                 else
                 {
-                    acc.Status = status;
+                    acc.Status = !acc.Status;
                     context.SubmitChanges();
                 }
             }
@@ -143,9 +146,10 @@ namespace DAL
 
         public static void ChangePassword(string username, string newPassword)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
+                var acc = context.Accounts.FirstOrDefault(a => a.Username.Equals(username));
+
                 if (acc is null)
                 {
                     throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
@@ -154,22 +158,6 @@ namespace DAL
                 {
                     acc.Password = newPassword;
                     context.SubmitChanges();
-                }
-            }
-        }
-
-        public static int GetRoleID(string username)
-        {
-            using (LibManDataContext context = new LibManDataContext())
-            {
-                var acc = context.Accounts.Where(a => a.Username.Equals(username)).FirstOrDefault();
-                if (acc is null)
-                {
-                    throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
-                }
-                else
-                {
-                    return acc.RoleID;
                 }
             }
         }

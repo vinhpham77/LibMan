@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Tạo tài khoản"
     Width="580"
-    Height="530"
+    Height="500"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="../../img/logo.ico"
@@ -28,7 +28,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition Height="2*" />
-            <RowDefinition Height="1.8*" />
+            <RowDefinition Height="1.4*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.38*" />
@@ -47,8 +47,8 @@
             VerticalAlignment="Bottom"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Vai trò"
-            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
             DisplayMemberPath="Name"
+            IsTextSearchEnabled="True"
             SelectedValuePath="ID"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <PasswordBox
@@ -71,7 +71,7 @@
             materialDesign:HintAssist.Hint="Họ tên"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <DatePicker
-            x:Name="dpBirthday"
+            x:Name="dtpBirthday"
             Grid.Row="1"
             Grid.Column="2"
             VerticalAlignment="Bottom"
@@ -110,7 +110,8 @@
             Grid.Row="3"
             Grid.Column="2"
             VerticalAlignment="Bottom"
-            materialDesign:HintAssist.Hint="CCCD/CMND"
+            materialDesign:HintAssist.Hint="CMND/CCCD"
+            MaxLength="12"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         <TextBox
             x:Name="txtAddress"
@@ -127,7 +128,7 @@
             x:Name="btnSubmit"
             Grid.Row="5"
             Grid.ColumnSpan="2"
-            Margin="0,0,10,0"
+            Margin="0,5,10,0"
             materialDesign:ButtonAssist.CornerRadius="4"
             Click="btnSubmit_Click"
             Content="Xác nhận"
@@ -137,6 +138,7 @@
             x:Name="btnCancel"
             Grid.Row="5"
             Grid.Column="2"
+            Margin="0,5,0,0"
             materialDesign:ButtonAssist.CornerRadius="4"
             Click="btnCancel_Click"
             Content="Huỷ bỏ"

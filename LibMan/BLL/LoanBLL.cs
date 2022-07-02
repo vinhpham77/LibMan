@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DAL;
 using DTO;
-using System.Globalization;
 
 namespace BLL
 {
     public class LoanBLL
     {
-
-        public static List<LoanDTO> GetLoanList(string username = "")
+        public static List<LoanDTO> GetLoans(string username = "")
         {
-            return LoanDAL.GetLoanList(username);            
+            return LoanDAL.GetLoans(username);            
         }
 
         public static Loan GetLoan(int id)
@@ -27,54 +22,44 @@ namespace BLL
             LoanDAL.DeleteLoan(loanID);
         }
 
-        public static void LoanBook(string username, int bookID, string loanDate, string dueDate)
+        public static void LoanBook(string username, int bookID, DateTime? loanDate, DateTime? dueDate)
         {
-            username = username.Trim();
-            loanDate = loanDate.Trim();
-            dueDate = dueDate.Trim();
             Account acc = AccountDAL.GetAccount(username);
             Book book = BookBLL.GetBook(bookID);
-
-            if (book is null)
-            {
-                throw new Exception("Không tồn tại sách này trong hệ thống!");
-            }
-            else if (string.IsNullOrEmpty(username))
+            
+            if (string.IsNullOrEmpty(username))
             {
                 throw new Exception("Vui lòng không để trống tên đăng nhập!");
             }
             else if (acc is null)
             {
-                throw new Exception($"Không tồn tại tài khoản '{username}' trong hệ thống!");
+                throw new Exception($"Không tồn tại tên đăng nhập '{username}' trong hệ thống!");
             }
-            else if (acc.Status == false)
+            else if (acc.Status is false)
             {
-                throw new Exception("Tài khoản bị vô hiệu!");
+                throw new Exception("Tài khoản không có hiệu lực!");
             }
             else if (book is null)
             {
                 throw new Exception($"Không tồn tại sách mã '{bookID}' trong hệ thống!");
             }
-            else if (string.IsNullOrEmpty(loanDate))
+            else if (loanDate is null)
             {
                 throw new Exception("Vui lòng nhập ngày mượn!");
             }
-            else if (string.IsNullOrEmpty(dueDate))
+            else if (dueDate is null)
             {
                 throw new Exception("Vui lòng nhập ngày trả!");
             }
             else
             {
-                DateTime loan = Convert.ToDateTime(loanDate);
-                DateTime due = Convert.ToDateTime(dueDate);
-                
-                if (loan.CompareTo(due) > 0)
+                if (loanDate > dueDate)
                 {
                     throw new Exception("Ngày mượn không thể sau ngày hẹn trả!");
                 }
                 else
                 {
-                    LoanDAL.CreateLoan(username, bookID, loan, due);
+                    LoanDAL.CreateLoan(username, bookID, (DateTime)loanDate, (DateTime)dueDate);
                 }
             }
         }

@@ -1,30 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LibMan" Class="LibManDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=FAVIN;Initial Catalog=LibMan;Integrated Security=True" SettingsObjectName="DTO.Properties.Settings" SettingsPropertyName="LibManConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Book" Member="Books">
-    <Type Name="Book">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CatalogID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Author" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Publisher" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Book_Loan" Member="Loans" ThisKey="ID" OtherKey="BookID" Type="Loan" />
-      <Association Name="Catalog_Book" Member="Catalog" ThisKey="CatalogID" OtherKey="ID" Type="Catalog" IsForeignKey="true" DeleteRule="SET NULL" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Catalog" Member="Catalogs">
-    <Type Name="Catalog">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Catalog_Book" Member="Books" ThisKey="ID" OtherKey="CatalogID" Type="Book" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Role" Member="Roles">
-    <Type Name="Role">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Association Name="Role_Account" Member="Accounts" ThisKey="ID" OtherKey="RoleID" Type="Account" />
-    </Type>
-  </Table>
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="Username" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -33,20 +8,29 @@
       <Column Name="Fullname" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
       <Column Name="Birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ID" Type="System.String" DbType="Char(12)" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ID" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Account_Loan" Member="Loans" ThisKey="Username" OtherKey="Username" Type="Loan" />
       <Association Name="Role_Account" Member="Role" ThisKey="RoleID" OtherKey="ID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Returned" Member="Returneds">
-    <Type Name="Returned">
+  <Table Name="dbo.Book" Member="Books">
+    <Type Name="Book">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="LoanID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Fee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Loan_Returned" Member="Loan" ThisKey="LoanID" OtherKey="ID" Type="Loan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CatalogID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Author" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Publisher" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="Book_Loan" Member="Loans" ThisKey="ID" OtherKey="BookID" Type="Loan" />
+      <Association Name="Catalog_Book" Member="Catalog" ThisKey="CatalogID" OtherKey="ID" Type="Catalog" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Catalog" Member="Catalogs">
+    <Type Name="Catalog">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Catalog_Book" Member="Books" ThisKey="ID" OtherKey="CatalogID" Type="Book" />
     </Type>
   </Table>
   <Table Name="dbo.Loan" Member="Loans">
@@ -59,6 +43,22 @@
       <Association Name="Loan_Returned" Member="Returneds" ThisKey="ID" OtherKey="LoanID" Type="Returned" />
       <Association Name="Book_Loan" Member="Book" ThisKey="BookID" OtherKey="ID" Type="Book" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Account_Loan" Member="Account" ThisKey="Username" OtherKey="Username" Type="Account" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Returned" Member="Returneds">
+    <Type Name="Returned">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LoanID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Fee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Loan_Returned" Member="Loan" ThisKey="LoanID" OtherKey="ID" Type="Loan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Role_Account" Member="Accounts" ThisKey="ID" OtherKey="RoleID" Type="Account" />
     </Type>
   </Table>
 </Database>

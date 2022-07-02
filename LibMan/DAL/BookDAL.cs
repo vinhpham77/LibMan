@@ -7,13 +7,14 @@ namespace DAL
 {
     public class BookDAL
     {
-        public static List<BookDTO> GetBookList(string title = "")
+        public static List<BookDTO> GetBooks(string title = "")
         {
-            List<BookDTO> list = new List<BookDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var list = new List<BookDTO>();
+            using (var context = new LibManDataContext())
             {
-                var query = context.Books.Where(b => b.Title.ToLower().Contains(title.ToLower()));
+                var query = context.Books.Where(b => b.Title.Contains(title));
                 BookDTO book;
+
                 foreach (var row in query)
                 {
                     book = new BookDTO()
@@ -25,13 +26,14 @@ namespace DAL
                         Publisher = row.Publisher
                     };
                 }
+
                 return list;
             }
         }
 
         public static void AddBook(string title, int? catalogID, string author, string publisher)
         {
-            using(LibManDataContext context = new LibManDataContext())
+            using(var context = new LibManDataContext())
             {
                 Book book = new Book
                 {
@@ -48,9 +50,9 @@ namespace DAL
 
         public static void UpdateBook(int id, string title, int? catalogID, string author, string publisher)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var book = context.Books.Where(b => b.ID == id).FirstOrDefault();
+                var book = context.Books.FirstOrDefault(b => b.ID == id);
                 
                 if (book is null)
                 {
@@ -70,17 +72,17 @@ namespace DAL
 
         public static Book GetBook(int id)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                return context.Books.Where(b => b.ID == id).FirstOrDefault();
+                return context.Books.FirstOrDefault(b => b.ID == id);
             }
         }
 
         public static void DeleteBook(int id)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                var book = context.Books.Where(b => b.ID == id).FirstOrDefault();
+                var book = context.Books.FirstOrDefault(b => b.ID == id);
 
                 if (book is null)
                 {

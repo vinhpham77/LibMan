@@ -1,28 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BLL;
 using GUI.Child.Dialog;
 using DTO;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace GUI.Child
 {
-    /// <summary>
-    /// Interaction logic for LoanManPage.xaml
-    /// </summary>
     public partial class LoanManPage : Page
     {
+        private ObservableCollection<LoanReturnedBookDTO> _data;
+
         public LoanManPage()
         {
             InitializeComponent();
@@ -31,13 +21,29 @@ namespace GUI.Child
 
         public void dtgLoan_Load(string keywords = "")
         {
-            dtgLoan.ItemsSource = LoanReturnedBookBLL.GetLoanReturnedList(keywords);
+            dtgLoan.ItemsSource = _data = LoanReturnedBookBLL.GetLoanReturneds(keywords);
+        }
+
+        private void txtLoanReturnSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key is Key.Enter)
+            {
+                string keywords = txtLoanReturnSearch.Text.Trim();
+                dtgLoan_Load(keywords);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            txtLoanReturnSearch.Clear();
+            dtgLoan_Load();
         }
 
         private void btnReturnBook_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
+            var btn = sender as Button;
             ReturnBookWindow returnBook;
+
             if (btn.Name.Equals("btnReturnBook"))
             {
                 returnBook = new ReturnBookWindow();
@@ -46,6 +52,7 @@ namespace GUI.Child
             else
             {
                 var lr = dtgLoan.SelectedItem as LoanReturnedBookDTO;
+
                 if (lr.ReturnedDate is null)
                 {
                     returnBook = new ReturnBookWindow(lr);
@@ -53,8 +60,9 @@ namespace GUI.Child
                 }
                 else
                 {
-                    MessageBox.Show($"Giao dịch mã '{lr.LoanID}' đã hoàn trả sách trước đó!",
-                                    "Lập hoá đơn", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    string message = string.Format($"Giao dịch mã '{lr.LoanID}' đã hoàn trả sách trước đó!");
+                    string title = "Lập hoá đơn";
+                    MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
             }
         }
@@ -62,34 +70,22 @@ namespace GUI.Child
         private void btnDeleteLoan_Click(object sender, RoutedEventArgs e)
         {
             string title = "Xoá giao dịch";
-            LoanReturnedBookDTO lr = dtgLoan.SelectedItem as LoanReturnedBookDTO;
-            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá giao dịch mã '{lr.LoanID}' không?", title,
-                                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var lr = dtgLoan.SelectedItem as LoanReturnedBookDTO;
+            string message = string.Format($"Bạn có chắc chắn muốn xoá giao dịch mã '{lr.LoanID}' không?");
+            var result = MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (result is MessageBoxResult.Yes)
             {
                 try
                 {
                     LoanBLL.DeleteLoan(lr.LoanID);
-                    dtgLoan_Load(txtLoanReturnSearch.Text);
+                    _data.Remove(lr);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, title, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-        }
-
-        private void txtLoanReturnSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            dtgLoan_Load(txtLoanReturnSearch.Text);
-        }
-
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            txtLoanReturnSearch.TextChanged -= txtLoanReturnSearch_TextChanged;
-            txtLoanReturnSearch.Clear();
-            dtgLoan_Load();
-            txtLoanReturnSearch.TextChanged += txtLoanReturnSearch_TextChanged;
         }
     }
 }

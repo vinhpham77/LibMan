@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 using DAL;
 using System.Collections.ObjectModel;
@@ -11,20 +7,18 @@ namespace BLL
 {
     public class CatalogBLL
     {
-        public static List<CatalogDTO> GetCatalogList(string catalogName = "")
+        public static ObservableCollection<CatalogDTO> GetCatalogs(string catalogName = "")
         {
-            return CatalogDAL.GetCatalogList(catalogName.Trim());
+            return CatalogDAL.GetCatalogs(catalogName);
         }
 
         public static void CreateCatalog(string catalogName)
         {
-            catalogName = catalogName.Trim();
             if (string.IsNullOrEmpty(catalogName))
             {
                 throw new Exception("Vui lòng điền tên danh mục!");
             }
-            
-            if (CatalogDAL.GetCatalog(catalogName) is null)
+            else if (CatalogDAL.GetCatalog(catalogName) is null)
             {
                 CatalogDAL.CreateCatalog(catalogName);
             }
@@ -41,7 +35,6 @@ namespace BLL
 
         public static void UpdateCatalog(int catalogID, string catalogName)
         {
-            catalogName = catalogName.Trim();
             if (string.IsNullOrEmpty(catalogName))
             {
                 throw new Exception("Vui lòng điền tên danh mục!");

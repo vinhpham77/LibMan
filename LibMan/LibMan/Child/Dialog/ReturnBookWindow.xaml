@@ -9,7 +9,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="Lập hoá đơn"
     Width="440"
-    Height="400"
+    Height="380"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Icon="../../img/logo.ico"
@@ -21,7 +21,7 @@
     TextOptions.TextRenderingMode="Auto"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="100,20" FocusManager.FocusedElement="{Binding ElementName=cbxUsername}">
+    <Grid Margin="100,20">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -33,7 +33,7 @@
             x:Name="cbxUsername"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Tên đăng nhập"
-            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+            IsTextSearchEnabled="True"
             SelectionChanged="cbxUsername_SelectionChanged"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <Grid Grid.Row="1">
@@ -46,7 +46,7 @@
                 Margin="0,0,10,0"
                 materialDesign:ColorZoneAssist.Mode="PrimaryLight"
                 materialDesign:HintAssist.Hint="Mã giao dịch"
-                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+                IsTextSearchEnabled="True"
                 SelectionChanged="cbxLoanID_SelectionChanged"
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
             <TextBox
@@ -54,7 +54,7 @@
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Mã sách"
-                IsReadOnly="True"
+                IsEnabled="False"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
         </Grid>
         <Grid Grid.Row="2">
@@ -67,14 +67,14 @@
                 Margin="0,0,10,0"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Ngày mượn"
-                IsReadOnly="True"
+                IsEnabled="False"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <TextBox
                 x:Name="txtDueDate"
                 Grid.Column="1"
                 VerticalAlignment="Center"
                 materialDesign:HintAssist.Hint="Ngày hẹn trả"
-                IsReadOnly="True"
+                IsEnabled="False"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
         </Grid>
@@ -85,7 +85,7 @@
             materialDesign:HintAssist.Hint="Ngày trả"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
             Text="{Binding Source={x:Static sys:DateTime.Now}}" />
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />

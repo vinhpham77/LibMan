@@ -1,29 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BLL;
 
 namespace GUI.Child.Dialog
 {
-    /// <summary>
-    /// Interaction logic for CreateAccountWindow.xaml
-    /// </summary>
     public partial class CreateAccountWindow : Window
     {
         public CreateAccountWindow()
         {
             InitializeComponent();
-            cbxRole.ItemsSource = RoleBLL.GetRoleList();
+            cbxRole.ItemsSource = RoleBLL.GetRoles();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -33,10 +19,21 @@ namespace GUI.Child.Dialog
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string username = txtUsername.Text.Trim();
+            string pass = txtPassword.Password;
+            string repass = txtRePassword.Password;
+            var roleID = cbxRole.SelectedValue as int?;
+            string fullname = txtFullname.Text.Trim();
+            DateTime? birthday = dtpBirthday.SelectedDate;
+            var gender = (bool)rdMale.IsChecked;
+            string id = txtID.Text.Trim();
+            string address = txtAddress.Text.Trim();
+            bool status = true;
+
             try
             {
-                AccountBLL.CreateAccount(txtUsername.Text, txtPassword.Password, txtRePassword.Password, cbxRole.SelectedValue as int?,
-                        txtFullname.Text, dpBirthday.SelectedDate, (bool)rdMale.IsChecked, txtID.Text, txtAddress.Text, true);
+                AccountBLL.CreateAccount(username, pass, repass, roleID, fullname,
+                                            birthday, gender, id, address, status);
                 Close();
             }
             catch (Exception ex)

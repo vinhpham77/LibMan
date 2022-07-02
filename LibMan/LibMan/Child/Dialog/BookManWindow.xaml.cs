@@ -1,24 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BLL;
 using DTO;
 
 namespace GUI.Child.Dialog
 {
-    /// <summary>
-    /// Interaction logic for AddBookWindow.xaml
-    /// </summary>
     public partial class BookManWindow : Window
     {
         private readonly int _bookID;
@@ -29,6 +15,7 @@ namespace GUI.Child.Dialog
             Title = "Thêm sách";
             _bookID = 0;
             cbxCatalog_Load();
+            txtTitle.Focus();
         }
 
         public BookManWindow(BookCatalogDTO bc)
@@ -50,7 +37,7 @@ namespace GUI.Child.Dialog
 
         public void cbxCatalog_Load()
         {
-            cbxCatalog.ItemsSource = CatalogBLL.GetCatalogList();
+            cbxCatalog.ItemsSource = CatalogBLL.GetCatalogs();
             cbxCatalog.DisplayMemberPath = "Name";
             cbxCatalog.SelectedValuePath = "ID";
         }
@@ -62,15 +49,20 @@ namespace GUI.Child.Dialog
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string title = txtTitle.Text.Trim();
+            var catalogID = cbxCatalog.SelectedValue as int?;
+            string author = txtAuthor.Text.Trim();
+            string publisher = txtPublisher.Text.Trim();
+
             try
             {
                 if (_bookID == 0)
                 {
-                   BookBLL.AddBook(txtTitle.Text, cbxCatalog.SelectedValue as int?, txtAuthor.Text, txtPublisher.Text);
+                   BookBLL.AddBook(title, catalogID, author, publisher);
                 }
                 else
                 {
-                    BookBLL.UpdateBook(_bookID, txtTitle.Text, cbxCatalog.SelectedValue as int?, txtAuthor.Text, txtPublisher.Text);
+                    BookBLL.UpdateBook(_bookID, title, catalogID, author, publisher);
                 }
                 Close();
             }

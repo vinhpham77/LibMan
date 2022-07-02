@@ -40,7 +40,7 @@
             Grid.Row="1"
             materialDesign:ColorZoneAssist.Mode="PrimaryLight"
             materialDesign:HintAssist.Hint="Tên đăng nhập"
-            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+            IsTextSearchEnabled="True"
             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
         <DatePicker
             x:Name="dtpLoanDate"
@@ -55,7 +55,7 @@
             materialDesign:CalendarAssist.IsHeaderVisible="False"
             materialDesign:HintAssist.Hint="Ngày hẹn trả"
             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Globalization;
-using System.Threading.Tasks;
-using DTO;
 using DAL;
 
 namespace BLL
@@ -49,39 +42,23 @@ namespace BLL
             return fee;
         }
 
-        public static Hashtable Validate(string username, string loanID, string loanDate, string dueDate, DateTime? returnedDate)
+        public static void Validate(string[] fields)
         {
-            username = username.Trim();
-            if (string.IsNullOrEmpty(username))
+            for (int i = 0; i < fields.Length; i++)
             {
-                throw new Exception("Vui lòng chọn tài khoản trả sách!");
-            }
-            if (string.IsNullOrEmpty(loanID))
-            {
-                throw new Exception("Vui lòng chọn mã dịch vụ mượn sách!");
-            }
-            if (returnedDate is null)
-            {
-                throw new Exception("Vui lòng điền ngày trả sách!");
-            }
+                if (string.IsNullOrEmpty(fields[i]))
+                {
+                    throw new Exception("Vui lòng cung cấp đầy đủ thông tin!");
+                }
 
-            DateTime returned = Convert.ToDateTime(returnedDate);
-            DateTime loan = Convert.ToDateTime(loanDate);
-            if (returned < loan)
-            {
-                throw new Exception("Ngày trả không thể trước ngày mượn!");
-            }
-            DateTime due = Convert.ToDateTime(dueDate);
-            Hashtable fields = new Hashtable
-            {
-                { "username", username },
-                { "loanID", Convert.ToInt32(loanID) },
-                { "loanDate", loan },
-                { "dueDate", due },
-                { "returnedDate", returned }
-            };
+                DateTime loan = Convert.ToDateTime(fields[2]);
+                DateTime returned = Convert.ToDateTime(fields[4]);
 
-            return fields;
+                if (loan > returned)
+                {
+                    throw new Exception("Ngày trả không thể trước ngày mượn!");
+                }
+            }
         }
     }
 }

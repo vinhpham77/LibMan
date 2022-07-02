@@ -3,11 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dto="clr-namespace:DTO;assembly=DTO"
     xmlns:local="clr-namespace:GUI.Child"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
@@ -41,10 +40,12 @@
                 Kind="Search" />
             <TextBox
                 x:Name="txtAccountSearch"
+                MinWidth="150"
+                MaxWidth="300"
                 VerticalAlignment="Bottom"
-                materialDesign:HintAssist.Hint="Tên đăng nhập, họ tên hoặc mã định danh công dân"
+                materialDesign:HintAssist.Hint="Tìm kiếm"
                 DockPanel.Dock="Left"
-                TextChanged="txtAccountSearch_TextChanged" />
+                KeyUp="txtAccountSearch_KeyUp" />
             <Button
                 x:Name="btnRefresh"
                 Width="28"
@@ -53,17 +54,15 @@
                 VerticalAlignment="Bottom"
                 Click="btnRefresh_Click"
                 Content="{materialDesign:PackIcon Kind=Refresh,
-                                                  Size=28}"
+                                                  Size=25}"
                 DockPanel.Dock="Right"
                 Style="{StaticResource MaterialDesignIconForegroundButton}"
-                ToolTip="Làm mới(F5)" />
+                ToolTip="Làm mới" />
         </DockPanel>
         <DataGrid
             x:Name="dtgAccount"
             Grid.Row="1"
             AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"

@@ -1,0 +1,7 @@
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\bin\Release\DTO.dll.config
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\bin\Release\DTO.dll
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\bin\Release\DTO.pdb
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\obj\Release\DTO.csproj.AssemblyReference.cache
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\obj\Release\DTO.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\obj\Release\DTO.dll
+C:\Users\LENOVO LEGION\LibMan\LibMan\DTO\obj\Release\DTO.pdb

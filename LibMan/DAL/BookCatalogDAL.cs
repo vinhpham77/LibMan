@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 
 namespace DAL
 {
     public class BookCatalogDAL
     {
-        public static List<BookCatalogDTO> GetBookCatalogList(string keywords = "")
+        public static ObservableCollection<BookCatalogDTO> GetBookCatalogs(string keywords = "")
         {
-            List<BookCatalogDTO> list = new List<BookCatalogDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var bookCatalogs = new ObservableCollection<BookCatalogDTO>();
+            using (var context = new LibManDataContext())
             {
                 var query = string.IsNullOrEmpty(keywords)
                             ? from b in context.Books
@@ -36,9 +33,9 @@ namespace DAL
                         Author = item.Author,
                         Publisher = item.Publisher
                     };
-                    list.Add(bookCatalog);
+                    bookCatalogs.Add(bookCatalog);
                 }
-                return list;
+                return bookCatalogs;
             }
         }
     }

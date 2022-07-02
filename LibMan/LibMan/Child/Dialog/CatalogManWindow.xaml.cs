@@ -1,27 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BLL;
 using DTO;
 
 namespace GUI.Child.Dialog
 {
-    /// <summary>
-    /// Interaction logic for CatalogManWindow.xaml
-    /// </summary>
     public partial class CatalogManWindow : Window
     {
         private readonly int _catalogID;
+        
         public CatalogManWindow()
         {
             InitializeComponent();
@@ -35,6 +22,7 @@ namespace GUI.Child.Dialog
             Title = "Sửa danh mục";
             _catalogID = catalog.ID;
             txtCatalogName.Text = catalog.Name;
+            txtCatalogName.CaretIndex = txtCatalogName.Text.Length;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -50,6 +38,7 @@ namespace GUI.Child.Dialog
                 {
                     string catalogName = txtCatalogName.Text.Trim();
                     CatalogBLL.CreateCatalog(catalogName);
+
                     if (Owner is BookManWindow bm)
                     {
                         bm.cbxCatalog_Load();

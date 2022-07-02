@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 
 namespace DAL
 {
     public class AccountRoleDAL
     {
-        public static List<AccountRoleDTO> GetAccountRoleList(string keyword = "")
+        public static ObservableCollection<AccountRoleDTO> GetAccountRoles(string keyword = "")
         {
-            List<AccountRoleDTO> list = new List<AccountRoleDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var accRoles = new ObservableCollection<AccountRoleDTO>();
+            using (var context = new LibManDataContext())
             {
-                var query = string.IsNullOrEmpty(keyword) ?
-                                from u in context.Accounts 
-                                join r in context.Roles on u.RoleID equals r.ID 
-                                select new {u, r.Name}
-                                :
-                                from u in context.Accounts
-                                join r in context.Roles on u.RoleID equals r.ID
-                                where u.Username.Contains(keyword) || u.ID.Contains(keyword) || u.Fullname.Contains(keyword)
-                                select new {u, r.Name};
+                var query = string.IsNullOrEmpty(keyword) 
+                                ? from u in context.Accounts 
+                                  join r in context.Roles on u.RoleID equals r.ID 
+                                  select new {u, r.Name}
+                                : from u in context.Accounts
+                                  join r in context.Roles on u.RoleID equals r.ID
+                                  where u.Username.Contains(keyword) || u.ID.Contains(keyword) || u.Fullname.Contains(keyword)
+                                  select new {u, r.Name};
 
                 AccountRoleDTO ar;
                 foreach (var row in query)
@@ -40,10 +36,9 @@ namespace DAL
                         Address = acc.Address,
                         Status = acc.Status
                     };
-                    list.Add(ar);
+                    accRoles.Add(ar);
                 }
-
-                return list;
+                return accRoles;
             }    
         }
     }

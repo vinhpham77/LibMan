@@ -31,7 +31,7 @@ INSERT Account(Username, Password, RoleID, Fullname, Birthday, Gender, ID, Addre
 	('admin', 'admin', '3', N'Phạm Văn Vinh', '1/1/2002', '1', '4351050443', N'Trường Đại học Quy Nhơn', '1'),
 	('lib', 'lib', '2', N'Hồ Quý', '1/12/2000', '0', '987654321111', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1'),
 	('johnweak', 'doeg123', '1', N'John Wick', '12/10/2002', '1', '123456789000', N'123 Wal Shrek, New York', '1'),
-	('jasonmama', 'seaman', '1', N'Jason Mamoa', '8/1/1999', '1', '123456789001', N'123 Shrimpon, Alaska', '0'),
+	('jasonmama', 'seaman', '1', N'Jason Mamoa', '8/1/1999', '1', '123456789001', N'123 Shrimpon, Alaska', '1'),
 	('thiLan', 'vanDiep', '2', N'Nguyễn Thị Lan', '10/12/2002', '0', '987654321000', N'67 Bạch Đằng, Đống Đa, Hà Nội', '0'),
 	('hoaiLam123', 'doilabekho', '2', N'Trần Hoài Lâm', '1/12/2000', '1', '987654321101', N'23 Bùi Thị Xuân, Đống Đa, Hà Nội', '1')
 
@@ -74,16 +74,22 @@ CREATE TABLE Loan
 )
 
 INSERT Loan(Username, BookID, LoanDate, DueDate) VALUES
-	('jasonmama', '4', '5/24/2022', '5/29/2022'),
-	('jasonmama', '3', '5/24/2022', '5/29/2022'),
-	('johnweak', '1', '5/25/2022', '5/30/2022'),
-	('johnweak', '5', '5/25/2022', '6/1/2022')
+	('jasonmama', '4', '6/24/2022', '6/29/2022'),
+	('jasonmama', '3', '6/24/2022', '6/29/2022'),
+	('johnweak', '1', '6/25/2022', '6/30/2022'),
+	('johnweak', '5', '6/25/2022', '7/1/2022')
 
 
 CREATE TABLE Returned
 (
-	ID INT CONSTRAINT PK_FineID PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	ID INT CONSTRAINT PK_ReturnedID PRIMARY KEY IDENTITY(1,1) NOT NULL,
 	LoanID INT CONSTRAINT FK_LoanID FOREIGN KEY REFERENCES Loan(ID) ON DELETE CASCADE NOT NULL,
 	Date DATE,
 	Fee FLOAT
 )
+
+INSERT Returned(LoanID, Date, Fee) VALUES
+	('1', '6/29/2022', '0'),
+	('2', '6/30/2022', '5000'),
+	('3', '6/26/2022', '0'),
+	('4', '6/29/2022', '0')

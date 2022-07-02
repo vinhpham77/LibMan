@@ -28,7 +28,6 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
         <materialDesign:ColorZone
             Grid.ColumnSpan="2"
             Padding="10"
@@ -44,7 +43,8 @@
                             Width="30"
                             Height="30"
                             Foreground="White"
-                            Kind="Account" />
+                            Kind="Account"
+                            ToolTip="Đọc giả" />
                     </Label>
                     <Label
                         x:Name="lblUsername"
@@ -61,7 +61,7 @@
                         VerticalAlignment="Center"
                         FontSize="18"
                         FontWeight="Bold">
-                        QUẢN LÝ THƯ VIỆN
+                        THƯ VIỆN
                     </Label>
                 </StackPanel>
             </DockPanel>
@@ -109,7 +109,7 @@
         <materialDesign:Card Grid.Row="1" Grid.Column="1">
             <Frame
                 x:Name="frmChild"
-                Margin="35"
+                Margin="35,25,35,40"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 NavigationUIVisibility="Hidden" />

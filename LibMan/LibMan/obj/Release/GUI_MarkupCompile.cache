@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Users\LENOVO LEGION\LibMan\LibMan\LibMan\App.xaml
-151648571098
+18-305551990
 1-174167838
-19593540224
+22485651068
 17770407474
-AdminWindow.xaml;Child\AddWindow\BookManWindow.xaml;Child\AddWindow\CatalogManWindow.xaml;Child\AddWindow\LoanBookWindow.xaml;Child\AddWindow\ReturnBookWindow.xaml;Child\BookLibrarianPage.xaml;Child\BookPage.xaml;Child\CatalogLibrarianPage.xaml;Child\LoanManPage.xaml;Child\LoanPage.xaml;LibrarianWindow.xaml;LoginWindow.xaml;ReaderWindow.xaml;RegisterWindow.xaml;UC\ControlBarUC.xaml;
+AdminWindow.xaml;Child\AccountManPage.xaml;Child\Dialog\BookManWindow.xaml;Child\Dialog\CatalogManWindow.xaml;Child\Dialog\ChangePasswordWindow.xaml;Child\Dialog\CreateAccountWindow.xaml;Child\Dialog\LoanBookWindow.xaml;Child\Dialog\ReturnBookWindow.xaml;Child\Dialog\UpdateAccountWindow.xaml;Child\BookManPage.xaml;Child\BookPage.xaml;Child\CatalogManPage.xaml;Child\LoanManPage.xaml;Child\LoanPage.xaml;LibrarianWindow.xaml;LoginWindow.xaml;ReaderWindow.xaml;RegisterWindow.xaml;
 
-True
+False
 

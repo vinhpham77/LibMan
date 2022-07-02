@@ -1,28 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BLL;
 using DTO;
 using GUI.Child.Dialog;
+using System.Windows.Input;
 
 namespace GUI.Child
 {
-    /// <summary>
-    /// Interaction logic for AccountManPage.xaml
-    /// </summary>
     public partial class AccountManPage : Page
     {
+        private ObservableCollection<AccountRoleDTO> _data;
+
         public AccountManPage()
         {
             InitializeComponent();
@@ -31,73 +21,80 @@ namespace GUI.Child
 
         private void dtgAccount_Load(string keywords = "")
         {
-            dtgAccount.ItemsSource = AccountRoleBLL.GetAccountRoleList(keywords);
-        }
+            dtgAccount.ItemsSource = _data = AccountRoleBLL.GetAccountRoles(keywords);
+        }   
         
-        private void txtAccountSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {            
-            dtgAccount_Load(txtAccountSearch.Text);
+        private void txtAccountSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key is Key.Enter)
+            {
+                string keywords = txtAccountSearch.Text.Trim();
+                dtgAccount_Load(keywords);
+            }
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            txtAccountSearch.TextChanged -= txtAccountSearch_TextChanged;
             txtAccountSearch.Clear();
             dtgAccount_Load();
-            txtAccountSearch.TextChanged += txtAccountSearch_TextChanged;
         }
 
         private void btnEditAccount_Click(object sender, RoutedEventArgs e)
         {
-            UpdateAccountWindow acc = new UpdateAccountWindow(dtgAccount.SelectedItem as AccountRoleDTO);
+            var item = dtgAccount.SelectedItem as AccountRoleDTO;
+            var acc = new UpdateAccountWindow(item);
             acc.ShowDialog();
         }
 
         private void btnDeleteAccount_Click(object sender, RoutedEventArgs e)
         {
+            var ar = dtgAccount.SelectedItem as AccountRoleDTO;
+            string message = string.Format($"Bạn có chắc chắn muốn xoá tài khoản '{ar.Username}'" +
+                                            " và tất cả dữ liệu liên quan không?");
             string title = "Xoá tài khoản";
-            AccountRoleDTO ar = dtgAccount.SelectedItem as AccountRoleDTO;
-            MessageBoxResult result = MessageBox.Show($"Bạn có chắc chắn muốn xoá tài khoản '{ar.Username}' và tất cả dữ liệu liên quan không?",
-                                                title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
             if (result is MessageBoxResult.Yes)
             {
                 try
                 {
                     AccountBLL.DeleteAccount(ar.Username);
-                    dtgAccount_Load(txtAccountSearch.Text);
+                    _data.Remove(ar);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, title, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
-            AccountRoleDTO ar = dtgAccount.SelectedItem as AccountRoleDTO;
-            ChangePasswordWindow change = new ChangePasswordWindow(ar.Username);
+            var ar = dtgAccount.SelectedItem as AccountRoleDTO;
+            var change = new ChangePasswordWindow(ar.Username);
             change.ShowDialog();
         }
 
         private void btnChangeStatus_Click(object sender, RoutedEventArgs e)
         {
-            AccountRoleDTO ar = dtgAccount.SelectedItem as AccountRoleDTO;
+            string title = "Cấp quyền/Khoá";
+            var ar = dtgAccount.SelectedItem as AccountRoleDTO;
             bool status = !(ar.Status is true);
             try
             {
-                AccountBLL.ChangeStatus(ar.Username, status);
-                dtgAccount_Load(txtAccountSearch.Text);
+                AccountBLL.ChangeStatus(ar.Username);
+                int index = _data.IndexOf(ar);
+                _data[index].Status = status;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void btnCreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            CreateAccountWindow acc = new CreateAccountWindow();
+            var acc = new CreateAccountWindow();
             acc.ShowDialog();
         }
     }

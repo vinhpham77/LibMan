@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DTO;
 
 namespace DAL
 {
     public class RoleDAL
     {
-        public static List<RoleDTO> GetRoleList()
+        public static List<RoleDTO> GetRoles()
         {
-            List<RoleDTO> list = new List<RoleDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var roles = new List<RoleDTO>();
+
+            using (var context = new LibManDataContext())
             {
                 RoleDTO role;
                 foreach (var row in context.Roles)
@@ -22,10 +19,11 @@ namespace DAL
                         ID = row.ID,
                         Name = row.Name
                     };
-                    list.Add(role);
+
+                    roles.Add(role);
                 }
 
-                return list;
+                return roles;
             }
         }
     }

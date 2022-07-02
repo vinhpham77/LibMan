@@ -1,33 +1,18 @@
 ﻿using System;
-using System.Collections;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BLL;
 using DTO;
 
 namespace GUI.Child.Dialog
 {
-    /// <summary>
-    /// Interaction logic for ReturnBookWindow.xaml
-    /// </summary>
     public partial class ReturnBookWindow : Window
     {
         public ReturnBookWindow()
         {
             InitializeComponent();
             cbxUsername_Load();
+            cbxUsername.IsDropDownOpen = true;
         }
 
         public ReturnBookWindow(LoanReturnedBookDTO lr)
@@ -37,7 +22,7 @@ namespace GUI.Child.Dialog
             cbxUsername.SelectedItem = lr.Username;
             cbxLoanID.SelectedItem = lr.LoanID;
             dtpReturnDate.Focus();
-            PreventEditingFields();
+            PreventSelectingItem();
             InformSomethingWrong();
         }
 
@@ -45,18 +30,15 @@ namespace GUI.Child.Dialog
         {
             if (cbxUsername.SelectedItem is null || cbxLoanID.SelectedItem is null)
             {
-                MessageBox.Show("Thông tin phiên giao dịch này đã được thay đổi hoặc đã hoàn trả sách trước đó!",
-                                Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                string message = "Phiên giao dịch này đã được thay đổi hoặc đã hoàn trả sách trước đó!";
+                MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void PreventEditingFields()
+        private void PreventSelectingItem()
         {
             cbxUsername.IsEnabled = false;
-            cbxLoanID.IsEnabled = false;    
-            txtBookID.IsEnabled = false;
-            txtDueDate.IsEnabled = false;
-            txtLoanDate.IsEnabled = false;
+            cbxLoanID.IsEnabled = false;
         }
 
         private void cbxUsername_Load()
@@ -71,18 +53,27 @@ namespace GUI.Child.Dialog
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string username = cbxUsername.Text;
+            string id = cbxLoanID.Text;
+            string loan = txtLoanDate.Text;
+            string due = txtDueDate.Text;
+            string returned = dtpReturnDate.Text;
             try
             {
-                Hashtable fields = ReturnedBLL.Validate(cbxUsername.Text, cbxLoanID.Text, txtLoanDate.Text, txtDueDate.Text, dtpReturnDate.SelectedDate);
-                int loanID = Convert.ToInt32(fields["loanID"]);
-                DateTime loanDate = Convert.ToDateTime(fields["loanDate"]);
-                DateTime dueDate = Convert.ToDateTime(fields["dueDate"]);
-                DateTime returnedDate = Convert.ToDateTime(fields["returnedDate"]);
+                string[] fields = {username, id, loan, due, returned};
+                ReturnedBLL.Validate(fields);
+                int loanID = Convert.ToInt32(fields[1]);
+                DateTime loanDate = Convert.ToDateTime(fields[2]);
+                DateTime dueDate = Convert.ToDateTime(fields[3]);
+                DateTime returnedDate = Convert.ToDateTime(fields[4]);
                 double fee = ReturnedBLL.GetFee(loanDate, dueDate, returnedDate);
+
                 if (fee > 0)
                 {
                     string feeVN = string.Format("{0:n0}đ", fee);
-                    MessageBoxResult result = MessageBox.Show($"Đồng ý thanh toán phí là {feeVN}", "Thanh toán", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    string message = string.Format($"Đồng ý thanh toán phí là {feeVN}");
+                    string title = "Trả phí";
+                    var result = MessageBox.Show(message, title, MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result is MessageBoxResult.Yes)
                     {
                         ReturnedBLL.CreateReturned(loanID, returnedDate, fee);
@@ -103,7 +94,8 @@ namespace GUI.Child.Dialog
 
         private void cbxLoanID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Loan loan = LoanBLL.GetLoan(Convert.ToInt32(cbxLoanID.SelectedItem));
+            var loanID = (int)cbxLoanID.SelectedItem;
+            Loan loan = LoanBLL.GetLoan(loanID);
             txtBookID.Text = loan.BookID.ToString();
             txtLoanDate.Text = loan.LoanDate.ToShortDateString();
             txtDueDate.Text = loan.DueDate.ToShortDateString();
@@ -111,7 +103,8 @@ namespace GUI.Child.Dialog
 
         private void cbxUsername_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            cbxLoanID.ItemsSource = LoanReturnedBookBLL.GetLoanIDsNotReturned(cbxUsername.SelectedItem as string);
+            var username = cbxUsername.SelectedItem as string;
+            cbxLoanID.ItemsSource = LoanReturnedBookBLL.GetLoanIDsNotReturned(username);
             txtBookID.Clear();
             txtLoanDate.Clear();
             txtDueDate.Clear();

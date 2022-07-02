@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DTO;
 
 namespace DAL
 {
     public class LoanDAL
     {
-        public static List<LoanDTO> GetLoanList(string username = "")
+        public static List<LoanDTO> GetLoans(string username = "")
         {
-            List<LoanDTO> list = new List<LoanDTO>();
-            using (LibManDataContext context = new LibManDataContext())
+            var loans = new List<LoanDTO>();
+            using (var context = new LibManDataContext())
             {
                 var query = string.IsNullOrEmpty(username) 
                             ? context.Loans 
@@ -29,24 +27,25 @@ namespace DAL
                         DueDate = row.DueDate,
                         LoanDate = row.LoanDate
                     };
-                    list.Add(loan);
+
+                    loans.Add(loan);
                 }
                 
-                return list;
+                return loans;
             }
         }
 
         public static Loan GetLoan(int id)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
-                return context.Loans.Where(l => l.ID == id).FirstOrDefault();
+                return context.Loans.FirstOrDefault(l => l.ID == id);
             }
         }
 
         public static void CreateLoan(string username, int bookID, DateTime loanDate, DateTime dueDate)
         {
-            using (LibManDataContext context = new LibManDataContext())
+            using (var context = new LibManDataContext())
             {
                 Loan loan = new Loan()
                 {
@@ -65,7 +64,7 @@ namespace DAL
         {
             using (LibManDataContext context = new LibManDataContext())
             {
-                Loan loan = context.Loans.Where(l => l.ID == loanID).FirstOrDefault();
+                Loan loan = context.Loans.FirstOrDefault(l => l.ID == loanID);
 
                 if (loan is null)
                 {

@@ -26,7 +26,7 @@
             VerticalAlignment="Top"
             materialDesign:HintAssist.Hint="Tên danh mục mới"
             DockPanel.Dock="Top"
-            MaxLength="100"
+            MaxLength="50"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             TextWrapping="Wrap" />
         <Grid VerticalAlignment="Bottom" DockPanel.Dock="Bottom">

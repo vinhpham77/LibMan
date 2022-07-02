@@ -121,7 +121,8 @@
                 Grid.Row="4"
                 Grid.Column="2"
                 VerticalAlignment="Bottom"
-                materialDesign:HintAssist.Hint="CCCD/CMND"
+                materialDesign:HintAssist.Hint="CMND/CCCD"
+                MaxLength="12"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <TextBox
                 x:Name="txtAddress"

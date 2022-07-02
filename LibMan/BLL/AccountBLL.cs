@@ -7,27 +7,31 @@ namespace BLL
 {
     public class AccountBLL
     {
-        public static List<AccountDTO> GetAccountList(string keyword = "")
+        public static List<AccountDTO> GetAccounts(string keyword = "")
         {
-            return AccountDAL.GetAccountList(keyword);
+            return AccountDAL.GetAccounts(keyword);
         }
 
-        public static List<string> GetUsernameList()
+        public static List<string> GetUsernames()
         {
-            return AccountDAL.GetUsernameList();
+            return AccountDAL.GetUsernames();
         }
 
-        public static void CreateAccount(string username, string password, string rePassword, int? roleID, string fullname
-                                            , DateTime? birthday, bool gender, string id, string address, bool status)
+        public static void CreateAccount(string username, string password, string rePassword,
+                                            int? roleID, string fullname, DateTime? birthday,
+                                            bool gender, string id, string address, bool status)
         {
-            string[] formInputs = { username, roleID.ToString(), password, rePassword, fullname, birthday.ToString(), id, address };
+            string[] formInputs = { username, roleID.ToString(), password, rePassword,
+                                        fullname, birthday.ToString(), id, address };
             ValidateRegister(formInputs);
-            AccountDAL.CreateAccount(formInputs[0], password, (int)roleID, formInputs[4], (DateTime)birthday, gender, formInputs[6], formInputs[7], status);
+            AccountDAL.CreateAccount(formInputs[0], password, (int)roleID, 
+                                        formInputs[4], (DateTime)birthday, gender,
+                                        formInputs[6], formInputs[7], status);
         }
 
-        public static Account GetAccount(string username)
+        public static Account GetAccount(string usernameOrID, bool isID = false)
         {
-            return AccountDAL.GetAccount(username);
+            return AccountDAL.GetAccount(usernameOrID, isID);
         }
 
         public static void UpdateAccount(string username, int roleID, string fullname, 
@@ -36,14 +40,25 @@ namespace BLL
             string[] fields = {username, fullname, birthday, id, address};
             for (int i = 0; i < fields.Length; i++)
             {
-                fields[i] = fields[i].Trim();
                 if (string.IsNullOrEmpty(fields[i]))
                 {
                     throw new Exception("Vui lòng cung cấp đầy đủ thông tin!");
                 }
             }
 
-            AccountDAL.UpdateAccount(fields[0], roleID, fields[1], Convert.ToDateTime(fields[2]), gender, fields[3], fields[4]);
+            if (!long.TryParse(id, out _))
+            {
+                throw new Exception("CMND/CCCD chỉ chứa các chữ số!");
+            }
+            
+            Account acc = AccountDAL.GetAccount(fields[3], true);
+            if (acc != null && !acc.Username.Equals(fields[0]))
+            {
+                throw new Exception("CMND/CCCD đã tồn tại!");
+            }
+
+            AccountDAL.UpdateAccount(fields[0], roleID, fields[1], Convert.ToDateTime(fields[2]),
+                                        gender, fields[3], fields[4]);
         }
 
         public static void ChangePassword(string username, string newPassword)
@@ -51,7 +66,7 @@ namespace BLL
             AccountDAL.ChangePassword(username, newPassword);
         }
 
-        public static void CheckLogin(string username, string password)
+        public static int CheckLogin(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
@@ -69,54 +84,47 @@ namespace BLL
             }
             else if (account.Status is false)
             {
-                throw new Exception("Tài khoản không có hiệu lực, vui lòng đợi cấp quyền hoặc liên hệ người có thẩm quyền!");
+                throw new Exception("Tài khoản không có hiệu lực, vui lòng đợi " +
+                                        "cấp quyền hoặc liên hệ người có thẩm quyền!");
             }
-        }
 
-        public static int GetRoleID(string username)
-        {            
-            return AccountDAL.GetRoleID(username.Trim());
+            return account.RoleID;
         }
 
         public static void ValidateRegister(string[] formInputs)
         {
             for (int i = 0; i < formInputs.Length; i++)
             {
-                formInputs[i] = formInputs[i].Trim();
                 if (string.IsNullOrEmpty(formInputs[i]))
                 {
                     throw new Exception("Vui lòng cung cấp đủ thông tin!");
                 }
             }
-
             string username = formInputs[0];
             if (GetAccount(username) != null)
             {
                 throw new Exception("Tài khoản đã tồn tại!");
             }
-
             string pass = formInputs[2];
             string repass = formInputs[3];
-
             if (!pass.Equals(repass))
             {
                 throw new Exception("Mật khẩu nhập lại không khớp với mật khẩu trước đó!");
             }
-
             string id = formInputs[6];
-            if (!int.TryParse(id, out _))
+            if (!long.TryParse(id, out _))
             {
                 throw new Exception("CMND/CCCD chỉ chứa các chữ số!");
             }
-            if (GetAccount(id) != null)
+            if (GetAccount(id, true) != null)
             {
                 throw new Exception("CCCD/CMND đã tồn tại!");
             }
         }
 
-        public static void ChangeStatus(string username, bool status)
+        public static void ChangeStatus(string username)
         {
-            AccountDAL.ChangeStatus(username, status);
+            AccountDAL.ChangeStatus(username);
         }
 
         public static void DeleteAccount(string username)

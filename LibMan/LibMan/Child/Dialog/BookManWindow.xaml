@@ -20,7 +20,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <Grid Margin="100,20" FocusManager.FocusedElement="{Binding ElementName=txtTitle}">
+    <Grid Margin="100,20">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -42,7 +42,7 @@
                 x:Name="cbxCatalog"
                 materialDesign:ColorZoneAssist.Mode="PrimaryLight"
                 materialDesign:HintAssist.Hint="Danh mục"
-                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource PrimaryHueMidBrush}"
+                IsTextSearchEnabled="True"
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
             <Button
                 x:Name="btnAddCatalog"
@@ -66,7 +66,7 @@
             VerticalAlignment="Center"
             materialDesign:HintAssist.Hint="Nhà xuất bản"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="4" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />

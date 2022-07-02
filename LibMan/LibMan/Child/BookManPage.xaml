@@ -6,8 +6,6 @@
     xmlns:local="clr-namespace:GUI.Child"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
@@ -41,10 +39,12 @@
                 Kind="Search" />
             <TextBox
                 x:Name="txtBookSearch"
+                MinWidth="150"
+                MaxWidth="300"
                 VerticalAlignment="Bottom"
-                materialDesign:HintAssist.Hint="Tựa đề hoặc tác giả"
+                materialDesign:HintAssist.Hint="Tìm kiếm"
                 DockPanel.Dock="Left"
-                TextChanged="txtBookSearch_TextChanged" />
+                KeyUp="txtBookSearch_KeyUp" />
             <Button
                 x:Name="btnRefresh"
                 Width="28"
@@ -62,8 +62,6 @@
             x:Name="dtgBook"
             Grid.Row="1"
             AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
@@ -116,7 +114,7 @@
                                     Width="25"
                                     Height="25"
                                     Padding="0"
-                                    Click="btnBorrowBook_Click"
+                                    Click="btnLendBook_Click"
                                     Content="{materialDesign:PackIcon Kind=HandExtended}"
                                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                     ToolTip="Cho mượn" />

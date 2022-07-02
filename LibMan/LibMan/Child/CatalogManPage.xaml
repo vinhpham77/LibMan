@@ -6,8 +6,6 @@
     xmlns:local="clr-namespace:GUI.Child"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
     FontFamily="{DynamicResource MaterialDesignFont}"
     TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
@@ -41,10 +39,12 @@
                 Kind="Search" />
             <TextBox
                 x:Name="txtCatalogSearch"
+                MinWidth="150"
+                MaxWidth="300"
                 VerticalAlignment="Bottom"
-                materialDesign:HintAssist.Hint="Tên danh mục"
+                materialDesign:HintAssist.Hint="Tìm kiếm"
                 DockPanel.Dock="Left"
-                TextChanged="txtCatalogSearch_TextChanged" />
+                KeyUp="txtCatalogSearch_KeyUp" />
             <Button
                 x:Name="btnRefresh"
                 Width="28"
@@ -62,13 +62,9 @@
             x:Name="dtgCatalog"
             Grid.Row="1"
             AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
             HeadersVisibility="Column"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            IsTextSearchEnabled="True"
-            TextSearch.Text="{Binding ElementName=txtCatalogSearch, Path=Text}"
             VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn
